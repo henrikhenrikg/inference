@@ -1,0 +1,32 @@
+\section{Consistency Probing of Knowledge}
+\label{sec:framework}
+
+In this section, we formally detail our proposed framework that allows probing for consistency of PLMs.
+
+\paragraph{Consistency in KBs}
+
+Consistency has been studied under theoretical frameworks in the contexts of the satisfiability problem and KBs constructions, and efficient algorithms that detect inconsistencies in KBs have been proposed \cite{hansen2000probabilistic,andersen2001easy}.
+Other works, aim to quantify the degree to which KBs are inconsistent and detect the inconsistent statements \cite{Thimm:2009d,muino2011measuring,Thimm:2013}.
+
+Recently, with the rise of PLMs, the question of whether these can be used as KBs has been raised and gained popularity \cite{lama,petroni2020how,jiang2020can}. However, an important property of KBs, especially in automatic constructed KBs, is consistency.
+One of the biggest advantages of using a PLM as a KB is the ability to query it in natural language and to avoid the need of learning a specific schema.
+Thus, expecting that the PLMs would abstract away the language, and map queries in natural language into its representation, queries with identical meaning should yield the same answer, even if their language differs.
+For example, ``\textit{Homeland} was released on [Y]'' should produce the same answer as ``\textit{Homeland} was aired on [Y]''.
+Studying inconsistencies of LM-KBs as a testbed can also teach us about the organization of `knowledge' in the model, or lack thereof. Failure to do so may also point to other issues in representations \cite{w2v-synonyms-antonyms-studies}.
+% \sr{this is subtle, but I think we should focus on what inconsistency tells us about the organization of ``knowledge" in the model or lack thereof, and not so much on the supposed advantages of PLMs as KBs when it comes to natural language queries, etc. That is: inconsistency is interesting because it shows that the model does not organize its knowledge in a way that makes sense, not because it disqualifies PLMs from being used as KBs.}
+% \nk{I really like this idea of Shauli}
+% In this work, we focus on simple lexical and syntactic inferences, but the framework also allows for more complex inferences, that require for example commonsense reasoning and pragmatics capabilities. Moreover, in this work we only change the patterns, although the framework also allows for more complex modifications that require different predicates (e.g. ``Animal love food'' $\rightarrow$ ``Dogs love food'').
+
+\paragraph{The Framework}
+% Formally, given a tuple $t$, which consists of $<s, p, o>$ where $s$, $p$ and $o$ stands for the subject, pattern, and object respectively. 
+We begin with a set of $m$ KB triplets $D = \{D_1, D_2, \dots, D_m\}$, where each $D_i$ contains factual statements that express a specific relation $R(D_i)$, such as ``aired on''. Each $D_i$ is composed of $n$ examples $D_i = \{d_1^i, d_2^i, \dots, d_n^i\}$, where each $d_j^i = <s_j^i, p_j^i, o_j^i>$ is a triplet of a subject, a unique pattern that expresses the relation $R(D_i)$, and an object, respectively. For instance, if $R(D_1)=\text{``aired on"}$ then a triplet in $D_1$ can be $< \text{\textit{Homeland}}, \text{\subj{} was born in \obj{}}, \text{\textit{Showtime}}>$.
+
+
+
+Given some relation $R(D_i)$, and two factual statements associated with this relation $d_j^i$ and $d_k^i$ (such as ``Homeland was premiered on Showtime'' and ``Homeland was aired on Showtime''), our goal is to test whether the model consistently predict $d_k^i$ and $d_j^i$, given that we know that $p_j^i$ entails $p_k^i$ ($p_j^i \rightarrow p_k^i$). 
+% \nk{given that we know that $p_j^i$ entails $p_k^i$} 
+We do this by testing the knowledge that the model stores, and is expressed in $d_j^i$. To this end, we mask the object $o_j^i$ and ask the model to predict it: ``Obama was born in [MASK]''.
+Then, expecting that every entailed pattern $d_k^i$ would predict the same answer: ``Obama is native to [MASK]''.
+Notice that we do not require the answers to be factually correct, an important property for KBs, but is not under our scope, but solely to consistent.
+% If the model predicts the correct $o_j^i$ as the most probable completion, we take that as evidence for the storing of the factual knowledge $d_j^i$ in the model. 
+% In this case, a model that can perform adequate inference over the syntactic and lexical alternations between $p_j^i$ and $p_k^i$ is expected to also correctly predict the object from the alternative patterns $p_k^i$.

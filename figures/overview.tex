@@ -1,0 +1,147 @@
+\documentclass{standalone}%
+
+%% Language and font encodings
+%\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+%\usepackage[a4paper,top=3cm,bottom=2cm,left=1cm,right=1cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage[dvipsnames]{xcolor}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+
+
+
+%\usepackage{xcolor}
+
+%% tikz packages
+\usepackage{tikz,pgf}
+\usetikzlibrary{trees}
+\usetikzlibrary{backgrounds}
+\usepackage{tikz-dependency}
+
+
+\usepackage{relsize}
+
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\definecolor{my_green}{rgb}{0, 0.6, 0.5}
+\definecolor{my_orange}{rgb}{0.9, 0.6, 0}
+\definecolor{my_purple}{rgb}{0.8, 0.6, 0.7}
+\definecolor{my_blue}{rgb}{0, 0.45, 0.7}
+
+\tikzstyle{bag} = [align=center]
+
+
+% for thoughts bubbles
+\newcommand{\bubblethis}[2]{
+        \tikz[remember picture,baseline]{\node[anchor=base,inner sep=0,outer sep=0]%
+        (#1) {\underline{#1}};\node[overlay,cloud callout,callout relative pointer={(0.02cm,-0.07cm)},%
+        aspect=2.5,fill=yellow!90] at ($(#1.north)+(-0.5cm,1.6cm)$) {#2};}%
+    }%
+
+\begin{document}
+
+
+
+\begin{tikzpicture}[
+  emb/.style={rectangle,draw,fill=white,minimum width=2cm,minimum height=0.6cm,rounded corners=.8ex},
+  normal/.style={rectangle,draw,fill=white,minimum width=4cm,minimum height=0.8cm,rounded corners=.8ex},
+  path_embedding/.style={rectangle,draw,fill=blue!20,minimum width=4cm,    minimum height=0.7cm},
+  nc_embedding/.style={rectangle,draw,fill=orange!50,minimum width=2.5cm,    minimum height=0.7cm},
+  word_embedding/.style={rectangle,draw,fill=my_green!40,minimum width=2.5cm,    minimum height=0.7cm},
+  every neuron_empty/.style={circle,draw,minimum size=0.2cm},
+  every neuron/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
+  every neuron1/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
+  every neuron2/.style={circle,draw,fill=blue!50,minimum size=0.2cm},
+  every neuron3/.style={circle,draw,fill=green!50,minimum size=0.2cm},
+  every neuron4/.style={circle,draw,fill=green!50,minimum size=0.2cm},
+  every neurontar/.style={circle,draw,fill=brown!50,minimum size=0.5cm},
+  every text-box/.style={rectangle,minimum size=0.6cm},
+  every rect/.style={rectangle,draw,fill=gray!50,minimum size=0.6cm},
+  every vecrec/.style={rectangle,draw,fill=none,minimum width=1.5cm, minimum height=0.8cm},
+  every oper/.style={rectangle,draw,fill=red!50,minimum size=0.5cm},
+  every oper2/.style={rectangle,draw,fill=pink!50,minimum size=0.5cm},
+  neuron missing/.style={draw=none,fill=none,scale=2,execute at begin node=\color{black}$\cdots$}
+  ]
+  
+
+
+% text
+\node[] at (0,0) {\tiny \textit{Homeland} was released on \textsc{[MASK]}};
+
+\node[inner sep=0pt] (bert_encoder) at (1.5,-0.9)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+
+\node[inner sep=0pt] (bert_encoder) at (0.4,-0.8)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+
+\node[] at (0.45, -0.6) [fontscale=0.1] {\tiny Showtime};
+
+
+
+\node[] at (0.45, -1.7) {$\Updownarrow$};
+
+
+
+
+\node[] at (0,-2.2) {\tiny \textit{Homeland} aired on \textsc{[MASK]}};
+
+\node[inner sep=0pt] (bert_encoder) at (1.5,-3.1)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+    
+\node[inner sep=0pt] (bert_encoder) at (0.4,-3.0)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+    
+\node[] at (0.45, -2.8) [fontscale=0.1] {\tiny ABC};
+
+\node[] at (0, 0.4) [fontscale=0.1, text=Red] {\tiny Inconsistent Prediction};
+
+
+\draw (2.2,0.1) -- (2.2,-3.6);
+
+
+% Consistent
+\node[] at (4,0) {\tiny \textit{Seinfeld} was released on \textsc{[MASK]}};
+
+\node[inner sep=0pt] (bert_encoder) at (5.5,-0.9)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+
+\node[inner sep=0pt] (bert_encoder) at (4.4,-0.8)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+
+\node[] at (4.45, -0.6) [fontscale=0.1] {\tiny NBC};
+
+
+
+\node[] at (4.45, -1.7) {$\Updownarrow$};
+
+
+
+
+\node[] at (4,-2.2) {\tiny \textit{Seinfeld} aired on \textsc{[MASK]}};
+
+\node[inner sep=0pt] (bert_encoder) at (5.5,-3.1)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+    
+\node[inner sep=0pt] (bert_encoder) at (4.4,-3.0)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+    
+\node[] at (4.45, -2.8) [fontscale=0.1] {\tiny NBC};
+
+\node[] at (4, 0.4) [fontscale=0.1, text=ForestGreen] {\tiny Consistent Prediction};
+
+\end{tikzpicture}
+
+\end{document}

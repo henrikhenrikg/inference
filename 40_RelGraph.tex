@@ -1,0 +1,53 @@
+\section{The \resource{} Resource}
+\label{sec:rel-graph}
+
+
+To test the consistency of PLMs, we need to test the sensitivity of their predictions to variations of natural language queries for which the same answer is expected. \nk{= different patterns} This requires a large set of queries, for various relations, annotated by entailing relations (to detect the variations we are interested in). To this end, we create a resource that enables us to study this property, which we name \resource{}. \resource{} is a high-quality resource, that was built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
+It contains patterns for @@ different relations from the TREx dataset \cite{trex}, with an average of @@ patterns per relation.
+
+All patterns from a specific relation entail the original pattern from the relation, but not the other way around.
+% Each pattern entails the main expression for each pattern, but not necessarily the other way around. 
+For example, for the relation of ``aired on'', which describes a TV-series that was aired on some network, the original pattern is: ``\subj{} was aired on \obj{}'' and one of the patterns we create is ``\subj{} was premiered on \obj{}'', which entails the main expression, but not vice versa.
+Each pattern is represented as a node in the graph, and directed edges connect it with each pattern it entails.
+A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:graph}. For instance, the phrase "\subj{} was aired on \obj{}" entails "\obj{} released \subj{}", but not "\subj{} was premiered on \obj{}", although the other direction is entailed.
+% \ar{The entailment 'Y released X' doesn't seem correct. Suggestion For instance, the phrase "\subj{} was premiered on \obj{}" entails "\subj{} was aired on \obj{}", but not the other way around.}
+
+\begin{figure}[t!]
+\centering
+
+\includegraphics[width=1.\columnwidth]{figures/ent_graph}
+
+\caption{Overview of \resource{}.}
+\label{fig:graph}
+% \vspace{-6mm}
+\end{figure}
+
+Overall, \resource{} contains @@ different patterns in total for @@ different relations (@@\% paraphrases per relation in average). All of the paraphrases for a particular relation are organized as a directed graph to indicate the entailment relation between two patterns. Moreover, each edge also contains information about the entailment type, e.g. a lexical or syntactic transformation (Examples for each can be seen in Figure \ref{fig:graph}).
+%A detailed definition is provided shortly.
+% \ye{need to define this.} 
+This information allows us to study the different generalization capabilities of models.
+% The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
+
+\resource{}, was built by this paper's authors, in two steps:
+We begin with the patterns provided by LAMA \cite{lama}. Then, we augmented that relation with other patterns that entail the base pattern. Some of these relations are taken from LPAQA \cite{jiang2020can}. However, since LPAQA relations were extracted automatically, many do not accurately depict the relation, therefore only a subset of these patterns were used in practice. 
+\nk{should we give a number?}.\ye{I don't think it's necessary} 
+Then, by using spike \cite{spike}, we searched for additional patterns that appeared in Wikipedia (or with small modifications) and added them to our resource. Lastly, we augment additional patterns using the annotators' linguistic expertise, such that they are either paraphrase of the base pattern or entail the base pattern. 
+Then, two additional authors went over all the patterns and corrected them, while engaging in a discussion until reaching an agreement.
+\nk{Not sure if the details of this need to be in the main paper or can be moved to the appendix?} \sr{I support moving the technicalities to an appendix and focus here on the properties of the resources and how it is being used.}
+\ye{can decide when we have the full story}
+%The entailment edges were also annotated by the same two authors that created the patterns.
+
+\paragraph{Inference Types}
+\nk{we should change inference types to consistency types} \ye{but the graph is in entailment graph}
+To study the consistency against syntactic and lexical variations of models, each edge is augmented with the type of changes performed to reach from one pattern to another. We account for three types of changes: 1) \textit{syntactic}, 2) \textit{lexical} and 3) \textit{determiner}, all binary variables that account for a change of the specific type between two patterns.
+\textit{Syntactic} structure is defined as the dependency path between the subject and the object in a given pattern, where the path includes the edge types. Two patterns are considered equal syntactically if the labeled paths are identical.
+\textit{Lexical} difference is defined by words difference between two patterns, excluding determiners, punctuation, and symbols. The addition or removal of a preposition does not count as a lexical change.
+\textit{Determiner} difference is considered when the patterns' determiners do not fully overlap.
+
+
+Some statistics of the graphs are presented in Table \ref{tab:rel-graph-stats}, and full statistics per relation are presented in Table \ref{tab:rel-graph-stats-elaborate} in the Appendix.
+
+\input{tables/rel_graph_stats}
+
+\input{tables/rel_graph_examples}
+
