@@ -1,0 +1,98 @@
+\section{Improving Consistency in PLMs}
+\label{sec:adding_consistency}
+
+In the previous sections, we showed the models are generally not consistent in their predictions. Previous works have noticed the lack of this property in a variety of downstream tasks \cite{}, and since PLMs are used for downstream tasks, lack of consistency is likely to affect them as well.
+% Ideally, a consistent PLM would also reflect this property in downstream tasks.
+Can we enhance current PLMs and make them acquire the consistency property?
+
+\subsection{Consistency Improved PLM}
+We propose a simple method to improve the consistency of PLMs, by continuing the prertaining step, with a novel consistency loss. \nk{Should we refer the paper that does it in a similar way?}
+We make use of the TREx triplets, and the paraphrases from \resource{}.
+
+
+Assuming a set of $k$ paraphrases for a given relation, $P^i=\{P_1^i, P_2^i, \dots, P_k^i\}$, each $P_j^i$ represents a paraphrase of some relation $R^i$.
+We use a PLM to encode all patterns from a certain relation $P^i$, to output the probability distribution of the vocabulary of the masked word, denoted by $D^i_j$.
+% Since the patterns are paraphrases of one another, we'd expect the distribution of the objects to be the same. We thus 
+
+
+\paragraph{Consistency Loss Function}
+Given two paraphrase from \resource{}, we expect the predictions of the masked tokens to be identical. However, as we showed in the previous sections, it is not the case. 
+We propose to enforce consistency, by requiring the distribution of the masked tokens to be identical. We use KL Divergence (DKL) to approach these distributions. Since DKL is not a symmetric metric, we use DKL to function on both sides for two pattern $P^i_m,P^i_n$:
+$D_{KL}(D^i_n||D^i_m) + D_{KL} (D^i_m||D^i_n)$
+
+As most of the vocabulary is not relevant for the predictions, in practice we filter it to the candidate set, of each relation \ref{sec:framework}. Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps achieving this goal, since most of the vocabulary is not affected by our new loss.
+From preliminary results we noticed that using only the candidate set is beneficial.
+
+In practice, as we typically have multiple paraphrases, we use all of them, which can help in enforcing a more general solution. Thus, the consistency loss consist of all possible patterns pairs, for a particular relation $R^i$ would be:
+\[
+\mathcal{L}_{c} = \sum_{n=1}^k \sum_{m=n+1}^k D_{KL}(D^i_m||D^i_n) + D_{KL}(D^i_n||D^i_m)
+\]
+
+
+\paragraph{MLM Loss}
+Since the consistency loss is different from the original Cross Entropy loss the MLM was trained on, we find it important to continue the MLM loss on text data, as was observed in previous work \cite{geva2020injecting}.
+
+We consider two alternatives for continuing the pretraining objective: (1) MLM on wikipedia and (2) MLM on the patterns of the relations used for the consistency loss. In practice, we find that the later works better. We denote this loss by $\mathcal{L}_{MLM}$
+
+
+\paragraph{Consistency Guided MLM Continual Training}
+
+Combining the novel consistency loss introduced above, with the regular MLM loss, we continue the PLM training by combining the two losses. The combination of the two losses is determined by a hyperparameter $\lambda$, to make the following final loss function:
+
+\[
+\mathcal{L} = \lambda \mathcal{L}_c + \mathcal{L}_{MLM}
+\]
+
+The above loss is computed per relation, for one KB tuple $d_j^i$. In practice, we have many of these instance, which we require to behave similarly. Therefore, we batch together $n$ tuples from the same relation, and apply the same loss function to all of them.
+
+
+\subsection{Setup}
+
+% \paragraph{Relations used for training}
+% The TREx relations contain different types, and contain many location-related relations. 
+Since we evaluate our method on relations other than the ones we train on, it's better to avoid relations of the same type (e.g. location-based relations, are very common in TREx).
+Moreover, our method is aimed to be simple, effective and requiring only minimal supervision, therefore we opt to use only a minimal number of relations for training.
+In practice, we use only three relations: @@, @@ and @@. These relations were chosen randomly, out of the non-location related relations.
+Since we train only on 3 relations, and the paraphrases are short, we manage to include many tuples in every batch, resulting in a quick training phase.
+
+For validation, we randomly pick 5 relations of the remaining relations, and use the rest 32 for testing.
+
+We perform minimal tuning of the parameters, to pick the best model.
+
+We train this model for 3 epochs, and select the best model based on the consistency score on a validation set.
+
+For efficiency reasons, we use the base version of BERT, but expect other models to behave similarly.
+
+
+\subsection{Consistency Results}
+
+\input{tables/ft_consistency}
+
+The results are presented in Table \ref{tab:consistency-ft}. We report the aggregated results for all of the relations, apart from those that were used for training or validation. As in the previous section, we report the mean over the inspected relations, as well as the standard deviation.
+We report the results of the majority baseline, as well as the vanilla BERT-base model that we then fine-tune on. Finally we report the results on our new model.
+First, we note the big improvement in consistency, that our model reaches: from 56.9\% in the BERT baseline to 66.6\% in our model, an increase of 9.7 points. \nk{I would emphasise here again that it was able to transfer consistency from the seen to the unseen relations and we should maybe add that this in not only syntax based (is it?)}
+The LAMA score, slightly decrease from the BERT baseline, however it is still compatible. Finally, and most importantly, we see an increase of 5.4 points to the Group-Score, that is achieved to the better consistency of the model.
+
+
+% \subsection{Effect on a Downstream Task}
+% The improvement in consistency on the Knowledge domain is embraced, however, the overall results are still low, and the usability of such models as knowledge bases is in doubt.
+% Ideally, a model that more consistent, reflect this capability on downstream tasks, such as Question Answering (QA).
+
+% As such, we aim to inspect the model we trained in the previous section on a downstream task as a test bed. The goals of these experiments are two fold: (1) verify that the fine-tuned model is still useful for downstream tasks, and did not lose of its basic language capabilities, and (2) test whether the consistency capabilities are reflected also in a downstream task.
+
+% We opt to use QA as our downstream task, specifically experimenting on SQuAD1 and SQuAD2 \cite{squad,squad2}.
+% In addition, since SQuAD does not typically contain paraphrases of the same question, we do not expect to see improvements on these tasks. As such, we also experiment with paraphrased question of SQuAD1 \cite{squad-paraphrase}.
+% An improvement on this test set would suggest that our model not only kept its language capabilities, but also acquired some consistency skills.
+
+% \paragraph{Setup}
+
+% We follow the standard fine-tuning process, with the recommended hyperparameters for training SQuAD models. We provide details about the training in the Appendix to allow for reproducibility.
+% We experiment with both the base version of BERT as a baseline, as well as our model. We repeat each experiment three times, with different random seed, and report the average results on the standard metrics: F1 and Exact Match (EM).
+
+% \citet{squad-paraphrase} release two test sets: a regular paraphrase of questions originated from SQuAD1, that were generated automatically, and then filtered manually. This test set contains 1,602 paraphrased questions. The other test set is an adversarial set, that exploits similar candidates of the gold answer, and uses phrases from the other candidates contexts inside the question, to challenge the model. This test set contains 56 manually generated questions.
+
+% \paragraph{Results}
+
+% The results are summarized in Table \ref{}.
+
+% \input{tables/squad_results}

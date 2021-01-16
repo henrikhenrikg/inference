@@ -2,14 +2,15 @@
 \label{sec:setup}
 
 \subsection{Models}
-We experiment with three PLMs: BERT \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their two size variants\footnote{For ALBERT we use the smallest and largest versions.}. Additionally, we use the whole-word-masking version of BERT large, which was shown to perform better in multiple tasks \cite{talmor2019olmpics}.
+We experiment with three PLM types: BERT \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their two size variants\footnote{For ALBERT we use the smallest and largest versions.}. Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
+
+In addition, we also report a majority baseline that always predict the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
 
 \subsection{Data}
 
-To query PLMs for knowledge graph like triplets
-a cloze-style query is generated using a (subject, relation, object) triple from a knowledge graph and a pattern for the relation that contains variables X and Y for subject and object; e.g, ``X was aired in Y''. The subject is substituted for X and a masked token (e.g. `[MASK]') for Y.
+To probe for consistency of PLMs we use cloze-style queries using a (subject, object, relation) triple from a KB. We then populate the subjects and objects from the KB into patterns from a specific relation from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]').
 
-We use knowledge graph data from TREx \cite{trex} which contains 34,039 triples across 41 relations.
+We use knowledge graph data from TREx \cite{trex} which contains 34,039 triples across 40 relations. To make the results comparable across all models, we filter objects that do not fit a single token in all models' vocabularies.
 We use the patterns from our resource \resource{}, described in the previous section.
 
 
@@ -17,21 +18,19 @@ We use the patterns from our resource \resource{}, described in the previous sec
 \label{sec:eval}
 
 %\ye{I think typed querying should be defined properly}
-Following prior work \cite{Xiong2020Pretrained, }: for each relation, we create a
-candidate set $\mathcal{C}$ and then predict
-$\arg\max_{c\in \mathcal{C}}p(c|q)$ where $p(w|q)$ is the probability
-that word $w$ gets predicted in query $q$. For most relations,
-there is only one valid entity type, e.g., country for the ``captical-of'' relation.
-We choose as $\mathcal{C}$ the set of all possible objects for a specific relation from the TREx dataset.
-The candidate set could also be obtained from an entity
-typing system
-(e.g., \cite{yaghoobzadeh-schutze-2016-intrinsic}), but this
-is beyond the scope of this paper.
+% Following prior work \cite{Xiong2020Pretrained, }: for each relation, we create a
+% candidate set $\mathcal{C}$ and then predict
+% $\arg\max_{c\in \mathcal{C}}p(c|q)$ where $p(w|q)$ is the probability
+% that word $w$ gets predicted in query $q$. For most relations,
+% there is only one valid entity type, e.g., country for the ``captical-of'' relation.
+% We choose as $\mathcal{C}$ the set of all possible objects for a specific relation from the TREx dataset.
+% The candidate set could also be obtained from an entity
+% typing system
+% (e.g., \cite{yaghoobzadeh-schutze-2016-intrinsic}), but this
+% is beyond the scope of this paper.
 
 
-We compute the accuracy of predictions per relation, or graph, as the number of correct predictions of the object in the entailed pattern, dividing by the total amount of predictions. This metric can be seen as a weighted average, when computing a performance score for each edge, and performing a weighted average based on the number of tuples per pattern.
-Additionally, we also report aggregated results for specific edge types that involve a specific transformation: \textit{syntactic}, \textit{lexical}, and both, using the same measurement.
+We compute the accuracy of predictions per relation, or graph, as the number of consistent predictions for every pattern pair for all tuples in the KB for a relation, dividing by the total amount of predictions.
+Finally, we aggregate the results for all relations and report a final number as the average of all relations. This metric can be viewed as macro average.
+We also report aggregated results for specific edge types that involve a specific transformation: \textit{syntactic}, \textit{lexical}, and both, using the same measurement. \nk{what about det? Also in the statistics table you call it rest}
 
-\paragraph{Evaluation Types}
-We provide two types of evaluations: \textit{clean} and \textit{complex}.
-The first type, \textit{clean} only looks at each relation subgraph where the nodes are entailed by the main pattern. Since we also provide some patterns that entail the main pattern (e.g. ``\subj{} was premiered on \obj{}'' entails ``\subj{} was aired on \obj{}'') these patterns are not always factually correct for the KB triplets. Therefore, 

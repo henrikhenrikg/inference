@@ -1,0 +1,19 @@
+\begin{table}[t]
+% \small
+    \centering
+\resizebox{1\columnwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Model &        LAMA & Group-Score & Consistency \\
+\midrule
+majority-baseline      &  24.2+-20.7 &  24.2+-20.7 &  100.0+-0.0 \\ \midrule
+roberta-med-small-1M-1 &   10.2+-9.0 &    2.5+-3.9 &  36.6+-11.3 \\
+roberta-base-10M-1     &  18.0+-16.5 &    3.9+-8.2 &  30.3+-14.0 \\
+roberta-base-100M-1    &  22.9+-19.9 &   6.8+-15.4 &  32.9+-17.2 \\
+roberta-base-1B-1      &  36.3+-24.4 &  17.7+-19.8 &  48.8+-20.4 \\
+\bottomrule
+\end{tabular}
+}
+    \caption{Average consistency results for the different RoBERTas, trained on increasing amounts of tokens.}
+    \label{tab:robertas}
+\end{table}

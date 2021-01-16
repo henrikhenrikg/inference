@@ -98,6 +98,23 @@
       primaryClass={cs.CL}
 }
 
+@inproceedings{li-etal-2019-logic,
+    title = "A Logic-Driven Framework for Consistency of Neural Models",
+    author = "Li, Tao  and
+      Gupta, Vivek  and
+      Mehta, Maitrey  and
+      Srikumar, Vivek",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-1405",
+    doi = "10.18653/v1/D19-1405",
+    pages = "3924--3935",
+    abstract = "While neural models show remarkable accuracy on individual predictions, their internal beliefs can be inconsistent across examples. In this paper, we formalize such inconsistency as a generalization of prediction error. We propose a learning framework for constraining models using logic rules to regularize them away from inconsistency. Our framework can leverage both labeled and unlabeled examples and is directly compatible with off-the-shelf learning schemes without model redesign. We instantiate our framework on natural language inference, where experiments show that enforcing invariants stated in logic can help make the predictions of neural models both accurate and consistent.",
+}
+
 @inproceedings{kassner-etal-2020-pretrained,
     title = "Are Pretrained Language Models Symbolic Reasoners over Knowledge?",
     author = {Kassner, Nora  and
@@ -149,6 +166,83 @@
     doi = "10.18653/v1/2020.acl-main.543",
     pages = "6105--6117",
     abstract = "Despite the success of language models using neural networks, it remains unclear to what extent neural models have the generalization ability to perform inferences. In this paper, we introduce a method for evaluating whether neural models can learn systematicity of monotonicity inference in natural language, namely, the regularity for performing arbitrary inferences with generalization on composition. We consider four aspects of monotonicity inferences and test whether the models can systematically interpret lexical and logical phenomena on different training/test splits. A series of experiments show that three neural models systematically draw inferences on unseen combinations of lexical and logical phenomena when the syntactic structures of the sentences are similar between the training and test sets. However, the performance of the models significantly decreases when the structures are slightly changed in the test set while retaining all vocabularies and constituents already appearing in the training set. This indicates that the generalization ability of neural models is limited to cases where the syntactic structures are nearly the same as those in the training set.",
+}
+
+@article{forbes2019neural,
+  title={Do Neural Language Representations Learn Physical Commonsense?},
+  author={Forbes, Maxwell and Holtzman, Ari and Choi, Yejin},
+  journal={arXiv preprint arXiv:1908.02899},
+  year={2019}
+}
+
+@article{Ettinger_2020,
+   title={What BERT Is Not: Lessons from a New Suite of Psycholinguistic Diagnostics for Language Models},
+   volume={8},
+   ISSN={2307-387X},
+   url={http://dx.doi.org/10.1162/tacl_a_00298},
+   DOI={10.1162/tacl_a_00298},
+   journal={Transactions of the Association for Computational Linguistics},
+   publisher={MIT Press - Journals},
+   author={Ettinger, Allyson},
+   year={2020},
+   month={Jan},
+   pages={34–48}
+}
+
+@inproceedings{da2019cracking,
+    title = "Cracking the Contextual Commonsense Code: Understanding Commonsense Reasoning Aptitude of Deep Contextual Representations",
+    author = "Da, Jeff  and
+      Kasai, Jungo",
+    booktitle = "Proceedings of the First Workshop on Commonsense Inference in Natural Language Processing",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-6001",
+    doi = "10.18653/v1/D19-6001",
+    pages = "1--12",
+    abstract = "Pretrained deep contextual representations have advanced the state-of-the-art on various commonsense NLP tasks, but we lack a concrete understanding of the capability of these models. Thus, we investigate and challenge several aspects of BERT{'}s commonsense representation abilities. First, we probe BERT{'}s ability to classify various object attributes, demonstrating that BERT shows a strong ability in encoding various commonsense features in its embedding space, but is still deficient in many areas. Next, we show that, by augmenting BERT{'}s pretraining data with additional data related to the deficient attributes, we are able to improve performance on a downstream commonsense reasoning task while using a minimal amount of data. Finally, we develop a method of fine-tuning knowledge graphs embeddings alongside BERT and show the continued importance of explicit knowledge graphs.",
+}
+
+
+@article{DBLP:journals/corr/ForbesC17,
+  author    = {Maxwell Forbes and
+               Yejin Choi},
+  title     = {Verb Physics: Relative Physical Knowledge of Actions and Objects},
+  journal   = {CoRR},
+  volume    = {abs/1706.03799},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1706.03799},
+  archivePrefix = {arXiv},
+  eprint    = {1706.03799},
+  timestamp = {Mon, 13 Aug 2018 16:45:59 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ForbesC17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@article{rogers2020primer,
+  title={A primer in bertology: What we know about how bert works},
+  author={Rogers, Anna and Kovaleva, Olga and Rumshisky, Anna},
+  journal={arXiv preprint arXiv:2002.12327},
+  year={2020}
+}
+
+@inproceedings{ravichander-etal-2020-systematicity,
+    title = "On the Systematicity of Probing Contextualized Word Representations: The Case of Hypernymy in {BERT}",
+    author = "Ravichander, Abhilasha  and
+      Hovy, Eduard  and
+      Suleman, Kaheer  and
+      Trischler, Adam  and
+      Cheung, Jackie Chi Kit",
+    booktitle = "Proceedings of the Ninth Joint Conference on Lexical and Computational Semantics",
+    month = dec,
+    year = "2020",
+    address = "Barcelona, Spain (Online)",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.starsem-1.10",
+    pages = "88--102",
+    abstract = "Contextualized word representations have become a driving force in NLP, motivating widespread interest in understanding their capabilities and the mechanisms by which they operate. Particularly intriguing is their ability to identify and encode conceptual abstractions. Past work has probed BERT representations for this competence, finding that BERT can correctly retrieve noun hypernyms in cloze tasks. In this work, we ask the question: \textit{do probing studies shed light on systematic knowledge in BERT representations?} As a case study, we examine hypernymy knowledge encoded in BERT representations. In particular, we demonstrate through a simple consistency probe that the ability to correctly retrieve hypernyms in cloze tasks, as used in prior work, does not correspond to systematic knowledge in BERT. Our main conclusion is cautionary: even if BERT demonstrates high probing accuracy for a particular competence, it does not necessarily follow that BERT {`}understands{'} a concept, and it cannot be expected to systematically generalize across applicable contexts.",
 }
 
 @inproceedings{goodwin-etal-2020-probing,
@@ -331,7 +425,7 @@ eprint = {
   year={2018}
 }
 
-@article{jiang2020can,
+@article{alpaqa,
   title={How can we know what language models know?},
   author={Jiang, Zhengbao and Xu, Frank F and Araki, Jun and Neubig, Graham},
   journal={Transactions of the Association for Computational Linguistics},
@@ -478,4 +572,199 @@ author={Fabio Petroni and Patrick Lewis and Aleksandra Piktus and Tim Rockt{\"a}
 booktitle={Automated Knowledge Base Construction},
 year={2020},
 url={https://openreview.net/forum?id=025X0zPfn}
+}
+
+@inproceedings{robertas,
+    title = "Learning Which Features Matter: {R}o{BERT}a Acquires a Preference for Linguistic Generalizations (Eventually)",
+    author = "Warstadt, Alex  and
+      Zhang, Yian  and
+      Li, Xiaocheng  and
+      Liu, Haokun  and
+      Bowman, Samuel R.",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-main.16",
+    doi = "10.18653/v1/2020.emnlp-main.16",
+    pages = "217--235",
+}
+
+@article{tsne,
+  title={Visualizing data using t-{SNE}},
+  author={Maaten, Laurens van der and Hinton, Geoffrey},
+  journal={Journal of Machine Learning Research},
+  volume={9},
+  pages={2579--2605},
+  year={2008}
+}
+
+@inproceedings{ribeiro-etal-2019-red,
+    title = "Are Red Roses Red? Evaluating Consistency of Question-Answering Models",
+    author = "Ribeiro, Marco Tulio  and
+      Guestrin, Carlos  and
+      Singh, Sameer",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P19-1621",
+    doi = "10.18653/v1/P19-1621",
+    pages = "6174--6184",
+}
+
+@inproceedings{vqa,
+  title={Vqa: Visual question answering},
+  author={Antol, Stanislaw and Agrawal, Aishwarya and Lu, Jiasen and Mitchell, Margaret and Batra, Dhruv and Lawrence Zitnick, C and Parikh, Devi},
+  booktitle={Proceedings of the IEEE international conference on computer vision},
+  pages={2425--2433},
+  year={2015}
+}
+
+@inproceedings{squad,
+  title={SQuAD: 100,000+ Questions for Machine Comprehension of Text},
+  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
+  booktitle={Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing},
+  pages={2383--2392},
+  year={2016}
+}
+
+@inproceedings{alberti2019synthetic,
+  title={Synthetic QA Corpora Generation with Roundtrip Consistency},
+  author={Alberti, Chris and Andor, Daniel and Pitler, Emily and Devlin, Jacob and Collins, Michael},
+  booktitle={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages={6168--6173},
+  year={2019}
+}
+
+@inproceedings{du2019consistent,
+  title={Be Consistent! Improving Procedural Text Comprehension using Label Consistency},
+  author={Du, Xinya and Dalvi, Bhavana and Tandon, Niket and Bosselut, Antoine and Yih, Wen-tau and Clark, Peter and Cardie, Claire},
+  booktitle={Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)},
+  pages={2347--2356},
+  year={2019}
+}
+
+@inproceedings{kryscinski2020evaluating,
+  title={Evaluating the factual consistency of abstractive text summarization},
+  author={Kryscinski, Wojciech and McCann, Bryan and Xiong, Caiming and Socher, Richard},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages={9332--9346},
+  year={2020}
+}
+
+@inproceedings{ribeiro-etal-2020-beyond,
+    title = "Beyond Accuracy: Behavioral Testing of {NLP} Models with {C}heck{L}ist",
+    author = "Ribeiro, Marco Tulio  and
+      Wu, Tongshuang  and
+      Guestrin, Carlos  and
+      Singh, Sameer",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.442",
+    doi = "10.18653/v1/2020.acl-main.442",
+    pages = "4902--4912",
+}
+
+@inproceedings{geva2020injecting,
+  title={Injecting Numerical Reasoning Skills into Language Models},
+  author={Geva, Mor and Gupta, Ankit and Berant, Jonathan},
+  booktitle={Association for Computational Linguistics (ACL)},
+  year={2020},
+}
+
+@inproceedings{squad2,
+  title={Know What You Don’t Know: Unanswerable Questions for SQuAD},
+  author={Rajpurkar, Pranav and Jia, Robin and Liang, Percy},
+  booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)},
+  pages={784--789},
+  year={2018}
+}
+
+@inproceedings{Xiong2020Pretrained,
+  author    = {Wenhan Xiong and
+Jingfei Du and
+William Yang Wang and
+Veselin Stoyanov},
+title     = {Pretrained Encyclopedia: Weakly Supervised Knowledge-Pretrained Language
+Model},
+booktitle = {8th International Conference on Learning Representations, {ICLR} 2020,
+Addis Ababa, Ethiopia, April 26-30, 2020},
+publisher = {OpenReview.net},
+year      = {2020},
+url       = {https://openreview.net/forum?id=BJlzm64tDH},
+timestamp = {Thu, 07 May 2020 17:11:47 +0200},
+biburl    = {https://dblp.org/rec/conf/iclr/XiongDWS20.bib},
+bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+
+@inproceedings{squad-paraphrase,
+  title={Improving the robustness of question answering systems to question paraphrasing},
+  author={Gan, Wee Chung and Ng, Hwee Tou},
+  booktitle={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages={6065--6075},
+  year={2019}
+}
+
+@misc{amnesic_probing,
+Author = {Yanai Elazar and Shauli Ravfogel and Alon Jacovi and Yoav Goldberg},
+Title = {Amnesic Probing: Behavioral Explanation with Amnesic Counterfactuals},
+Year = {2020},
+Eprint = {arXiv:2006.00995},
+}
+
+@inproceedings{hewitt2019structural,
+ author = {Hewitt, John and Manning, Christopher D.},
+ booktitle = {North American Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL)},
+ location = {Minneapolis, USA},
+ publisher = {Association for Computational Linguistics},
+ title = {{A} Structural Probe for Finding Syntax in Word Representations},
+ url = {https://nlp.stanford.edu/pubs/hewitt2019structural.pdf},
+ year = {2019}
+}
+
+@inproceedings{tenney2019bert,
+  title={BERT Rediscovers the Classical NLP Pipeline},
+  author={Tenney, Ian and Das, Dipanjan and Pavlick, Ellie},
+  booktitle={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  pages={4593--4601},
+  year={2019}
+}
+
+@inproceedings{zhang2020language,
+  title={Do Language Embeddings capture Scales?},
+  author={Zhang, Xikun and Ramachandran, Deepak and Tenney, Ian and Elazar, Yanai and Roth, Dan},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: Findings},
+  pages={4889--4896},
+  year={2020}
+}
+
+@article{denis2009global,
+  title={Global joint models for coreference resolution and named entity classification},
+  author={Denis, Pascal and Baldridge, Jason},
+  journal={Procesamiento del Lenguaje Natural},
+  volume={42},
+  year={2009}
+}
+
+@inproceedings{chang2011inference,
+  title={Inference protocols for coreference resolution},
+  author={Chang, Kai-Wei and Samdani, Rajhans and Rozovskaya, Alla and Rizzolo, Nick and Sammons, Mark and Roth, Dan},
+  booktitle={Proceedings of the Fifteenth Conference on Computational Natural Language Learning: Shared Task},
+  pages={40--44},
+  year={2011}
+}
+
+@inproceedings{nguyen2016integrating,
+  title={Integrating Distributional Lexical Contrast into Word Embeddings for Antonym-Synonym Distinction},
+  author={Nguyen, Kim Anh and im Walde, Sabine Schulte and Vu, Ngoc Thang},
+  booktitle={Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)},
+  pages={454--459},
+  year={2016}
 }

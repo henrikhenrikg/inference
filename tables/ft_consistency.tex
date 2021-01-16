@@ -1,0 +1,19 @@
+\begin{table}[t]
+% \small
+    \centering
+\resizebox{1\columnwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+LM &       LAMA & Group-Score & Consistency \\
+
+\midrule
+majority-baseline &  25.5+-22.3 &  25.5+-22.3 &  100.0+-0.0 \\
+BERT-base         &  \textbf{44.0}+-26.6 &  24.4+-25.8 &  56.9+-20.9 \\ \midrule
+BERT-base+                &  43.6+-28.2 &  \textbf{29.8}+-27.6 &  \textbf{66.6}+-20.1 \\
+\bottomrule
+\end{tabular}
+}
+
+    \caption{Results for the baselines and the Finetuned Model.}
+    \label{tab:consistency-ft}
+\end{table}
