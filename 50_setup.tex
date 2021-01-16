@@ -2,17 +2,23 @@
 \label{sec:setup}
 
 \subsection{Models}
-We experiment with three PLM types: BERT \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their two size variants\footnote{For ALBERT we use the smallest and largest versions.}. Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
+We experiment with three PLM types: BERT \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants\footnote{For ALBERT we use the smallest and largest versions.}. Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
 
-In addition, we also report a majority baseline that always predict the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
+In addition, we also report a majority baseline that always predicts the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
 
 \subsection{Data}
 
+\enote{hs}{below: why ``specific'' relation? don't you do
+  this for all relations? can you say: for all triples in $D$?}
+
 To probe for consistency of PLMs we use cloze-style queries using a (subject, object, relation) triple from a KB. We then populate the subjects and objects from the KB into patterns from a specific relation from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]').
 
-We use knowledge graph data from TREx \cite{trex} which contains 34,039 triples across 40 relations. To make the results comparable across all models, we filter objects that do not fit a single token in all models' vocabularies.
+We use knowledge graph data from TREx \cite{trex} which contains 34,039 triples across 40 relations. To make the results comparable across all models, we remove objects that do not fit a single token in all models' vocabularies.
 We use the patterns from our resource \resource{}, described in the previous section.
 
+
+\enote{hs}{below: is there a difference between ``tuple''
+  and ``triple''?}
 
 \subsection{Evaluation}
 \label{sec:eval}

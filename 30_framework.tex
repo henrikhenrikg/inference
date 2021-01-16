@@ -24,10 +24,23 @@ respectively. For instance, if $R(D_1)=\text{``originally
 
 
 
-Given some relation $R(D_i)$, and two factual statements associated with this relation $d_j^i$ and $d_k^i$ (such as ``Homeland was originally aired on Showtime'' and ``Showtime released Homeland''), our goal is to test whether the model consistently predicts $d_k^i$ and $d_j^i$, given that we know that $p_j^i$ and $p_k^i$ are paraphrases.
-To this end, we mask the objects $o_j^i$ and $o_k^i$ and ask the model to predict them: ``Homeland was originally aired on [MASK]'' and ``[MASK] released Homeland''.
-Then, expecting a consistent model to predict the same answer.
-Notice that the consistency measure does not require the answers to be factually correct, an important property for KBs, which is measured with a different metric.
+Given some relation $R(D_i)$, and two factual statements
+$d_j^i,d_k^i \in D_i$
+associated with this relation 
+(such as
+``Homeland was originally aired on Showtime'' and ``Showtime
+released Homeland''), our goal is to test whether the model,
+if subject/object are the same,
+consistently predicts $d_k^i$ and $d_j^i$, given that we
+know that $p_j^i$ and $p_k^i$ are paraphrases.  To this end,
+we mask the objects $o_j^i$ and $o_k^i$ and ask the model to
+predict them: ``Homeland was originally aired on [MASK]''
+and ``[MASK] released Homeland''.  Then, expecting a
+consistent model to predict the same answer.  Notice that
+the consistency measure does not require the answers to be
+factually correct, an important property for KBs, which is
+measured with a different metric.
+
 % If the model predicts the correct $o_j^i$ as the most probable completion, we take that as evidence for the storing of the factual knowledge $d_j^i$ in the model. 
 % In this case, a model that can perform adequate inference over the syntactic and lexical alternations between $p_j^i$ and $p_k^i$ is expected to also correctly predict the object from the alternative patterns $p_k^i$.
 

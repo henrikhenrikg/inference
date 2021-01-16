@@ -20,7 +20,7 @@
 To provide additional insights on the way models operate on the patterns with the masked tokens they need to predict, we inspect their representations after encoding the cloze-style patterns.
 We encode the patterns, populated with 50 random subjects along with the masked token, and inspect the final layer in the masked token index for all the paraphrases of multiple relations.
 Then, we use t-SNE \cite{tsne} and present the results in Figure \ref{fig:tsne-emb}.
-Each point represent a specific tuple, and are colored by the subjects, and the shape stands for the pattern.
+Each point represents a specific tuple, and are colored by the subjects, and the shape stands for the pattern.
 A good representation would cluster the vectors together based on the subject, as then the predictions would more likely to be consistent. However, clusters based on patterns would suggest a worse encoding, since the subjects, which are of great importance in these paraphrases, are less taken into account in the representation.
 
 We display the t-SNE figures for two relations, \textit{Language  of work or name} and \textit{Capital} in Figure \ref{fig:tsne-emb}.

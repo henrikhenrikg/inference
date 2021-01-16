@@ -6,21 +6,24 @@ In the previous sections, we showed the models are generally not consistent in t
 Can we enhance current PLMs and make them acquire the consistency property?
 
 \subsection{Consistency Improved PLM}
-We propose a simple method to improve the consistency of PLMs, by continuing the prertaining step, with a novel consistency loss. \nk{Should we refer the paper that does it in a similar way?}
-We make use of the TREx triplets, and the paraphrases from \resource{}.
+We propose a simple method to improve the consistency of PLMs, by continuing the pretaining step, with a novel consistency loss. \nk{Should we refer the paper that does it in a similar way?}
+We make use of the TREx triples, and the paraphrases from \resource{}.
 
-
-Assuming a set of $k$ paraphrases for a given relation, $P^i=\{P_1^i, P_2^i, \dots, P_k^i\}$, each $P_j^i$ represents a paraphrase of some relation $R^i$.
-We use a PLM to encode all patterns from a certain relation $P^i$, to output the probability distribution of the vocabulary of the masked word, denoted by $D^i_j$.
+Given a relation $R^i$, we
+assume we have a set of $k$ paraphrases for $R^i$,
+$P^i=\{P_1^i, P_2^i, \dots, P_k^i\}$.
+%, each $P_j^i$ represents a paraphrase of some relation $R^i$.
+We use a PLM to encode all patterns in $P^i$ and to output the probability distribution of the vocabulary of the masked word, denoted by $D^i_j$.
 % Since the patterns are paraphrases of one another, we'd expect the distribution of the objects to be the same. We thus 
 
 
 \paragraph{Consistency Loss Function}
-Given two paraphrase from \resource{}, we expect the predictions of the masked tokens to be identical. However, as we showed in the previous sections, it is not the case. 
+Given two paraphrases from \resource{}, we expect the predictions of the masked tokens to be identical. However, as we showed in the previous sections, it is not the case. 
 We propose to enforce consistency, by requiring the distribution of the masked tokens to be identical. We use KL Divergence (DKL) to approach these distributions. Since DKL is not a symmetric metric, we use DKL to function on both sides for two pattern $P^i_m,P^i_n$:
 $D_{KL}(D^i_n||D^i_m) + D_{KL} (D^i_m||D^i_n)$
 
-As most of the vocabulary is not relevant for the predictions, in practice we filter it to the candidate set, of each relation \ref{sec:framework}. Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps achieving this goal, since most of the vocabulary is not affected by our new loss.
+As most of the vocabulary is not relevant for the
+predictions, in practice we filter it down to the candidate set, of each relation \ref{sec:framework}. Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps achieving this goal, since most of the vocabulary is not affected by our new loss.
 From preliminary results we noticed that using only the candidate set is beneficial.
 
 In practice, as we typically have multiple paraphrases, we use all of them, which can help in enforcing a more general solution. Thus, the consistency loss consist of all possible patterns pairs, for a particular relation $R^i$ would be:
@@ -32,7 +35,7 @@ In practice, as we typically have multiple paraphrases, we use all of them, whic
 \paragraph{MLM Loss}
 Since the consistency loss is different from the original Cross Entropy loss the MLM was trained on, we find it important to continue the MLM loss on text data, as was observed in previous work \cite{geva2020injecting}.
 
-We consider two alternatives for continuing the pretraining objective: (1) MLM on wikipedia and (2) MLM on the patterns of the relations used for the consistency loss. In practice, we find that the later works better. We denote this loss by $\mathcal{L}_{MLM}$
+We consider two alternatives for continuing the pretraining objective: (1) MLM on wikipedia and (2) MLM on the patterns of the relations used for the consistency loss. In practice, we find that the latter works better. We denote this loss by $\mathcal{L}_{MLM}$
 
 
 \paragraph{Consistency Guided MLM Continual Training}
@@ -55,7 +58,7 @@ Moreover, our method is aimed to be simple, effective and requiring only minimal
 In practice, we use only three relations: @@, @@ and @@. These relations were chosen randomly, out of the non-location related relations.
 Since we train only on 3 relations, and the paraphrases are short, we manage to include many tuples in every batch, resulting in a quick training phase.
 
-For validation, we randomly pick 5 relations of the remaining relations, and use the rest 32 for testing.
+For validation, we randomly pick 5 relations of the remaining relations, and use the remaining 32 for testing.
 
 We perform minimal tuning of the parameters, to pick the best model.
 
