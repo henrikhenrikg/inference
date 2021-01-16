@@ -22,18 +22,22 @@ We expect that a consistent model would predict the same answer for every two tu
 \end{figure}
 
 
-Recently, with the rise of PLMs, the question of whether these models can be used as KBs has been raised and gained popularity \cite{lama,petroni2020how,alpaqa}. However, an important property of KBs, especially in automatic constructed KBs, is consistency.
+Recently, with the rise of PLMs, the question of whether these models can be used as KBs has been raised and gained popularity \cite{lama,petroni2020how,alpaqa}. However, an important property of KBs, especially in automatically constructed KBs, is consistency.
 One of the biggest advantages of using a PLM as a KB is the ability to query it in natural language and to not rely on a specific schema.
 Thus, expecting that the PLMs would abstract away the language, and map queries in natural language into a meaningful representation, queries with identical meaning should yield the same answer, even if their language differs.
 For example, ``\textit{Homeland} was released on [MASK]'' should produce the same answer as ``\textit{Homeland} was originally aired on [MASK]''.
 Studying inconsistencies of LM-KBs as a testbed can also teach us about the organization of `knowledge' in the model, or lack thereof. Failure to do so may also point to other issues in representations, such as the similarity between antonyms and synonyms \cite{nguyen2016integrating}.
 
 In this work, we study consistency from the factual knowledge perspective, that is, the ability to extract factual information while staying invariant to paraphrases.
-Our setup relies on zero-shot evaluation, which allows us to inspect these capabilities in models directly, without adding biases that arise from finetuning on a specific dataset. This allows to understand if consistency was learned during pretraining, and will allow to track and improve this property in future work. %\sr{Question: how do we separate between lack of consistency due to the extraction method (maybe other extraction method would yield more consistent predictions), and an inherent lack of consistency in the model's behavior?}
+Our setup relies on zero-shot evaluation, which allows us to
+inspect these capabilities in models directly, without
+adding biases that arise from finetuning on a specific
+dataset. This allows us to understand if consistency was learned during pretraining, and will allow to track and improve this property in future work. %\sr{Question: how do we separate between lack of consistency due to the extraction method (maybe other extraction method would yield more consistent predictions), and an inherent lack of consistency in the model's behavior?}
 
 
 We propose a new benchmark that measures consistency in PLMs, using factual knowledge that was claimed to be partially encoded in them (\S \ref{sec:framework}).
-This benchmark, \resource{}, is a manually curated resource that provides patterns -- short textual prompts -- paraphrases of one another, with @@ paraphrases describing 40 relations, such as \textit{born-in}, \textit{works-for} (\S \ref{sec:rel-graph}).
+This benchmark, \resource{}, is a manually curated resource
+that provides patterns -- short textual prompts -- that are paraphrases of one another, with @@ paraphrases describing 40 relations, such as \textit{born-in}, \textit{works-for} (\S \ref{sec:rel-graph}).
 Then, expecting from a consistent model to predict the same answer for all the patterns, we test multiple PLMs for consistency over knowledge.
 An overview of the probe is displayed in Figure \ref{fig:overview}.
 Using \resource{}, we are able to probe for consistency in PLMs (\S \ref{sec:setup}), including BERT, RoBERTa and ALBERT.
