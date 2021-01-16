@@ -7,7 +7,20 @@ In this section, we formally detail our proposed framework that allows probing f
 
 
 \paragraph{The Framework}
-We begin with a set of $m$ KB triplets $D = \{D_1, D_2, \dots, D_m\}$, where each $D_i$ contains factual statements that express a specific relation $R(D_i)$, such as ``aired on''. Each $D_i$ is composed of $n$ examples $D_i = \{d_1^i, d_2^i, \dots, d_n^i\}$, where each $d_j^i = <s_j^i, o_j^i, p_j^i>$ is a triplet of a subject, an object, and a unique pattern that expresses the relation $R(D_i)$, respectively. For instance, if $R(D_1)=\text{``originally aired on"}$ then a triplet in $D_1$ can be $< \text{\textit{Homeland}}, \text{\textit{Showtime}}, \text{\textit{\subj{} was originally aired on \obj{}}}>$.
+Let
+$D = \{D_1, D_2,
+\dots, D_m\}$
+be a set of sets of KB triples,
+where each $D_i$ contains factual statements
+that express a specific relation $R(D_i)$, such as ``aired
+on''. Each $D_i$ is composed of $n$ examples $D_i = \{d_1^i,
+d_2^i, \dots, d_n^i\}$, where each $d_j^i = <s_j^i, o_j^i,
+p_j^i>$ is a triplet of a subject, an object, and a unique
+pattern that expresses the relation $R(D_i)$,
+respectively. For instance, if $R(D_1)=\text{``originally
+  aired on"}$ then a triplet in $D_1$ can be $<
+\text{\textit{Homeland}}, \text{\textit{Showtime}},
+\text{\textit{\subj{} was originally aired on \obj{}}}>$.
 
 
 

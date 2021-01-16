@@ -33,11 +33,31 @@ A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:gra
 % This information allows us to study the different generalization capabilities of models.
 % The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
 
-\resource{}, was constructed in four steps:
-(1) We begin with the patterns provided by LAMA \cite{lama} (one pattern per relation, referred to as base pattern). (2) Then, we augmented that relation with other patterns that are paraphrases of the base pattern. Some of these relations are taken from LPAQA \cite{alpaqa}. However, since its relations were extracted automatically, many do not accurately depict the relation, therefore only a subset of these patterns were used in practice. 
+\resource{}, was constructed in four steps: (1) We begin
+with the patterns provided by LAMA \cite{lama} (one pattern
+per relation, referred to as base pattern). (2) Then, we
+augmented that relation with other patterns that are
+paraphrases of the base pattern. Some of these relations are
+taken from LPAQA \cite{alpaqa}. However, since its relations
+were extracted automatically, many do not accurately depict
+the relation, therefore only a subset of these patterns were
+used in practice.  (3) Then, by using spike \cite{spike}, we
+searched for additional patterns that appeared in Wikipedia
+and added them to our resource. This was done by searching
+for subject and object tuples from the TREx resource and
+looking at the sentences that contain both. (4) Lastly, we
+add additional patterns that are paraphrases of the base
+pattern using the annotators' linguistic
+expertise.
+(The annotators can also add entailing or entailed patterns,
+but we do not make use of them in this paper.)
+Then, two additional
+authors went over all the patterns and corrected them, while
+engaging in a discussion until reaching an agreement,
+discarding patterns with disagreements.
+
 % \nk{should we give a number?}.\ye{I don't think it's necessary}
-(3) Then, by using spike \cite{spike}, we searched for additional patterns that appeared in Wikipedia and added them to our resource. This was done by searching for subject and object tuples from the TREx resource and looking at the sentences that contain both. (4) Lastly, we augment additional patterns using the annotators' linguistic expertise, such that they are either paraphrase of the base pattern or entail the base pattern. 
-Then, two additional authors went over all the patterns and corrected them, while engaging in a discussion until reaching an agreement, discarding patterns with disagreements.
+
 % \nk{Not sure if the details of this need to be in the main paper or can be moved to the appendix?} \sr{I support moving the technicalities to an appendix and focus here on the properties of the resources and how it is being used.}
 % \ye{can decide when we have the full story}
 %The entailment edges were also annotated by the same two authors that created the patterns.
