@@ -1,5 +1,19 @@
-We study consistency in Pretrained Language Models (PLMs), with respect to factual knowledge. \textit{Consistency} --- that is, the ability to remain invariant to meaning-preserving alternations --- is a desired property of any model applied to natural language. Are Pretrained Language Models (PLMs) consistent?
-For studying this property, we create a high-quality resource of cloze-style query English paraphrases, which we name \resource{}. It contains paraphrases for forty relations, with an overall of @@ paraphrases.
-Using \resource{}, we show that all models we experiment with demonstrate poor consistency capabilities, though with high variance between relations.
-We further analyze the representational spaces of these models, and analyze them to provide additional evidence of the poor structure, that suggests these models are currently not suitable for representing knowledge in a robust way.
-Finally, we propose a method for improving consistency in these models and show promising results.
+%We study consistency in Pretrained Language Models (PLMs),
+%with respect to factual knowledge.
+
+\textit{Consistency} of a model --- that is, the invariance
+of its behavior under meaning-preserving alternations in its
+input --- is a highly desirable property in natural language
+processing.  In this paper we study the question: Are
+Pretrained Language Models (PLMs) consistent with respect to
+factual knowledge?  To this end, we create \resource{}, a
+high-quality resource of cloze-style query English
+paraphrases. It contains a total of @@ paraphrases for forty
+relations.  Using \resource{}, we show that the consistency
+of all PLMs we experiment with is poor -- though with high
+variance between relations.  Our analysis of the
+representational spaces of PLMs suggests that they have a
+poor structure and are currently not suitable for
+representing knowledge in a robust way.  Finally, we propose
+a method for improving model consistency and experimentally
+demonstrate its efficacy.
