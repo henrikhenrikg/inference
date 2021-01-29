@@ -2,7 +2,7 @@
 \label{sec:setup}
 
 \subsection{Models}
-We experiment with four PLM variants from three PLMs families: BERT \cite{bert}, BERT whole-word-masking \am{cite?}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants.\footnote{For ALBERT we use the smallest and largest versions.}
+We experiment with four PLM variants from three PLMs families: BERT \cite{bert}, BERT whole-word-masking, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants.\footnote{For ALBERT we use the smallest and largest versions.}
 % Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
 
 In addition, we also report a majority baseline that always predicts the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
@@ -13,8 +13,8 @@ In addition, we also report a majority baseline that always predicts the same mo
 % To probe for consistency of PLMs we use cloze-style queries using a (subject, relation, object) triple from a KB. We then populate the subjects and objects from the KB into patterns for all triplets in $D$ from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]'). \nk{not sure if this is a bit confusing as it is saying the same as earlier a bit differently}\yg{I agree. Don't repeat, and refer to prev description.}
 
 We use knowledge graph data from TREx \cite{trex} which contains 34,039 tuples across 40 relations. To make the results comparable across all models, we remove objects that do not fit a single token in all models' vocabularies. Moreover, some relations contain aggregated data of different types, which makes the original LAMA pattern sometimes obsolete as it does not fit the type (e.g. the tuple (`My Family', `sitcom') in the \textit{genre} relation, that mainly contains music-genre entities).\yg{the prev sentence is not clear}\am{I agree} In these cases, we manually filter these entities from our test set.
-Overall, after the filters\am{filtering}, we are left with @@ tuples.\am{add @@ percent as well?}
-We use the patterns from our resource \resource{}, described in the previous section. \am{use them for, what?}
+Overall, after the filtering, we are left with @@ tuples.
+% We use the patterns from our resource \resource{}, described in the previous section. \am{use them for, what?}
 
 
 \subsection{Evaluation}

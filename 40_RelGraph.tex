@@ -2,8 +2,10 @@
 \label{sec:rel-graph}
 
 We now create \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
-To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
-It contains patterns for 40 relations from the T-REx dataset \cite{T-REx}, with an average of @@ patterns per relation.
+% To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. 
+% We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
+\resource{} is a high-quality resource, built by experts,
+it contains patterns for 40 relations from the T-REx dataset \cite{trex}, with an average of @@ patterns per relation.
 Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
 % Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
@@ -36,10 +38,9 @@ Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}
 % The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
 
 \paragraph{Construction Method}
-\resource{}, was constructed in four steps: (1) We begin \am{everything is in past tense, "began"}
-with the patterns provided by LAMA \cite{lama} (one pattern per relation, referred to as ``base pattern"); (2) we augmented these patterns with other patterns that are paraphrases of the base pattern. Some of these relations are
-taken from LPAQA \cite{alpaqa}. However, since its\am{unclear anticident} relations were extracted automatically, many do not accurately depict the relation \am{relation not depicting the relation?}, therefore only a subset of these patterns were used in practice;  (3) using SPIKE \cite{spike},\footnote{\url{https://spike.apps.allenai.org/}} a search engine over wikipedia sentencecs that allows syntax-based queries, we searched for additional patterns that appeared in Wikipedia and added them to our resource. This was done by searching for subject and object tuples from the T-REx resource and
-looking at the sentences that contain both, followed by a human annotator extracting a pattern from the Wikipedia sentence. (4) Lastly, we add \am{added} additional patterns that are paraphrases of the base pattern using the annotators' linguistic expertise.
+\resource{}, was constructed in four steps: (1) We began with the patterns provided by LAMA \cite{lama} (one pattern per relation, referred to as ``base pattern"); (2) we augmented these patterns with other patterns that are paraphrases of the base pattern. Some of these relations are
+taken from LPAQA \cite{alpaqa}. However, since these patterns were extracted automatically, many do not accurately depict the relation, therefore only a subset of these patterns were used in practice;  (3) using SPIKE \cite{spike},\footnote{\url{https://spike.apps.allenai.org/}} a search engine over wikipedia sentencecs that allows syntax-based queries, we searched for additional patterns that appeared in Wikipedia and added them to our resource. This was done by searching for subject and object tuples from the T-REx resource and
+looking at the sentences that contain both, followed by a human annotator extracting a pattern from the Wikipedia sentence. (4) Lastly, we added additional patterns that are paraphrases of the base pattern using the annotators' linguistic expertise.
 % (The annotators can also add entailing or entailed patterns, but we do not make use of them in this paper.)
 Two additional experts went over all the patterns and corrected them, while engaging in a discussion until reaching an agreement, discarding patterns with disagreements.
 
@@ -71,10 +72,10 @@ By definition, two different patterns that are paraphrases of of the LAMA patter
 
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
 We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
-Overall, each task contains five patterns that are thought to paraphrase \am{to be paraphrases?}, and two that are not.\footnote{Note that the control patterns contain the same subject and object for avoiding shortcuts in solving the task.}
+Overall, each task contains five patterns that are thought to be paraphrases, and two that are not.\footnote{Note that the control patterns contain the same subject and object for avoiding shortcuts in solving the task.}
 
 We asked graduate students in NLP to perform the annotations and collected one answer per question.
-Due to random errors in the annotations, \am{for} every question that does not match our original label (either for paraphrases or controls), we ask the annotators to relabels \am{relabel} these examples\am{it} (without specifying the reason), to allow them to fix random mistakes.\footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
+Due to random errors in the annotations, for every question that does not match our original label (either for paraphrases or controls), we ask the annotators to relabel them (without specifying the reason), to allow them to fix random mistakes.\footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
 % \nk{I would cut that last sentence}
 
 The agreement score for the paraphrases and the control are: @@ and @@, which are high and reassures \resource's quality.
