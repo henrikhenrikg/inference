@@ -31,6 +31,10 @@
 %
 % and set <dim> to something 5cm or larger.
 
+\usepackage{soul} % colors
+% \usepackage[dvipsnames,table,xcdraw]{xcolor}
+
+
 % own packages
 \usepackage{graphicx} % figures
 % \usepackage{float}
@@ -44,13 +48,30 @@
 \usepackage{dsfont} % math
 
 
+\usepackage{transparent} % transparent
+
+\definecolor{WildStrawberry}{HTML}{ff6467}
+\definecolor{OrangeRed}{HTML}{F26035}
+
+
+
+\DeclareRobustCommand{\hltrue}[1]{{\sethlcolor{cyan}\hl{#1}}}
+\DeclareRobustCommand{\hlfalseo}[1]{{\sethlcolor{pink}\hl{#1}}}
+\DeclareRobustCommand{\hlfalset}[1]{{\sethlcolor{WildStrawberry}\hl{#1}}}
+\DeclareRobustCommand{\hlfalsetr}[1]{{\sethlcolor{OrangeRed}\hl{#1}}}
+
+
+% \DeclareRobustCommand{\hlgray}[1]{{\sethlcolor{lightgray}\hl{#1}}}
+
+
 
 \newcommand{\ye}[1]{\textcolor{purple}{Yanai: #1}}
 \newcommand{\sr}[1]{\textcolor{blue}{Shauli: #1}}
 \newcommand{\nk}[1]{\textcolor{brown}{Nora: #1}}
 \newcommand{\ar}[1]{\textcolor{magenta}{Lasha: #1}}
 \newcommand{\hs}[1]{\textcolor{orange}{Hinrich: #1}}
-\newcommand{\yg}[1]{\textcolor{red}{Yoav: #1}}
+\newcommand{\yg}[1]{\textcolor{purple}{Yoav: #1}}
+\newcommand{\am}[1]{\textcolor{red}{[Amit: #1]}}
 
 \newcommand{\resource}{\textsc{ParaRel}}
 
@@ -60,6 +81,7 @@
 \title{Assessing Consistency of Language Models}
 \title{Consistency in Language Models}
 \title{(In)Consistency in Pretrained Language Models}
+\title{Measuring and Improving Consistency in Pretrained Language Models}
 
 % Author information can be set in various styles:
 % For several authors from the same institution:
@@ -122,7 +144,9 @@ $>>>$\hspace{1cm}}}}}
 
 \input{80_adding_consistency}
 
-\input{80_discussion}
+\input{90_discussion}
+
+\input{100_conclusions}
 
 % \input{90_related_work}
 
@@ -131,13 +155,13 @@ $>>>$\hspace{1cm}}}}}
 
 % \section*{Acknowledgements}
 % Tomer Wolfson, Ido Dagan
-
+% for annotations: Alon Jacovi, Ori Shapira, Arie Cattan, Elron Bandel
 
 % Entries for the entire Anthology, followed by custom entries
 \bibliography{custom}
 \bibliographystyle{acl_natbib}
 
-\appendix
+% \appendix
 
 % \section{Example Appendix}
 % \label{sec:appendix}

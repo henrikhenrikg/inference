@@ -21,22 +21,25 @@
 \section{Background}
 \label{sec:background}
 
-There has been significant interest in analyzing the capabilities of PLMs \cite{rogers2020primer}, including linguistic tasks \cite{yoav-syntax,hewitt2019structural,tenney2019bert,amnesic_probing}, commonsense capabilities \cite{forbes2019neural, da2019cracking,zhang2020language} and ability to reason \cite{talmor2019olmpics, kassner-etal-2020-pretrained}. However, there has been considerably less research attention devoted to analyzing how \emph{consistent} models are on these abilities. That is, to what extent do such probes uncover generalizable capabilities of a model and how indicative are they of a coherent set of beliefs in the model. Some initial work in this area has shown that models can be equally prone to generating facts and their negation, a type of inconsistent behavior \cite{Ettinger_2020,kassner-schutze-2020-negated}. \newcite{ravichander-etal-2020-systematicity} propose consistency probes - paired probes to evaluate the ability of PLM to behave in a coherent manner. However, our work is broader in scope, examining the behaviour of PLMs across a range of factual knowledge types, and investigating how models can be made to behave more consistently. 
+There has been significant interest in analyzing the capabilities of PLMs \cite{rogers2020primer}, including linguistic tasks \cite{yoav-syntax,hewitt2019structural,tenney2019bert,amnesic_probing}, commonsense capabilities \cite{forbes2019neural, da2019cracking,zhang2020language} and ability to reason \cite{talmor2019olmpics, kassner-etal-2020-pretrained}. However, there has been considerably less research attention devoted to analyzing how \emph{consistent} models are\am{how they are what? perform? learn?} on these abilities. That is, to what extent do such probes uncover generalizable capabilities of a model, and how indicative they are of 
+factual knowledge. 
+% a coherent set of beliefs in the model \sr{not so clear}\yg{i dislike "beliefs"}. 
+Some initial work in this area has shown that models tend to generating\am{generate?} facts and their negation, a type of inconsistent behavior \cite{Ettinger_2020,kassner-schutze-2020-negated}. \newcite{ravichander-etal-2020-systematicity} propose consistency probes---paired probes to evaluate the ability of PLM to behave in a coherent manner. Our work is broader in scope, examining the behavior of PLMs across a range of factual knowledge types, and investigating how models can be made to behave more consistently. 
 
 Consistency has also been highlighted as a desirable property in automatically constructed KBs and downstream NLP tasks, which we describe below:
 
 \paragraph{Consistency in Knowledge Bases}
 
 Consistency has been studied under theoretical frameworks in the contexts of the satisfiability problem and KBs constructions, and efficient algorithms that detect inconsistencies in KBs have been proposed \cite{hansen2000probabilistic,andersen2001easy}.
-Other works, aim to quantify the degree to which KBs are inconsistent and detect the inconsistent statements \cite{Thimm:2009d,muino2011measuring,Thimm:2013}.
+Other works, aim to quantify the degree to which KBs are inconsistent and detect the\am{remove "the"} inconsistent statements \cite{Thimm:2009d,muino2011measuring,Thimm:2013}.
 
 
 
 \paragraph{Consistency in Question Answering}
-Consistency of models was studied in the Q\&A domain as well. \citet{ribeiro-etal-2019-red} studied the consistency capabilities of several models, in two Q\&A tasks: Visual Question Answering \cite{vqa} and Reading Comprehension \cite{squad}. They generate questions with an automatic method, that allows them to test the consistency of Q\&A models.
-Their findings suggest that most models are not consistent in their predictions, and they also use data augmentation to create more robust models.
+The consistency of models was studied in the Q\&A domain as well. \citet{ribeiro-etal-2019-red} studied the consistency capabilities of several models, in two Q\&A tasks: Visual Question Answering \cite{vqa} and Reading Comprehension \cite{squad}. They generate questions with an automatic method, that allows them to test the consistency of Q\&A models.\am{They automatically generate questions, allowing them...}
+Their findings suggest that most models are not consistent in their predictions. In addition, they use data augmentation to create more robust models.
 \citet{alberti2019synthetic} proposed to generate new questions conditioned on the context and answer from a labeled dataset, and by filtering answers that do not provide a consistent result with the original answer. The authors show that pretraining on this synthetic data improves the results on Q\&A datasets.
-\citet{consistent-qa} proposed to use data augmentation that complements questions with symmetricity and transitivity, as well as a regularizing loss that penalizes inconsistent predictions.
+\citet{consistent-qa} proposed \am{you use both "propose" and "proposed". not sure if that's a problem} to use data augmentation that complements questions with symmetricity and transitivity, as well as a regularizing loss that penalizes inconsistent predictions.
 
 \paragraph{Consistency in Other Domains}
 Consistency was also studied in other domains. For example, \citet{du2019consistent} improves predictions consistency in procedural text over similar descriptions. \citet{ribeiro-etal-2020-beyond} uses consistency for more robust evaluation. \citet{li-etal-2019-logic} measure and mitigate inconsistency in natural language inference.

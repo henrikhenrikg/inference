@@ -2,23 +2,20 @@
 \label{sec:setup}
 
 \subsection{Models}
-We experiment with three PLM types: BERT \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants\footnote{For ALBERT we use the smallest and largest versions.}. Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
+We experiment with four PLM variants from three PLMs families: BERT \cite{bert}, BERT whole-word-masking \am{cite?}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants.\footnote{For ALBERT we use the smallest and largest versions.}
+% Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
 
 In addition, we also report a majority baseline that always predicts the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
 
 \subsection{Data}
 
-\enote{hs}{below: why ``specific'' relation? don't you do
-  this for all relations? can you say: for all triples in $D$?}
 
-To probe for consistency of PLMs we use cloze-style queries using a (subject, object, relation) triple from a KB. We then populate the subjects and objects from the KB into patterns from a specific relation from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]').
+% To probe for consistency of PLMs we use cloze-style queries using a (subject, relation, object) triple from a KB. We then populate the subjects and objects from the KB into patterns for all triplets in $D$ from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]'). \nk{not sure if this is a bit confusing as it is saying the same as earlier a bit differently}\yg{I agree. Don't repeat, and refer to prev description.}
 
-We use knowledge graph data from TREx \cite{trex} which contains 34,039 triples across 40 relations. To make the results comparable across all models, we remove objects that do not fit a single token in all models' vocabularies.
-We use the patterns from our resource \resource{}, described in the previous section.
+We use knowledge graph data from TREx \cite{trex} which contains 34,039 tuples across 40 relations. To make the results comparable across all models, we remove objects that do not fit a single token in all models' vocabularies. Moreover, some relations contain aggregated data of different types, which makes the original LAMA pattern sometimes obsolete as it does not fit the type (e.g. the tuple (`My Family', `sitcom') in the \textit{genre} relation, that mainly contains music-genre entities).\yg{the prev sentence is not clear}\am{I agree} In these cases, we manually filter these entities from our test set.
+Overall, after the filters\am{filtering}, we are left with @@ tuples.\am{add @@ percent as well?}
+We use the patterns from our resource \resource{}, described in the previous section. \am{use them for, what?}
 
-
-\enote{hs}{below: is there a difference between ``tuple''
-  and ``triple''?}
 
 \subsection{Evaluation}
 \label{sec:eval}
@@ -36,7 +33,11 @@ We use the patterns from our resource \resource{}, described in the previous sec
 % is beyond the scope of this paper.
 
 
-We compute the accuracy of predictions per relation, or graph, as the number of consistent predictions for every pattern pair for all tuples in the KB for a relation, dividing by the total amount of predictions.
-Finally, we aggregate the results for all relations and report a final number as the average of all relations. This metric can be viewed as macro average.
-We also report aggregated results for specific edge types that involve a specific transformation: \textit{syntactic}, \textit{lexical}, and both, using the same measurement. \nk{what about det? Also in the statistics table you call it rest}
+We compute the accuracy of predictions per relation, or graph, as the number of consistent predictions for every pattern pair for all triples in the KB for a relation, dividing by the total number of predictions.
+\[
+\sum_j \sum_{k,l} p_k^i(s_j^i,mask) = p_l^i(s_j^i,mask)
+\]
+\am{at first glance "=" looks like assignment to me}\am{missing denominator?}
+Finally, we aggregate the results for all relations and report a final number as the average of all relations. This metric can be viewed as macro average.\am{I don't understand the metric}
+% We also report aggregated results for specific edge types that involve a specific transformation: \textit{syntactic}, \textit{lexical}, and both, using the same measurement. \nk{what about det? Also in the statistics table you call it rest}
 

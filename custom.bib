@@ -276,17 +276,6 @@
     abstract = "Building on Petroni et al. 2019, we propose two new probing tasks analyzing factual knowledge stored in Pretrained Language Models (PLMs). (1) Negation. We find that PLMs do not distinguish between negated ({`}{`}Birds cannot [MASK]{''}) and non-negated ({`}{`}Birds can [MASK]{''}) cloze questions. (2) Mispriming. Inspired by priming methods in human psychology, we add {``}misprimes{''} to cloze questions ({`}{`}Talk? Birds can [MASK]{''}). We find that PLMs are easily distracted by misprimes. These results suggest that PLMs still have a long way to go to adequately learn human-like factual knowledge.",
 }
 
-@article{ettinger-2020-bert,
-    title = "What {BERT} Is Not: Lessons from a New Suite of Psycholinguistic Diagnostics for Language Models",
-    author = "Ettinger, Allyson",
-    journal = "Transactions of the Association for Computational Linguistics",
-    volume = "8",
-    year = "2020",
-    url = "https://www.aclweb.org/anthology/2020.tacl-1.3",
-    doi = "10.1162/tacl_a_00298",
-    pages = "34--48",
-    abstract = "Pre-training by language modeling has become a popular and successful approach to NLP tasks, but we have yet to understand exactly what linguistic capacities these pre-training processes confer upon models. In this paper we introduce a suite of diagnostics drawn from human language experiments, which allow us to ask targeted questions about information used by language models for generating predictions in context. As a case study, we apply these diagnostics to the popular BERT model, finding that it can generally distinguish good from bad completions involving shared category or role reversal, albeit with less sensitivity than humans, and it robustly retrieves noun hypernyms, but it struggles with challenging inference and role-based event prediction{---} and, in particular, it shows clear insensitivity to the contextual impacts of negation.",
-}
 
 @inproceedings{schmitt-schutze-2019-sherliic,
     title = "{S}her{LI}i{C}: A Typed Event-Focused Lexical Inference Benchmark for Evaluating Natural Language Inference",
@@ -767,4 +756,208 @@ Eprint = {arXiv:2006.00995},
   booktitle={Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)},
   pages={454--459},
   year={2016}
+}
+
+@article{what_is_paraphrase,
+  title={What is a paraphrase?},
+  author={Bhagat, Rahul and Hovy, Eduard},
+  journal={Computational Linguistics},
+  volume={39},
+  number={3},
+  pages={463--472},
+  year={2013},
+  publisher={MIT Press}
+}
+
+@inproceedings{chi-etal-2020-finding,
+    title = "Finding Universal Grammatical Relations in Multilingual {BERT}",
+    author = "Chi, Ethan A.  and
+      Hewitt, John  and
+      Manning, Christopher D.",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.493",
+    doi = "10.18653/v1/2020.acl-main.493",
+    pages = "5564--5577",
+}
+
+@inproceedings{ravfogel-etal-2020-unsupervised,
+    title = "Unsupervised Distillation of Syntactic Information from Contextualized Word Representations",
+    author = "Ravfogel, Shauli  and
+      Elazar, Yanai  and
+      Goldberger, Jacob  and
+      Goldberg, Yoav",
+    booktitle = "Proceedings of the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.blackboxnlp-1.9",
+    doi = "10.18653/v1/2020.blackboxnlp-1.9",
+    pages = "91--106",
+}
+
+    @inproceedings{gonen-etal-2020-greek,
+    title = "It{'}s not {G}reek to m{BERT}: Inducing Word-Level Translations from Multilingual {BERT}",
+    author = "Gonen, Hila  and
+      Ravfogel, Shauli  and
+      Elazar, Yanai  and
+      Goldberg, Yoav",
+    booktitle = "Proceedings of the Third BlackboxNLP Workshop on Analyzing and Interpreting Neural Networks for NLP",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.blackboxnlp-1.5",
+    doi = "10.18653/v1/2020.blackboxnlp-1.5",
+    pages = "45--56",
+}
+
+@article{linzen2016assessing,
+  title={Assessing the ability of LSTMs to learn syntax-sensitive dependencies},
+  author={Linzen, Tal and Dupoux, Emmanuel and Goldberg, Yoav},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={4},
+  pages={521--535},
+  year={2016},
+  publisher={MIT Press}
+}
+
+@inproceedings{marvin-linzen-2018-targeted,
+    title = "Targeted Syntactic Evaluation of Language Models",
+    author = "Marvin, Rebecca  and
+      Linzen, Tal",
+    booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+    month = oct # "-" # nov,
+    year = "2018",
+    address = "Brussels, Belgium",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D18-1151",
+    doi = "10.18653/v1/D18-1151",
+    pages = "1192--1202",
+}
+
+
+@software{spacy,
+  author = {Honnibal, Matthew and Montani, Ines and Van Landeghem, Sofie and Boyd, Adriane},
+  title = {{spaCy: Industrial-strength Natural Language Processing in Python}},
+  year = 2020,
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.1212303},
+  url = {https://doi.org/10.5281/zenodo.1212303}
+}
+
+@inproceedings{dror2018hitchhiker,
+  title={The hitchhiker’s guide to testing statistical significance in natural language processing},
+  author={Dror, Rotem and Baumer, Gili and Shlomov, Segev and Reichart, Roi},
+  booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={1383--1392},
+  year={2018}
+}
+
+@article{dror2020statistical,
+  title={Statistical Significance Testing for Natural Language Processing},
+  author={Dror, Rotem and Peled-Cohen, Lotem and Shlomov, Segev and Reichart, Roi},
+  journal={Synthesis Lectures on Human Language Technologies},
+  volume={13},
+  number={2},
+  pages={1--116},
+  year={2020},
+  publisher={Morgan \& Claypool Publishers}
+}
+
+@inproceedings{bender2020climbing,
+  title={Climbing towards NLU: On meaning, form, and understanding in the age of data},
+  author={Bender, Emily M and Koller, Alexander},
+  booktitle={Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+  pages={5185--5198},
+  year={2020}
+}
+
+@inproceedings{wolf-etal-2020-transformers,
+    title = "Transformers: State-of-the-Art Natural Language Processing",
+    author = "Thomas Wolf and Lysandre Debut and Victor Sanh and Julien Chaumond and Clement Delangue and Anthony Moi and Pierric Cistac and Tim Rault and Rémi Louf and Morgan Funtowicz and Joe Davison and Sam Shleifer and Patrick von Platen and Clara Ma and Yacine Jernite and Julien Plu and Canwen Xu and Teven Le Scao and Sylvain Gugger and Mariama Drame and Quentin Lhoest and Alexander M. Rush",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = oct,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-demos.6",
+    pages = "38--45"
+}
+
+@misc{wandb,
+title = {Experiment Tracking with Weights and Biases},
+year = {2020},
+note = {Software available from wandb.com},
+url={https://www.wandb.com/},
+author = {Biewald, Lukas},
+}
+
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+@inproceedings{dhingra2020differentiable,
+    title={Differentiable Reasoning over a Virtual Knowledge Base},
+    author={Dhingra, Bhuwan and Zaheer, Manzil and Balachandran, Vidhisha and Neubig, Graham and Salakhutdinov, Ruslan and Cohen, William W},
+    booktitle={International Conference on Learning Representations},
+    year={2019}
+}
+
+@article{thorne2020neural,
+  title={Neural Databases},
+  author={Thorne, James and Yazdani, Majid and Saeidi, Marzieh and Silvestri, Fabrizio and Riedel, Sebastian and Halevy, Alon},
+  journal={arXiv preprint arXiv:2010.06973},
+  year={2020}
+}
+
+@inproceedings{adversarial_attacks,
+title	= {Intriguing properties of neural networks},
+author	= {Christian Szegedy and Wojciech Zaremba and Ilya Sutskever and Joan Bruna and Dumitru Erhan and Ian Goodfellow and Rob Fergus},
+year	= {2014},
+URL	= {http://arxiv.org/abs/1312.6199},
+booktitle	= {International Conference on Learning Representations}
+}
+
+@inproceedings{jia2017adversarial,
+  title={Adversarial Examples for Evaluating Reading Comprehension Systems},
+  author={Jia, Robin and Liang, Percy},
+  booktitle={Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing},
+  pages={2021--2031},
+  year={2017}
+}
+
+@inproceedings{ribeiro2018semantically,
+  title={Semantically equivalent adversarial rules for debugging nlp models},
+  author={Ribeiro, Marco Tulio and Singh, Sameer and Guestrin, Carlos},
+  booktitle={Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={856--865},
+  year={2018}
+}
+
+@article{gpt3,
+  title={Language models are few-shot learners},
+  author={Brown, Tom B and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and others},
+  journal={arXiv preprint arXiv:2005.14165},
+  year={2020}
+}
+
+@inproceedings{roberts2020much,
+  title={How Much Knowledge Can You Pack into the Parameters of a Language Model?},
+  author={Roberts, Adam and Raffel, Colin and Shazeer, Noam},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages={5418--5426},
+  year={2020}
 }

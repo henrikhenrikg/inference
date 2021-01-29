@@ -1,11 +1,13 @@
 \section{The \resource{} Resource}
 \label{sec:rel-graph}
 
+We now create \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
+To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
+It contains patterns for 40 relations from the T-REx dataset \cite{T-REx}, with an average of @@ patterns per relation.
+Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
-To test the consistency of PLMs, we opt to test their predictions sensitivity to variations patterns for which the same answer is expected. This requires a large set of paraphrased queries. To this end, we create a paraphrase resource that enables us to study this property, which we name \resource{}. \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
-It contains patterns for 40 relations from the TREx dataset \cite{trex}, with an average of @@ patterns per relation.
-Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
-A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:graph}. 
+% Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
+% A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:graph}. 
 
 % All patterns from a specific relation are paraphrases.
 % Each pattern entails the main expression for each pattern, but not necessarily the other way around. 
@@ -15,15 +17,15 @@ A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:gra
 % For instance, the phrase "\subj{} was aired on \obj{}" entails "\obj{} released \subj{}", but not "\subj{} was premiered on \obj{}", although the other direction is entailed.
 % \ar{The entailment 'Y released X' doesn't seem correct. Suggestion For instance, the phrase "\subj{} was premiered on \obj{}" entails "\subj{} was aired on \obj{}", but not the other way around.}
 
-\begin{figure}[t!]
-\centering
+% \begin{figure}[t!]
+% \centering
 
-\includegraphics[width=1.\columnwidth]{figures/ent_graph}
+% \includegraphics[width=1.\columnwidth]{figures/ent_graph}
 
-\caption{Overview of \resource{}.}
-\label{fig:graph}
-% \vspace{-6mm}
-\end{figure}
+% \caption{Overview of \resource{}.}
+% \label{fig:graph}
+% % \vspace{-6mm}
+% \end{figure}
 
 % Overall, \resource{} contains @@ different patterns in total for @@ different relations (@@\% paraphrases per relation in average). 
 % All of the paraphrases for a particular relation are organized as a directed graph to indicate the entailment relation between two patterns. 
@@ -33,28 +35,13 @@ A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:gra
 % This information allows us to study the different generalization capabilities of models.
 % The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
 
-\resource{}, was constructed in four steps: (1) We begin
-with the patterns provided by LAMA \cite{lama} (one pattern
-per relation, referred to as base pattern). (2) Then, we
-augmented that relation with other patterns that are
-paraphrases of the base pattern. Some of these relations are
-taken from LPAQA \cite{alpaqa}. However, since its relations
-were extracted automatically, many do not accurately depict
-the relation, therefore only a subset of these patterns were
-used in practice.  (3) Then, by using spike \cite{spike}, we
-searched for additional patterns that appeared in Wikipedia
-and added them to our resource. This was done by searching
-for subject and object tuples from the TREx resource and
-looking at the sentences that contain both. (4) Lastly, we
-add additional patterns that are paraphrases of the base
-pattern using the annotators' linguistic
-expertise.
-(The annotators can also add entailing or entailed patterns,
-but we do not make use of them in this paper.)
-Then, two additional
-authors went over all the patterns and corrected them, while
-engaging in a discussion until reaching an agreement,
-discarding patterns with disagreements.
+\paragraph{Construction Method}
+\resource{}, was constructed in four steps: (1) We begin \am{everything is in past tense, "began"}
+with the patterns provided by LAMA \cite{lama} (one pattern per relation, referred to as ``base pattern"); (2) we augmented these patterns with other patterns that are paraphrases of the base pattern. Some of these relations are
+taken from LPAQA \cite{alpaqa}. However, since its\am{unclear anticident} relations were extracted automatically, many do not accurately depict the relation \am{relation not depicting the relation?}, therefore only a subset of these patterns were used in practice;  (3) using SPIKE \cite{spike},\footnote{\url{https://spike.apps.allenai.org/}} a search engine over wikipedia sentencecs that allows syntax-based queries, we searched for additional patterns that appeared in Wikipedia and added them to our resource. This was done by searching for subject and object tuples from the T-REx resource and
+looking at the sentences that contain both, followed by a human annotator extracting a pattern from the Wikipedia sentence. (4) Lastly, we add \am{added} additional patterns that are paraphrases of the base pattern using the annotators' linguistic expertise.
+% (The annotators can also add entailing or entailed patterns, but we do not make use of them in this paper.)
+Two additional experts went over all the patterns and corrected them, while engaging in a discussion until reaching an agreement, discarding patterns with disagreements.
 
 % \nk{should we give a number?}.\ye{I don't think it's necessary}
 
@@ -65,17 +52,35 @@ discarding patterns with disagreements.
 \input{tables/rel_graph_stats}
 
 
-\paragraph{Consistency Types}
-% \nk{we should change inference types to consistency types} \ye{but the graph is in entailment graph}
-To study the consistency against syntactic and lexical variations of models, each edge is augmented with the type of changes performed to reach from one pattern to another. We account for three types of changes: 1) \textit{syntactic}, 2) \textit{lexical} and 3) \textit{determiner}, all binary variables that account for a change of the specific type between two patterns.
-\textit{Syntactic} structure is defined as the dependency path between the subject and the object in a given pattern, where the path includes the edge types. Two patterns are considered equal syntactically if the labeled paths are identical.
-\textit{Lexical} difference is defined by words difference between two patterns, excluding determiners, punctuation, and symbols. The addition or removal of a preposition does not count as a lexical change.
-\textit{Determiner} difference is considered when the patterns' determiners do not fully overlap.
-
-
-Some statistics of the graphs are presented in Table \ref{tab:rel-graph-stats}, and full statistics per relation are presented in Table \ref{tab:rel-graph-stats-elaborate} in the Appendix.
+% \paragraph{Consistency Types}
+% % \nk{we should change inference types to consistency types} \ye{but the graph is in entailment graph}
+% To study the consistency against syntactic and lexical variations of models, each edge is augmented with the type of changes performed to reach from one pattern to another. We account for three types of changes: (1) \textit{syntactic}, (2) \textit{lexical} and (3) \textit{determiner}, all binary variables that account for a change of the specific type between two patterns.
+% \textit{Syntactic} structure is defined as the dependency path between the subject and the object in a given pattern, where the path includes the edge types. Two patterns are considered equal syntactically if the labeled paths are identical.
+% \textit{Lexical} difference is defined by words difference between two patterns, excluding determiners, punctuation, and symbols. The addition or removal of a preposition does not count as a lexical change.
+% \textit{Determiner} difference is considered when the patterns' determiners do not fully overlap.
 
 
 
+% and full statistics per relation are presented in Table \ref{tab:rel-graph-stats-elaborate} in the Appendix.
+
+
+\paragraph{Human Agreement}
+To assure the quality of \resource{}, we run a study to test for agreement with our annotations.
+For each relation, we sample up to five paraphrases, comparing each of the new patterns to the base pattern that came with that resource, and which is assumed to correctly describe the relation.
+By definition, two different patterns that are paraphrases of of the LAMA pattern, are also paraphrases of each other.
+
+We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
+We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
+Overall, each task contains five patterns that are thought to paraphrase \am{to be paraphrases?}, and two that are not.\footnote{Note that the control patterns contain the same subject and object for avoiding shortcuts in solving the task.}
+
+We asked graduate students in NLP to perform the annotations and collected one answer per question.
+Due to random errors in the annotations, \am{for} every question that does not match our original label (either for paraphrases or controls), we ask the annotators to relabels \am{relabel} these examples\am{it} (without specifying the reason), to allow them to fix random mistakes.\footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
+% \nk{I would cut that last sentence}
+
+The agreement score for the paraphrases and the control are: @@ and @@, which are high and reassures \resource's quality.
+We further went through the disagreements  %of the paraphrases 
+and fixed any additional problem %that we agree with, 
+to further improve the resource quality.
+Examples of paraphrases are displayed in Table \ref{tab:predictions}. \am{a bit odd to send the reader all the way to table 4, at this stage}
 % \input{tables/rel_graph_examples}
 

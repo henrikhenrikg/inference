@@ -7,13 +7,13 @@
 LM &       LAMA & Group-Score & Consistency \\
 
 \midrule
-majority-baseline &  25.5+-22.3 &  25.5+-22.3 &  100.0+-0.0 \\
-BERT-base         &  \textbf{44.0}+-26.6 &  24.4+-25.8 &  56.9+-20.9 \\ \midrule
-BERT-base+                &  43.6+-28.2 &  \textbf{29.8}+-27.6 &  \textbf{66.6}+-20.1 \\
+majority-baseline &  25.5+-22.3 &  25.5+-22.3 &  100.0+-0.0 \\ \midrule
+BERT-base         &  \textbf{44.0}+-26.6 &  24.4+-25.8 &  56.9+-20.9 \\ 
+BERT-base Consistent    &  43.6+-28.2 &  \textbf{29.8}+-27.6 &  \textbf{66.6}+-20.1 \\
 \bottomrule
 \end{tabular}
 }
 
-    \caption{Results for the baselines and the Finetuned Model.}
+    \caption{Knowledge and consistency results for the majority baseline, BERT base, and the Finetuned Model. We report the LAMA score using the original patterns, the new group-score metric that combines all patterns for a relation, and the consistency results. The results are average over 31@@verify relations that were not part of the training and evaluation data.}
     \label{tab:consistency-ft}
 \end{table}

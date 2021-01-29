@@ -8,26 +8,28 @@
 
 The results for the different models are summarized in Table \ref{tab:consistency_main}.
 % First, we report the average consistency results for all graphs, as describe in Section \ref{sec:eval}.
-The average results, across all relations are shown in the last row of Table \ref{tab:consistency_main}. The BERT based models achieve the higher scores over all the models. Moreover, there is a consistent improvement from the base to large versions of each model, although it is not always significantly higher (e.g. 57.3\% to 59.1\% in BERT, and 50.1\% to 54.8\% in RoBERTa).
-However, in contrast to many previous works that observed quantitative and qualitative improvements of RoBERTa-based models over BERT, in terms of consistency BERT is better than RoBERTa, and ALBERT.
-Still, the overall results are remarkably low (59.1\% for the best model), especially given the permissive evaluation that only looks at the candidate set.
-We note that the results are highly variant between models, and relations. For instance, the best performing model on the `capital of' relation achieves 94\%, whereas the best performing model on `owned by' is 44\%. 
-On the other hand, the models performance on the `original language of film or TV show' relation, varies between 52\% and 90\% accuracy.
+The last column (``Consistency'') shows the average results across all relations \yg{consider oredering the table columns in the order of their discussion}\am{I actually like it in the end, its easier to find in a glance}
+
+The BERT-based models achieve higher scores over all the models\am{over the others, or the rest}. Moreover, there is a consistent improvement from the base to large\am{emph or quote 'base' and 'large'} versions of each model, although it is not always significantly \am{is there a significance test?} higher (e.g. 57.3\% to 59.1\% in BERT, and 50.1\% to 54.8\% in RoBERTa).
+However, in contrast to many previous works that observed quantitative and qualitative improvements of RoBERTa-based models over BERT, in terms of consistency\am{comma} BERT is better than RoBERTa and ALBERT.\am{I would rephrase and say "BERT is more consistent than ...."}
+Still, the overall results are remarkably low (59.1\% for the best model, \yg{meaning that out of XXX, YYY are ZZZ}), especially given the permissive evaluation that only looks at the candidate set.
+We note that the results are highly variant between models and relations. For instance, the best performing model on the `capital of' relation achieves 94\%, whereas the best performing model on `owned by' is 44\%\am{is what? "achieves"?}. 
+On the other hand, the models' performance on the `original language of film or TV show' relation, varies between 52\% and 90\% accuracy.
 We report the full consistency results for each relation in the Appendix.
 
 \input{tables/robertas_consistency}
 
-\enote{hs}{below: i would prefer ``(training) corpus size''
-  over ``number of tokens'' if that's what you mean}
+% \enote{hs}{below: i would prefer ``(training) corpus size''
+%   over ``number of tokens'' if that's what you mean}
 
-\paragraph{Number of Tokens Effect}
-Next, we inspect the question of whether the number of tokens used during the pretraining contributes to consistency.
+\paragraph{Effect of Pretraining Corpus Size}
+Next, we study the question of whether the number of tokens used during the pretraining contributes to consistency.
 We use the pretrained RoBERTas model provided by \citet{robertas} and repeat the experiments on four additional models.
-These models are RoBERTa-based models, that were trained on sample of Wikipedia and the book corpus, with varying training tokens, and models size. In practice, we use one of the three published models for each configuration, and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
-Overall, the consistency and the knowledge scores (LAMA and Group-Score) improve when trained on more data. However, there is an interesting outlier to this trend.
-First, the model that was trained on one million tokens is more consistent than the models trained on ten and one-hundred million tokens. A potentially crucial difference is that this model is also smaller in terms of the number of parameters than the rest, in order to avoid overfitting. This may be part of the explanation, however it is nonetheless interesting that a model which is trained on significantly less data can achieve better consistency. On the other hand, the knowledge scores are lower, arguably due to less factual knowledge this model was exposed to during training.
+These models are RoBERTa-based models, that were trained on a sample of Wikipedia and the book corpus, with varying training size, and parameters. In practice, we use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
+Overall, the consistency and the knowledge scores (LAMA and Group-Score) improve when trained on more data. \nk{Maybe I missed it, did we say what the Group-Score is before?}\am{seems like not} However, there is an interesting outlier to this trend.
+First, the model that was trained on one million tokens is more consistent than the models trained on ten and one-hundred million tokens. A potentially crucial difference is that this model is also smaller in terms of the number of parameters than the rest, in order to avoid overfitting. Still, it is nonetheless interesting that a model that is trained on significantly fewer\am{I would use "less"} data can achieve better consistency. On the other hand, the knowledge scores are lower, arguably due to less factual knowledge this model was exposed to during training.\am{due to the model being exposed to less factual knowledge during pretraining}
 
-% Finally, the original RoBERTa that was trained on ten billion parameters, achieves the same consistency performance as the one trained on one billion tokens, suggesting on a limit to the benefit of training examples in pretraining. \nk{not sure about this as the table is not there yet, but shouldn't it be: Finally, the original RoBERTa that was trained on ten billion tokens, achieves the same consistency performance as the one trained on one billion tokens, suggesting on a limit to the benefit of large training corpora. }
+% Finally, the original RoBERTa that was trained on ten billion parameters, achieves the same consistency performance as the one trained on one billion tokens, suggesting a limit to the benefit of training examples in pretraining. \nk{not sure about this as the table is not there yet, but shouldn't it be: Finally, the original RoBERTa that was trained on ten billion tokens, achieves the same consistency performance as the one trained on one billion tokens, suggesting on a limit to the benefit of large training corpora. }
 
 
 
@@ -51,25 +53,27 @@ First, the model that was trained on one million tokens is more consistent than 
 
 \subsection{Consistency and Knowledge}
 
-To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help understanding the results.
+\yg{wdym by ``to asses the knowledge and ability of the different patterns to extract knowledge''? in particular, what is the first `knowledge'?}
+To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help to\am{remove "to"? unsure} understand the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
 
-First, we report the number of triples that were predicted correctly by at least one of the patterns (Succ-Objs), and the number of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree of which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
+First, we report the percentage of triples that were predicted correctly by at least one of the patterns (Succ-Objs), and the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree to which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
 Across models, all patterns successfully extracted the right
 answer at least once, except for three models (bert-large and the two versions of albert) where one pattern in the `diplomatic relation'  did not succeed to classify any tuple.
 On the other hand, some tuples are not predicted correctly by any of the patterns, as is shown in the Succ-Objs measure. Since most relations contain at least @@ patterns, we take it as evidence that this knowledge is not stored in the model. 
 % \nk{This seems to suggest that it is the fault of the pattern that knowledge is not extracted from the model but an unsuccessful prediction across all models of the same tuple rather says that this knowledge is not stored} 
-The average number of extractable tuples is between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
+The average number of extractable tuples \am{extractable tuples?} is between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
 
-Next, we report LAMA results, that is the acc@1 accuracy of a model in predicting the object, using the original patterns from \citet{lama}. This metric inspects whether the first object within the candidate set of each relation is the correct answer. The reported numbers for this metric differ from \citet{lama} as we use a candidate set, as well as take only the KB triple where the objects are a single token in all models we inspect. The results range between 29.9 with albert-base to 45.6 with bert-large, being the best model in that aspect.
-Additionally, we report another metric, which we call \textsc{Group-Score}, where a point is given only when all patterns predict the object correctly. This metric is much stricter than \textit{acc@1}, however it provides a more robust metric, and better quantifies the degree to which the knowledge is encoded into the model. Overall, it combines both the requirement of a model to be consistent and correct. The results are much lower than the LAMA metric, as expected, but follow the same trend: albert-base perform worse, 17.0\% and bert-large performs best with 27.5\% accuracy.
+Next, we report LAMA results, that is\am{comma} the acc@1 accuracy\am{acc@1 accuracy is weird} of a model in predicting the object, using the original patterns from \citet{lama}. This metric inspects whether the first object within the candidate set of each relation is the correct answer. The reported numbers for this metric differ from \citet{lama} \am{reporting X\%} as we use a candidate set, as well as take only the KB triple where the objects are a single token in all models we inspect. The results range between 29.9 with albert-base to 45.6\am{should be \%?} with bert-large, being the best model in that aspect.
+Additionally, we report another metric, which we call \textsc{Group-Score}, where a point is given only when all patterns predict the object correctly. This metric is much stricter than \textit{acc@1}, however, it provides a more robust metric, and better quantifies the degree to which the knowledge is encoded into the model. Overall, it combines both the requirement of a model to be consistent and correct. The results are much lower than the LAMA metric, as expected, but follow the same trend: albert-base perform worse, 17.0\% and bert-large performs best with 27.5\% accuracy.
 
+\yg{give this part a paragraph title?}
 Next, we measure the consistency results for the tuples
 subset where at least one of the patterns for a specific
 relation predicted the correct answer, as well as for the
-subset where no pattern predicted the right answer correctly
+subset where no pattern predicted the right answer correctly \am{correct answer, like previous line}
 -- we refer to these metrics as \textsc{Know-Const} and \textsc{Unk-Const}, respectively.
-A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model, and performing consistent predictions across paraphrases.
-Indeed, the results appear to support this claim. For instance, the Know-Const metric for bert-large is 62.4 and Unk-Const is 46.4. \nk{I would emphasise this even more and say that our graph is able to distinguish pattern dependent guessing and the other is knowledge stored in the model}
+A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model and performing consistent predictions across paraphrases.
+Indeed, the results appear to support this claim. For instance, the Know-Const metric for bert-large is 62.4 and Unk-Const is 46.4. \nk{I would emphasize this even more and say that our graph is able to distinguish pattern dependent guessing and the other is knowledge stored in the model}
 % point on a connection between acquiring the correct knowledge, and the ability to extract it robustly. 
 % We refer to these metrics as \textsc{Know} and \textsc{Unk}, respectively, that stands for Knowledgeable and Unknowledgeable consistency.
 The additional consistent measurement we report is Const-Objs, which measures the number of tuples that are predicted consistently across all patterns for a particular relation.
@@ -81,5 +85,23 @@ The additional consistent measurement we report is Const-Objs, which measures th
 % For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
 
 
-An interesting observation from the results, is the clear superiority of the BERT models over the others, both in the factual knowledge correctness and consistency. This result, that we hypothesis to be due to the training data, may have broader impact on the models to come: Training bigger models on more data is not always beneficial. Since wikipedia is likely the largest source of factual knowledge that exists in unstructured data, the focused training on it (apart from the book corpus) was likely to make the BERT models memorize it better.
-As such, models such as GPT-3 \cite{gpt3}, or other future that solely train on more data with more parameters are not likely to be more consistent and absorb more factual knowledge.
+An interesting observation from the results, is the clear superiority of the BERT models over the others, both in the factual knowledge correctness and consistency. This result, which we hypothesise to be due to the training data, may have a broader impact on the\am{remove the} models to come: Training bigger models on\am{with?} more data is not always beneficial. Since Wikipedia is likely the largest unified source of factual knowledge that exists in unstructured data,\yg{is it? maybe say ''a large''?} the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models memorize\am{you never introduced memorization, just generalization} it better.
+As such, models such as GPT-3 \cite{gpt3}, or other future models that solely train on more data with more parameters are not likely to be more consistent.\am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
+
+
+\subsection{Do PLMs Generalize Over Syntax?} 
+% \sr{what does this title mean?}
+Many papers found models (especially PLMs) to naturally encode syntax \cite{linzen2016assessing,marvin-linzen-2018-targeted,yoav-syntax,hewitt2019structural}. How does this reflect in their ability to abstract knowledge and produce it while controlling for syntactic variations?
+We consider two scenarios: (1) the syntax is the only component that differs between the patterns and (2) both the syntax and the lexical choice remain the same.
+Success on the first scenario indicates the ability of the model to abstract the knowledge, and extract it using different syntactic patterns. Success on the second indicates the abstraction over word order and tense. This way, we can test for consistency in models, while controlling for syntactic variation.\footnote{We consider two patterns to have the same syntax if the path between the entities are equal} 
+% \sr{needs a footnote on our \emph{proxy} for syntactic change.}
+% staying invariant to alternations while the syntax is the only component that differs, and when 
+We parse all the patterns from \resource{} using a dependency parser \cite{spacy}\footnote{\url{https://spacy.io/}} and retain the path between the subject and object.
+% Then, for every pattern pair, we split into two groups: (1) patterns where the only difference is the syntactic path, but the lexical items are equal, and (2) patterns where both the syntactic path and the lexical items are identical. \nk{This sentence seems repetitive}
+% we filter out all cases where the syntactic path is different. 
+
+
+The results are reported in Table \ref{}.  While the results are not comparable to the main results on the entire data, as they contain different patterns, overall the results are low: @@ for BERT-base, @@ for BERT-large, and @@ for ALBERT base. These results are surprising, since the ability to abstract over syntax is perhaps the easier abstraction, and was expected to perform better, given other results on PLMs syntactic abilities. \sr{not sure if we can say it's easier/harder.}
+
+These results reminiscent of the findings of \citet{mccoy2019right}, which showed that models trained on an NLI dataset \cite{dagan-rte,snli} such as MNLI \cite{mnli}, are bound to use superficial syntactic heuristics, rather than more generalizable methods.
+However, we demonstrate that even the\am{remove "the", use PLMs} pretrained models are susceptible to these errors. 

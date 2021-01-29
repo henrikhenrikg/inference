@@ -1,0 +1,31 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Consistency for Downstream Tasks}
+
+The rise of PLMs has brought a lot of improvements to many applications, but also a lot of expectations. The standard usage of these models is by pretraining on a large corpus of unstructured text and then fine-tune on a task of interest. The first step is thought of as proving a good language-understanding component, whereas the second step is used to teach the format and the specifics of the task of interest.
+
+As we discussed earlier, consistency is a crucial component of many NLP system \cite{du2019consistent,consistent-qa,denis2009global,kryscinski2020evaluating} and gaining this skill from a PLM would be extremely beneficial and have the potential to excess\yg{?} specialized solutions for downstream tasks.
+Indeed, there is an ongoing discussion about the meaning\yg{?} capabilities of PLMs, that are trained solely on form (texts) \cite{bender2020climbing} \sr{``meaning capabiltiies" is unclear. ``The ability to acquire understanding of ``meaning" from raw text signal alone"? but generally I think this paragraph doesn't say much, and the quote of Bender can be incorporated in the intro.}.
+Thus, by providing our new benchmark, we can track the progress of consistency in PLMs.
+
+
+\paragraph{Broader Sense of Consistency}
+In this work we focus on one type of consistency, that is the consistency to paraphrases (or, \textit{quasi-paraphrases}), however, the consistency term is broader than that.
+For instance, previous work has studied the effect of negation on factual statements, which can also be seen as consistency \cite{Ettinger_2020,kassner-schutze-2020-negated}. As such, a consistent model is expected to return a different answer to the prompts: ``\textit{Birds can [MASK]}'' and ``\textit{Birds cannot [MASK]}''. The inability to do so, as was shown in these works, also shows the lack of consistency of models.
+
+
+\paragraph{Usage of PLMs as KBs}
+Our work follows the setup of \citet{lama,alpaqa}, where a PLMs are being tested as KBs. While it is an interesting setup for probing models for knowledge and consistency, it lacks important properties of standard KBs: (1) the ability to return more than a single answer and (2) the ability to return no answer.
+Although some heuristics can be used for allowing a PLM to do so, e.g. using a threshold on the probabilities, it is not the way that the model was trained, and thus may not be optimal.
+As such, newer approaches propose to use PLMs as a starting point to more complex systems, that provide promising results and solve the above problems \cite{thorne2020neural}.
+
+
+\paragraph{Brittleness of Neural Models}
+Our work also relates to the problem of brittleness in neural networks. One example of this brittleness is the vulnerability to adversarial attacks \cite{adversarial_attacks,jia2017adversarial}.
+The other problem, also more close to the problem we explore in this work, is the poor generalization to paraphrases.
+For example, \citet{squad-paraphrase} created a paraphrase version for a subset of SQuAD \cite{squad}, and showed that models' performance drops significantly. 
+\citet{ribeiro2018semantically} proposed another method for creating paraphrases and performed a similar analysis for visual question answering and sentiment analysis.
+In this work, we show that also the PLMs are susceptible to small perturbations, and thus, finetuning on some downstream task (and dataset), that typically are not extensive, and do not contain equivalent examples, are not likely to perform better with this regard.
+
+Finally, the ability to be consistent with respect to multiple ways of expressing the same meaning, indicates on the robustness of a model \sr{isn't it what the previous paragraph is saying?}. As such, a single pattern that a model succeeds on, cannot truly indicate on the knowledge that a model possess, but can come from other reasons such as spurious correlations, memorization, etc. A recent and related approach for behavioral testing of NLP models is \textsc{CheckList} that tests models' vulnerability to several linguistic perturbations \cite{ribeiro-etal-2020-beyond}.
