@@ -92,7 +92,24 @@ MASK in the two sentences.  A consistent model must predict the same entity. Not
 % In this case, a model that can perform adequate inference over the syntactic and lexical alternations between $p_j^i$ and $p_k^i$ is expected to also correctly predict the object from the alternative patterns $p_k^i$.
 
 \paragraph{Restricted Candidate Sets}
-Ideally, we would focus on the top-1 prediction that the PLM produces in order to compare between paraphrases. However, since these models were not trained for the purpose of serving as KBs, but as LMs, words outside of the inspected entities are often possible (e.g., the object in ``\subj{} was originally aired on \obj{}'' can also be replaced with `tv', to make a proper English sentence).
-Therefore, we restrict the vocabulary produced by the PLMs to a candidate set, that is the set of possible gold objects for each relation, as was also suggested in previous work \cite{Xiong2020Pretrained, nora@@}.
+%Ideally, we would focus on the top-1 prediction that the PLM
+%produces  to compare predictions on two paraphrases. However,
+Since PLMs were not trained for the purpose of
+serving as KBs, but as LMs, they often predict words
+that are not KB entities;
+e.g., a PLM may predict, for the object in ``\subj{}
+was originally aired on \obj{}'', the noun
+``tv'' --  which is also a likely substitution on the language
+modeling objective.
+Therefore,
+following \citep{Xiong2020Pretrained, nora@@},
+we
+restrict the PLM output vocabulary to the set of possible gold objects for each
+relation. In practice, we compute the full probability
+distribution and then only consider the subset of possible
+gold objects.
 
-Note that this procedure is a relaxation of the general problem, especially in the context of KBs, however, low consistency results in this setup are even more alarming.
+Note that this setup makes the task easier for the PLM,
+especially in the context of KBs. However, poor
+consistency in this setup strongly implies that consistency
+would be even lower without restricting candidates.
