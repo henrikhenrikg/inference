@@ -16,7 +16,7 @@
 
 We begin by assessing the variability of our patterns, as well as the degree of which they extract the correct entities.
 
-First, we report the percentage of triples that were predicted correctly by at least one of the patterns (Succ-Objs), and the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree to which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
+First, we report the percentage of entities that were predicted correctly by at least one of the patterns (Succ-Objs), and the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree to which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
 Across models, all patterns successfully extracted the right
 answer at least once, except for three models (bert-large and the two versions of albert) where one pattern in the `diplomatic relation'  did not succeed to classify any tuple.
 On the other hand, some tuples are not predicted correctly by any of the patterns, as is shown in the Succ-Objs measure. Since most relations contain at least @@ patterns, we take it as evidence that this knowledge is not stored in the model. 
