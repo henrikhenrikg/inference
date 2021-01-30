@@ -1,0 +1,26 @@
+\begin{table}[t]
+% \small
+    \centering
+% \resizebox{1\columnwidth}{!}{%
+\begin{tabular}{lll}
+\toprule
+Model & Diff-Syntax & No-Change \\
+\midrule
+majority-baseline &            100.0+-0.0 &            100.0+-0.0 \\
+\midrule
+BERT-base         &            62.8+-29.0 &            76.3+-22.6 \\
+BERT-large        &            61.5+-29.3 &            78.7+-14.7 \\
+BERT-large-wwm    &            58.6+-28.8 &             81.1+-9.7 \\
+\midrule
+RoBERTa-base      &            57.5+-18.8 &             80.7+-5.2 \\
+RoBERTa-large     &            61.0+-22.6 &             80.3+-6.8 \\
+\midrule
+ALBERT-base       &            58.2+-21.3 &            72.6+-11.5 \\
+ALBERT-xxlarge    &            50.6+-23.3 &            67.3+-17.1 \\
+\bottomrule
+\end{tabular}
+
+% }
+    \caption{Average consistency results when only the syntax is different, and when the syntax, and lexical is identical, over all relations, along with the Std.}
+    \label{tab:syntax_results}
+\end{table}

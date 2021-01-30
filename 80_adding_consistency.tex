@@ -79,7 +79,7 @@ We report the results of the majority baseline, as well as the vanilla BERT-base
 First, we note the significant improvement in consistency with our model: from 56.9\% in the BERT baseline to 66.6\% in our model, an increase of 9.7 points.
 % \nk{I would emphasize here again that it was able to transfer consistency from the seen to the unseen relations and we should maybe add that this in not only syntax based (is it?)}
 The LAMA score, slightly decrease from the BERT baseline, however, it is still compatible. Finally, and most importantly, we see an increase of 5.4 points to the Group-Score, which is achieved due to the improved consistency of the model.
-Notably, these improvements arises from only three relations that are not part of the test set.\yg{This is not clear: (a) it sounds as if you say '3 are not part of the set and others are part of the set'; (b) it is not clear why this is impressive. Try to make this point clearer. }
+Notably, these improvements arises from training on solely three relations, meaning that the model succeeded to improve its consistency ability and generalize to new relations.
 We also measure the statistical significance of our method compared to the BERT baseline, using McNemar's test (following \citet{dror2018hitchhiker,dror2020statistical}) and find all results to be significant ($p<0.01$)
 %  \nk{Maybe that will follow later: But I would add that this is only a case study and we would want follow up research on improving model consistency inside the pretrained model}
 

@@ -24,8 +24,7 @@ We show that this is not the case.
 % \nk{() are off here, also not sure if "populated" pattern is clear. Maybe also mention that the pattern is an relational pattern.}, 
 and feed it into a PLM. 
 We expect that a consistent model would predict the same answer for every two patterns $pattern_1$, $pattern_2$ which are paraphrases. 
-In the example above, the model makes an inconsistent prediction for the ``Homeland originally aired on [MASK]'' and ``Homeland premiered on [MASK]'' patterns and a consistent prediction on the same two patterns when the subject is `Seinfeld'.
-\am{Unclear, and too long. maybe also annotate left side as (a) and right side as (b)}}
+In the example above, the model makes an inconsistent prediction for the left part of the figure and a consistent prediction on right part, where the subject is different.}
 \label{fig:overview}
 % \vspace{-6mm}
 \end{figure}
@@ -49,7 +48,7 @@ Our setup relies on zero-shot evaluation, which allows us to inspect these capab
 
 We introduce a new benchmark that measures consistency in PLMs, using factual knowledge that was found to be partially encoded in them (\S \ref{sec:probe}).
 This benchmark, \resource{}, is a manually curated resource
-that provides patterns -- short textual prompts -- that are paraphrases of one another, with @@ paraphrases describing 40 binary relations such as \textit{X born-in Y}, \textit{X works-for Y} (\S \ref{sec:rel-graph}).
+that provides patterns -- short textual prompts -- that are paraphrases of one another, with 328 paraphrases describing thirty-eight binary relations such as \textit{X born-in Y}, \textit{X works-for Y} (\S \ref{sec:rel-graph}).
 We then test multiple PLMs for consistency over knowledge, 
 expecting a consistent model to predict the same answer for all the patterns of the same relation.
 An overview of our approach is presented in Figure \ref{fig:overview}.

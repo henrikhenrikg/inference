@@ -5,10 +5,10 @@
 In this section, we formally detail our definition for consistency as well as the proposed framework that allows probing for consistency of PLMs.
 
 \subsection{Consistency}
-We define consistency as follows: two cloze-phrases that are \textit{quasi-paraphrases} should result in the same prediction.
-%We use the term consistency in the sense that two cloze-phrases that are \textit{quasi-paraphrases} should result in the same prediction. 
-\textit{Quasi-paraphrases} is a concept introduced by \citet{what_is_paraphrase} that allow using a more fuzzy notion of paraphrases, which does not rely on the strict, logical definition of paraphrases, and allows to operationalize concrete use of paraphrases. This definition is in the spirit of the RTE definition \cite{dagan-rte}, which also allows a more flexible definition for Entailment.\yg{consider moving the quasi-paraphrase definition and discussion to footnote, esp if need space}
-In the context of PLM knowledge consistency, if two cloze-phrases\yg{we didn't define cloze-phrases yet. do they include a relation tuple?} of some relation (e.g. \textit{originally-aired-on}) are quasi-paraphrases, masked language models should predict the same entity for the masked item. 
+We define consistency as follows: two \textit{cloze-phrases} of the form ``Seinfeld originally aired on [MASK]'', that are \textit{quasi-paraphrases} should result in the same prediction.\footnote{\textit{Quasi-paraphrases} is a concept introduced by \citet{what_is_paraphrase} that allow using a more fuzzy notion of paraphrases, which does not rely on the strict, logical definition of paraphrases, and allows to operationalize concrete use of paraphrases. This definition is in the spirit of the RTE definition \cite{dagan-rte}, which also allows a more flexible definition for Entailment.}
+In the context of PLM knowledge consistency, if two cloze-phrases 
+% \yg{we didn't define cloze-phrases yet. do they include a relation tuple?} 
+of some relation (e.g. \textit{originally-aired-on}) are quasi-paraphrases, masked language models should predict the same entity for the masked item. 
 % \sr{I changed the wording here. Is it still what you meant? a natural question now is ``why objects".}
 % \yg{can it be "masked item"? or is it really a syntactic object?}
 In the rest of the paper, we use the terms \textit{paraphrase} and \textit{quasi-paraphrase} interchangeably.
@@ -29,7 +29,7 @@ that express a specific relation $R_i$, such as ``aired
 on''. Each $D_i$ is composed of $n$ examples $D_i = \{d_1^i,
 d_2^i, \dots, d_n^i\}$, where each $d_j^i = <s_j^i,o_j^i>$ is a tuple of a subject, and an object from the relation $R_i$. 
 For instance, if $R_1=\text{``originally
-  aired on"}$ then a tuple in $D_1$ can be $<\text{\textit{Homeland}}, \text{\textit{Showtime}}>$. Moreover, every relation $D_i$ \am{I thought $R_i$ is the relation} is associated with a set of cloze-patterns $P_i$ that are \textit{quasi-paraphrases} and express the same relation. For example, $P_1=\{p_1^1, p_2^1, \dots, p_n^1\}$ contain the patterns ``\subj{} was originally aired on \obj{}'' and ``\subj{} was premiered on \obj{}''.
+  aired on"}$ then a tuple in $D_1$ can be $<\text{\textit{Homeland}}, \text{\textit{Showtime}}>$. Moreover, every relation $R_i$ is associated with a set of cloze-patterns $P_i$ that are \textit{quasi-paraphrases} and express the same relation. For example, $P_1=\{p_1^1, p_2^1, \dots, p_n^1\}$ contain the patterns ``\subj{} was originally aired on \obj{}'' and ``\subj{} was premiered on \obj{}''.
 \nk{I think we should have someone who is not familiar with our setup check this passage. I am not sure if everyone will understand it}
 \yg{I agree, hard to follow. I propose to possible solutions: (1) start bottom-up rather than top-down: this is a pattern, here is a group of patterns, now we collect them into a set... (2) visualize it in a figure (instead of the text).}
 \am{while I'm familiar with this work, reading this paragraph for the first time I can understand the definitions. I agree with Yoav that a visualization can help though}

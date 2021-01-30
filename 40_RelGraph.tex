@@ -5,7 +5,7 @@ We now create \resource{}, a concrete resource according to the framework descri
 % To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. 
 % We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
 \resource{} is a high-quality resource, built by experts,
-it contains patterns for 40 relations from the T-REx dataset \cite{trex}, with an average of @@ patterns per relation.
+it contains patterns for thirty-eight relations from the T-REx dataset \cite{trex}, with an average of 8.63 patterns per relation.
 Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
 % Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
@@ -73,15 +73,17 @@ By definition, two different patterns that are paraphrases of of the LAMA patter
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
 We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
 Overall, each task contains five patterns that are thought to be paraphrases, and two that are not.\footnote{Note that the control patterns contain the same subject and object for avoiding shortcuts in solving the task.}
+Overall, we collect annotations for 156 paraphrase candidates, and 61 false paraphrases for control.
 
 We asked graduate students in NLP to perform the annotations and collected one answer per question.
 Due to random errors in the annotations, for every question that does not match our original label (either for paraphrases or controls), we ask the annotators to relabel them (without specifying the reason), to allow them to fix random mistakes.\footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
 % \nk{I would cut that last sentence}
 
-The agreement score for the paraphrases and the control are: @@ and @@, which are high and reassures \resource's quality.
+The agreement score for the paraphrases and the control are: 95.5\% and 98.3\%, which are high and reassures \resource's quality.
 We further went through the disagreements  %of the paraphrases 
 and fixed any additional problem %that we agree with, 
 to further improve the resource quality.
-Examples of paraphrases are displayed in Table \ref{tab:predictions}. \am{a bit odd to send the reader all the way to table 4, at this stage}
+Examples of paraphrases are displayed in Table \ref{tab:predictions}. 
+% \am{a bit odd to send the reader all the way to table 4, at this stage}
 % \input{tables/rel_graph_examples}
 

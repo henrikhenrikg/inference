@@ -6,14 +6,16 @@
 \toprule
 Model &        LAMA & Group-Score & Consistency \\
 \midrule
-majority-baseline      &  24.2+-20.7 &  24.2+-20.7 &  100.0+-0.0 \\ \midrule
-roberta-med-small-1M-1 &   10.2+-9.0 &    2.5+-3.9 &  36.6+-11.3 \\
-roberta-base-10M-1     &  18.0+-16.5 &    3.9+-8.2 &  30.3+-14.0 \\
-roberta-base-100M-1    &  22.9+-19.9 &   6.8+-15.4 &  32.9+-17.2 \\
-roberta-base-1B-1      &  36.3+-24.4 &  17.7+-19.8 &  48.8+-20.4 \\
+majority-baseline      &  25.0+-22.0 &  25.0+-22.0 &  100.0+-0.0 \\
+\midrule
+RoBERTa-med-small-1M-1 &    9.9+-9.1 &    2.4+-3.8 &  36.7+-11.4 \\
+\midrule
+RoBERTa-base-10M-1     &  17.0+-15.9 &    2.9+-4.8 &  29.7+-12.4 \\
+RoBERTa-base-100M-1    &  21.2+-18.9 &   4.9+-11.3 &  31.9+-15.0 \\
+RoBERTa-base-1B-1      &  35.2+-24.8 &  16.6+-17.5 &  49.0+-19.9 \\
 \bottomrule
 \end{tabular}
 }
-    \caption{Average consistency results for the different RoBERTas, trained on increasing amounts of data over all relations, along with the Std.}
-    \label{tab:robertas}
+    \caption{Average knowledge and consistency results for the different RoBERTas, trained on increasing amounts of data, over all relations, along with the Std.}
+    \label{tab:RoBERTas}
 \end{table}
