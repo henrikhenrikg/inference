@@ -49,23 +49,44 @@ $D = \{D_1, D_2,
 \dots, D_m\}$
 be a set of sets of KB triples,
 where each $D_i$ contains factual statements
-that express a specific relation $R_i$ such as ``originally aired
-on''. Each $D_i$ is composed of $n$ examples $D_i = \{d_1^i,
-d_2^i, \dots, d_n^i\}$, where each $d_j^i = <s_j^i,o_j^i>$
+that express a specific relation $R_i$. In this section, we
+us $R_1$ = ``premiered
+on'' and $D_1$
+as running example. Each $D_i=\{d_1^i,
+d_2^i, \dots, d_n^i\}$
+is composed of $n$ examples  where each $d_j^i = <s_j^i,o_j^i>$
 is a subject-object tuple from the relation $R_i$. 
-If $R_1=\text{``originally
-  aired on"}$, then $<\text{\textit{Homeland}},
+For example,
+$<\text{\textit{Homeland}},
 \text{\textit{Showtime}}>$
-is an example of a tuple
+is an example of a 
 tuple in $D_1$.
-Moreover, every relation $R_i$ is associated with a set of cloze-patterns $P_i$ that are \textit{quasi-paraphrases} and express the same relation. For example, $P_1=\{p_1^1, p_2^1, \dots, p_n^1\}$ contain the patterns ``\subj{} was originally aired on \obj{}'' and ``\subj{} was premiered on \obj{}''.
+Each relation $R_i$ is associated with a set of
+cloze-patterns $P_i$ that are \textit{quasi-paraphrases} of
+each other, i.e., they express the same relation $R_i$. For example, $P_1=\{p_1^1, p_2^1, \dots, p_n^1\}$ contains the patterns ``\subj{} was originally aired on \obj{}'' and ``\subj{} premiered on \obj{}''.
 \nk{I think we should have someone who is not familiar with our setup check this passage. I am not sure if everyone will understand it}
 \yg{I agree, hard to follow. I propose to possible solutions: (1) start bottom-up rather than top-down: this is a pattern, here is a group of patterns, now we collect them into a set... (2) visualize it in a figure (instead of the text).}
-\am{while I'm familiar with this work, reading this paragraph for the first time I can understand the definitions. I agree with Yoav that a visualization can help though}
+\am{while I'm familiar with this work, reading this
+  paragraph for the first time I can understand the
+  definitions. I agree with Yoav that a visualization can
+  help though}
+\enote{hs}{I do think the reader has to put in a little bit
+  of effort, but I'm the type of writer who expects that of
+  the reader. I agree that we should consider a figure!}
 
-Given some relation $R_i$, a subject-object tuple $d_j^i \in D_i$ (e.g., `Homeland', `Showtime') and two paraphrases $p_k^i, p_l^i \in P_i$ associated with this relation (such as ``\subj{} was originally aired on \obj{}'' and ``\subj{} premiered on \obj{}''), our goal is to test whether the model, consistently predicts the same object after filling the subject entity. To this end, we populate each of the subjects and a mask token to the pattern $p_k^i(s_j^i,mask)$, $p_l^i(s_j^i,mask)$
-% we mask the objects $o_j^i$ 
-and ask the model to predict them: ``Homeland was originally aired on [MASK]'' and ``Homeland was premiered on [MASK]''.  We expect a consistent model to predict the same entity. Notice that the consistency measure does not require the answers to be factually correct. While correctness is also an important property for KBs, we view it as separate objective and measure it independently. 
+Given some relation $R_i$, a subject-object tuple $d_j^i \in
+D_i$ (e.g., `Homeland', `Showtime') and two paraphrases
+$p_k^i, p_l^i \in P_i$ associated with this relation (such
+as ``\subj{} was originally aired on \obj{}'' and ``\subj{}
+premiered on \obj{}''), our goal is to test whether the
+model consistently predicts the same object for a particular subject.
+To this end, we
+substitute \subj{} with a selected subject and \obj{} with
+MASK; we write this as $p_k^i(s_j^i,mask)$,
+$p_l^i(s_j^i,mask)$ or (for a specific example) as
+``Homeland was originally aired on [MASK]'', ``Homeland was premiered on [MASK]''.
+Finally, we extract the model's most probable prediction for
+MASK in the two sentences.  A consistent model must predict the same entity. Note that the consistency measure does not require the answers to be factually correct. While correctness is also an important property for KBs, we view it as separate objective and measure it independently. 
 
 % If the model predicts the correct $o_j^i$ as the most probable completion, we take that as evidence for the storing of the factual knowledge $d_j^i$ in the model. 
 % In this case, a model that can perform adequate inference over the syntactic and lexical alternations between $p_j^i$ and $p_k^i$ is expected to also correctly predict the object from the alternative patterns $p_k^i$.
