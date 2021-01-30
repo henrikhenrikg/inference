@@ -47,12 +47,12 @@ For instance, some relations are defined as \textit{many-to-many}, and as such, 
 Let
 $D = \{D_1, D_2,
 \dots, D_m\}$
-be a set of sets of KB triples,
+be a set of sets of KB tuples,
 where each $D_i$ contains factual statements
 that express a specific relation $R_i$. In this section, we
-us $R_1$ = ``premiered
+use $R_1$ = ``premiered
 on'' and $D_1$
-as running example. Each $D_i=\{d_1^i,
+as running examples. Each $D_i=\{d_1^i,
 d_2^i, \dots, d_n^i\}$
 is composed of $n$ examples  where each $d_j^i = <s_j^i,o_j^i>$
 is a subject-object tuple from the relation $R_i$. 
@@ -86,7 +86,11 @@ MASK; we write this as $p_k^i(s_j^i,mask)$,
 $p_l^i(s_j^i,mask)$ or (for a specific example) as
 ``Homeland was originally aired on [MASK]'', ``Homeland was premiered on [MASK]''.
 Finally, we extract the model's most probable prediction for
-MASK in the two sentences.  A consistent model must predict the same entity. Note that the consistency measure does not require the answers to be factually correct. While correctness is also an important property for KBs, we view it as separate objective and measure it independently. 
+MASK in the two sentences.  A consistent model must predict
+the same entity. Note that the consistency measure does not
+require the answers to be factually correct. While
+correctness is also an important property for KBs, we view
+it as a separate objective and measure it independently. 
 
 % If the model predicts the correct $o_j^i$ as the most probable completion, we take that as evidence for the storing of the factual knowledge $d_j^i$ in the model. 
 % In this case, a model that can perform adequate inference over the syntactic and lexical alternations between $p_j^i$ and $p_k^i$ is expected to also correctly predict the object from the alternative patterns $p_k^i$.
@@ -100,7 +104,7 @@ that are not KB entities;
 e.g., a PLM may predict, for the object in ``\subj{}
 was originally aired on \obj{}'', the noun
 ``tv'' --  which is also a likely substitution on the language
-modeling objective.
+modeling objective, but not a valid KB fact completion.
 Therefore,
 following \citep{Xiong2020Pretrained, nora@@},
 we
