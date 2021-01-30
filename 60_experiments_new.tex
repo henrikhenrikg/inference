@@ -6,6 +6,55 @@
 
 \input{tables/extractability_results}
 
+\subsection{Knowledge Extraction Through Different Patterns}
+
+
+\subsection{Consistency and Knowledge}
+
+% \yg{wdym by ``to asses the knowledge and ability of the different patterns to extract knowledge''? in particular, what is the first `knowledge'?}
+% To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help understanding the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
+
+We begin by assessing the variability of our patterns, as well as the degree of which they extract the correct entities.
+
+First, we report the percentage of triples that were predicted correctly by at least one of the patterns (Succ-Objs), and the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree to which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
+Across models, all patterns successfully extracted the right
+answer at least once, except for three models (bert-large and the two versions of albert) where one pattern in the `diplomatic relation'  did not succeed to classify any tuple.
+On the other hand, some tuples are not predicted correctly by any of the patterns, as is shown in the Succ-Objs measure. Since most relations contain at least @@ patterns, we take it as evidence that this knowledge is not stored in the model. 
+% \nk{This seems to suggest that it is the fault of the pattern that knowledge is not extracted from the model but an unsuccessful prediction across all models of the same tuple rather says that this knowledge is not stored} 
+The average number of factual knowledge that are correctly extracted varies between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
+
+Next, we report LAMA results, that is, the acc@1 of a model in predicting the object, using the original patterns from \citet{lama}. This metric inspects whether the first object within the candidate set of each relation is the correct answer. The reported numbers for this metric differ from \citet{lama} as we use a candidate set, as well as take only the KB triple where the objects are a single token in all models we inspect. The results range between 29.9\% with albert-base to 45.6\% with bert-large, being the best model in that aspect.
+Additionally, we report another metric, which we call \textsc{Group-Score}, where a point is given only when all patterns predict the object correctly. This metric is much stricter than \textit{acc@1}, however, it provides a more robust metric, and better quantifies the degree to which the knowledge is encoded into the model. Overall, it combines both the requirement of a model to be consistent and correct. The results are much lower than the LAMA metric, as expected, but follow the same trend: albert-base perform worse, 17.0\% and bert-large performs best with 27.5\% accuracy.
+
+\yg{give this part a paragraph title?}
+Next, we measure the consistency results for the tuples
+subset where at least one of the patterns for a specific
+relation predicted the correct answer, as well as for the
+subset where no pattern predicted the correct answer correctly -- we refer to these metrics as \textsc{Know-Const} and \textsc{Unk-Const}, respectively.
+A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model and performing consistent predictions across paraphrases.
+Indeed, the results appear to support this claim. For instance, the Know-Const metric for bert-large is 62.4 and Unk-Const is 46.4. \nk{I would emphasize this even more and say that our graph is able to distinguish pattern dependent guessing and the other is knowledge stored in the model}
+% point on a connection between acquiring the correct knowledge, and the ability to extract it robustly. 
+% We refer to these metrics as \textsc{Know} and \textsc{Unk}, respectively, that stands for Knowledgeable and Unknowledgeable consistency.
+The additional consistent measurement we report is Const-Objs, which measures the number of tuples that are predicted consistently across all patterns for a particular relation.
+\ye{not sure if this one is important / alternatively maybe use this one instead of the main consistency score?}
+
+
+
+
+% For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
+
+
+An interesting observation from the results, is the clear superiority of the BERT models over the others, both in the factual knowledge correctness and consistency. This result, which we hypothesise to be due to the training data, may have a broader impact on models to come: Training bigger models with more data is not always beneficial. Since Wikipedia is likely a large unified source of factual knowledge that exists in unstructured data, the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models incorporate it better.
+As such, it is unclear if models such as GPT-3 \cite{gpt3}, or other future models that solely train on more data with more parameters are likely to be more consistent.
+% \am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+
 \subsection{Consistency}
 
 The results for the different models are summarized in Table \ref{tab:consistency_main}.
@@ -53,42 +102,6 @@ First, the model that was trained on one million tokens is more consistent than 
 % \input{tables/bert_results_extended}
 
 
-\subsection{Consistency and Knowledge}
-
-\yg{wdym by ``to asses the knowledge and ability of the different patterns to extract knowledge''? in particular, what is the first `knowledge'?}
-To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help understanding the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
-
-First, we report the percentage of triples that were predicted correctly by at least one of the patterns (Succ-Objs), and the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). Succ-Objs quantifies the degree to which the knowledge is stored by the models, and Succ-Patt quantified the quality of the patterns to extract the knowledge.
-Across models, all patterns successfully extracted the right
-answer at least once, except for three models (bert-large and the two versions of albert) where one pattern in the `diplomatic relation'  did not succeed to classify any tuple.
-On the other hand, some tuples are not predicted correctly by any of the patterns, as is shown in the Succ-Objs measure. Since most relations contain at least @@ patterns, we take it as evidence that this knowledge is not stored in the model. 
-% \nk{This seems to suggest that it is the fault of the pattern that knowledge is not extracted from the model but an unsuccessful prediction across all models of the same tuple rather says that this knowledge is not stored} 
-The average number of factual knowledge that are correctly extracted varies between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
-
-Next, we report LAMA results, that is, the acc@1 of a model in predicting the object, using the original patterns from \citet{lama}. This metric inspects whether the first object within the candidate set of each relation is the correct answer. The reported numbers for this metric differ from \citet{lama} as we use a candidate set, as well as take only the KB triple where the objects are a single token in all models we inspect. The results range between 29.9\% with albert-base to 45.6\% with bert-large, being the best model in that aspect.
-Additionally, we report another metric, which we call \textsc{Group-Score}, where a point is given only when all patterns predict the object correctly. This metric is much stricter than \textit{acc@1}, however, it provides a more robust metric, and better quantifies the degree to which the knowledge is encoded into the model. Overall, it combines both the requirement of a model to be consistent and correct. The results are much lower than the LAMA metric, as expected, but follow the same trend: albert-base perform worse, 17.0\% and bert-large performs best with 27.5\% accuracy.
-
-\yg{give this part a paragraph title?}
-Next, we measure the consistency results for the tuples
-subset where at least one of the patterns for a specific
-relation predicted the correct answer, as well as for the
-subset where no pattern predicted the correct answer correctly -- we refer to these metrics as \textsc{Know-Const} and \textsc{Unk-Const}, respectively.
-A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model and performing consistent predictions across paraphrases.
-Indeed, the results appear to support this claim. For instance, the Know-Const metric for bert-large is 62.4 and Unk-Const is 46.4. \nk{I would emphasize this even more and say that our graph is able to distinguish pattern dependent guessing and the other is knowledge stored in the model}
-% point on a connection between acquiring the correct knowledge, and the ability to extract it robustly. 
-% We refer to these metrics as \textsc{Know} and \textsc{Unk}, respectively, that stands for Knowledgeable and Unknowledgeable consistency.
-The additional consistent measurement we report is Const-Objs, which measures the number of tuples that are predicted consistently across all patterns for a particular relation.
-\ye{not sure if this one is important / alternatively maybe use this one instead of the main consistency score?}
-
-
-
-
-% For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
-
-
-An interesting observation from the results, is the clear superiority of the BERT models over the others, both in the factual knowledge correctness and consistency. This result, which we hypothesise to be due to the training data, may have a broader impact on models to come: Training bigger models with more data is not always beneficial. Since Wikipedia is likely a large unified source of factual knowledge that exists in unstructured data, the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models incorporate it better.
-As such, it is unclear if models such as GPT-3 \cite{gpt3}, or other future models that solely train on more data with more parameters are likely to be more consistent.
-% \am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
 
 
 \subsection{Do PLMs Generalize Over Syntax?} 
