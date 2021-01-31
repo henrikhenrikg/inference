@@ -2,21 +2,33 @@
 \label{sec:setup}
 
 \subsection{Models}
-We experiment with four PLM variants from three PLMs families: BERT, BERT whole-word-masking \cite{bert}, RoBERTa \cite{roberta} and ALBERT \cite{albert}, each with two of their  size variants.\footnote{For ALBERT we use the smallest and largest versions.}
+We experiment with four PLMs
+%variants
+from three PLM families: BERT, BERT whole-word-masking
+\cite{bert}, RoBERTa \cite{roberta} and ALBERT
+\cite{albert}. For each of the four, we use small and large versions.\footnote{For ALBERT we use the smallest and largest versions.}
 % Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
 
-In addition, we also report a majority baseline that always predicts the same most common object for a specific relation. By definition, this baseline is perfectly consistent.
+\enote{hs}{above: check correctness of ``For each of the four,
+  we use small and large versions''}
+
+In addition, we also report a majority baseline that always predicts the most common object for a specific relation. By definition, this baseline is perfectly consistent.
 
 \subsection{Data}
 
 
 % To probe for consistency of PLMs we use cloze-style queries using a (subject, relation, object) triple from a KB. We then populate the subjects and objects from the KB into patterns for all triplets in $D$ from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]'). \nk{not sure if this is a bit confusing as it is saying the same as earlier a bit differently}\yg{I agree. Don't repeat, and refer to prev description.}
 
-We use knowledge graph data from TREx \cite{trex} which contains 34,039 tuples across 40 relations. To make the results comparable across all models, we remove objects that do not fit a single token in all models' vocabularies.\footnote{We occasionally filter entities from certain relations that contain multiple fine-grained relations, to make our patterns compatible with the data.}
+We use knowledge graph data from TREx \cite{trex}, which
+contains 34,039 tuples across 40 relations. To make the
+results comparable across all models, we remove objects that
+are not represented as a single token in all models'
+vocabularies.\footnote{In a few cases, we filter entities from certain relations that contain multiple fine-grained relations to make our patterns compatible with the data.}
 % Moreover, some relations contain aggregated data of different types, which makes the original LAMA pattern sometimes obsolete as it does not fit the type (e.g. the tuple (`My Family', `sitcom') in the \textit{genre} relation, that mainly contains music-genre entities).\yg{the prev sentence is not clear}\am{I agree} In these cases, we manually filter these entities from our test set.
-Overall, after the filtering, we are left with @@ tuples.
+After this filtering step, @@ tuples remain.
 % We use the patterns from our resource \resource{}, described in the previous section. \am{use them for, what?}
 
+\enote{hs}{above: i don't understand the footnote}
 
 \subsection{Evaluation}
 \label{sec:eval}
@@ -33,13 +45,23 @@ Overall, after the filtering, we are left with @@ tuples.
 % (e.g., \cite{yaghoobzadeh-schutze-2016-intrinsic}), but this
 % is beyond the scope of this paper.
 
-Our consistency metric for some relation $R_i$ is simply the percentage of consistent prediction of all the pattern pairs of that relation $p_k^i,p_l^i \in P_i$, for all the tuples $d_j^i \in D_i$ corresponding to the relations.
+Our consistency measure for a relation $R_i$ is simply the
+percentage of consistent predictions of all the pattern pairs
+of that relation $p_k^i,p_l^i \in P_i$, for all the tuples
+$d_j^i \in D_i$.
+%adding this here: "corresponding to the relations."
+%would imply that there are also members of D_i that
+%do not correspond to the realtion. but that is not the case?
+We
+report the
+average over all relations. This measure can be viewed as a macro
+average.
+
 % We compute the accuracy of predictions per relation as the number of consistent predictions for every pattern pair for all triples in the KB, dividing by the total number of predictions.
 % \[
 % \sum_j \sum_{k,l} p_k^i(s_j^i,mask) = p_l^i(s_j^i,mask)
 % \]
 % \am{at first glance "=" looks like assignment to me}\am{missing denominator?}
-We aggregate the results for all relations and report the average of all relations. This metric can be viewed as macro average.
 % \am{I don't understand the metric}
 % We also report aggregated results for specific edge types that involve a specific transformation: \textit{syntactic}, \textit{lexical}, and both, using the same measurement. \nk{what about det? Also in the statistics table you call it rest}
 
