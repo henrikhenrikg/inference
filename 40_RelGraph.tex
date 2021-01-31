@@ -1,11 +1,11 @@
 \section{The \resource{} Resource}
 \label{sec:rel-graph}
 
-We now create \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
+We now describe \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
 % To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. 
 % We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
-\resource{} is a high-quality resource, built by experts,
-it contains patterns for thirty-eight relations from the T-REx dataset \cite{trex}, with an average of 8.63 patterns per relation.
+\resource{} is a high-quality resource, built by experts.
+It contains patterns for thirty-eight relations from the T-REx dataset \cite{trex}, with an average of 8.63 patterns per relation.
 Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
 % Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
@@ -38,11 +38,31 @@ Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}
 % The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
 
 \paragraph{Construction Method}
-\resource{}, was constructed in four steps: (1) We began with the patterns provided by LAMA \cite{lama} (one pattern per relation, referred to as ``base pattern"); (2) we augmented these patterns with other patterns that are paraphrases of the base pattern. Some of these relations are
-taken from LPAQA \cite{alpaqa}. However, since these patterns were extracted automatically, many do not accurately depict the relation, therefore only a subset of these patterns were used in practice;  (3) using SPIKE \cite{spike},\footnote{\url{https://spike.apps.allenai.org/}} a search engine over wikipedia sentencecs that allows syntax-based queries, we searched for additional patterns that appeared in Wikipedia and added them to our resource. This was done by searching for subject and object tuples from the T-REx resource and
-looking at the sentences that contain both, followed by a human annotator extracting a pattern from the Wikipedia sentence. (4) Lastly, we added additional patterns that are paraphrases of the base pattern using the annotators' linguistic expertise.
+\resource{} was constructed in four steps. (1) We began with
+the patterns provided by LAMA \cite{lama} (one pattern per
+relation, referred to as ``base pattern"). (2) We augmented
+each base pattern with other patterns that are paraphrases of
+the base pattern. Some of these paraphrases are taken from
+LPAQA \cite{alpaqa}. However, since LPAQA was
+extracted automatically, many LPAQA patterns are not
+correct paraphrases.
+We therefore only include the subset of correct paraphrases in \resource{}.
+(3) Using SPIKE
+\cite{spike},\footnote{\url{https://spike.apps.allenai.org/}}
+a search engine over Wikipedia sentencecs that supports
+syntax-based queries, we searched for additional patterns
+that appeared in Wikipedia and added them to 
+\resource{}. Specifically, we searched for Wikipedia sentences
+containing a  subject-object
+tuple from T-REx and then manually extracted 
+patterns from the  sentences. (4) Lastly, we added
+additional patterns that are paraphrases of the base pattern
+using the annotators' linguistic expertise.  Two additional
+experts went over all the patterns and corrected them, while
+engaging in a discussion until reaching  agreement,
+discarding patterns they could not agree on.
+
 % (The annotators can also add entailing or entailed patterns, but we do not make use of them in this paper.)
-Two additional experts went over all the patterns and corrected them, while engaging in a discussion until reaching an agreement, discarding patterns with disagreements.
 
 % \nk{should we give a number?}.\ye{I don't think it's necessary}
 
