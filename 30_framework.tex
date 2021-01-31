@@ -19,16 +19,16 @@ prediction.\footnote{A \textit{quasi-paraphrase} --
   paraphrases. This definition is in the spirit of the RTE
   definition \cite{dagan-rte}, which similarly supports a
   more flexible use of the notion of entailment.}
-\enote{hs}{I don't understand what this sentence says
--- in  addition to what was previously already said:
+% \enote{hs}{I don't understand what this sentence says
+% -- in  addition to what was previously already said:
   
-In the context of PLM knowledge consistency, if two cloze-phrases 
-% \yg{we didn't define cloze-phrases yet. do they include a relation tuple?} 
-of some relation (e.g., \textit{originally-aired-on}) are quasi-paraphrases, masked language models should predict the same entity for the masked item. 
-% \sr{I changed the wording here. Is it still what you meant? a natural question now is ``why objects".}
-% \yg{can it be "masked item"? or is it really a syntactic
-% object?}
-}
+% In the context of PLM knowledge consistency, if two cloze-phrases 
+% % \yg{we didn't define cloze-phrases yet. do they include a relation tuple?} 
+% of some relation (e.g., \textit{originally-aired-on}) are quasi-paraphrases, masked language models should predict the same entity for the masked item. 
+% % \sr{I changed the wording here. Is it still what you meant? a natural question now is ``why objects".}
+% % \yg{can it be "masked item"? or is it really a syntactic
+% % object?}
+% }
 In the rest of the paper, we use the terms \textit{paraphrase} and \textit{quasi-paraphrase} interchangeably.
 
  
@@ -40,10 +40,21 @@ In the rest of the paper, we use the terms \textit{paraphrase} and \textit{quasi
   Can we move this to a later point in the paper and say:
   this is something that we will investigate in the future?}
 We note that this definition does not take into account the type (e.g., one-to-one or many-to-many) of the relation. %\yg{what relation? we didn't say relation in this secction until now.} 
-For instance, some relations are defined as \textit{many-to-many}, and as such, more than a single item can be factually correct, even for quasi-paraphrases. However, we still expect that the order will remain, and thus even if the alternative answer is factually correct, we still consider cases with different answers as a non-consistent result.
+For instance, some relations are defined as \textit{many-to-many}, and as such, more than a single item can be factually correct, even for quasi-paraphrases. However, we still expect that the order will remain, and thus even if the alternative answer is factually correct, we still consider cases with different answers as a non-consistent result.\ar{Maybe we should report one-one and many-one separately, so that the reader can see both consistency and determinism results.}
 
 \subsection{The Framework}
 \label{sec:framework}
+
+\begin{figure}[t!]
+\centering
+
+\includegraphics[width=1.\columnwidth]{figures/framework}
+
+\caption{Overview of our framework that is used to assess models consistency.}
+\label{fig:framework}
+% \vspace{-6mm}
+\end{figure}
+
 Let
 $D = \{D_1, D_2,
 \dots, D_m\}$

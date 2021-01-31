@@ -1,0 +1,181 @@
+\documentclass{standalone}%
+
+%% Language and font encodings
+%\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+%\usepackage[a4paper,top=3cm,bottom=2cm,left=1cm,right=1cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage[dvipsnames]{xcolor}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+
+
+
+%\usepackage{xcolor}
+
+%% tikz packages
+\usepackage{tikz,pgf}
+\usetikzlibrary{trees}
+\usetikzlibrary{backgrounds}
+\usepackage{tikz-dependency}
+
+\usetikzlibrary{matrix}
+\usepackage{relsize}
+
+\usepackage{booktabs}
+
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\definecolor{my_green}{rgb}{0, 0.6, 0.5}
+\definecolor{my_orange}{rgb}{0.9, 0.6, 0}
+\definecolor{my_purple}{rgb}{0.8, 0.6, 0.7}
+\definecolor{my_blue}{rgb}{0, 0.45, 0.7}
+
+\tikzstyle{bag} = [align=center]
+
+
+% for thoughts bubbles
+\newcommand{\bubblethis}[2]{
+        \tikz[remember picture,baseline]{\node[anchor=base,inner sep=0,outer sep=0]%
+        (#1) {\underline{#1}};\node[overlay,cloud callout,callout relative pointer={(0.02cm,-0.07cm)},%
+        aspect=2.5,fill=yellow!90] at ($(#1.north)+(-0.5cm,1.6cm)$) {#2};}%
+    }%
+
+\begin{document}
+
+
+
+\begin{tikzpicture}[
+  emb/.style={rectangle,draw,fill=white,minimum width=2cm,minimum height=0.6cm,rounded corners=.8ex},
+  normal/.style={rectangle,draw,fill=white,minimum width=4cm,minimum height=0.8cm,rounded corners=.8ex},
+  path_embedding/.style={rectangle,draw,fill=blue!20,minimum width=4cm,    minimum height=0.7cm},
+  nc_embedding/.style={rectangle,draw,fill=orange!50,minimum width=2.5cm,    minimum height=0.7cm},
+  word_embedding/.style={rectangle,draw,fill=my_green!40,minimum width=2.5cm,    minimum height=0.7cm},
+  every neuron_empty/.style={circle,draw,minimum size=0.2cm},
+  every neuron/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
+  every neuron1/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
+  every neuron2/.style={circle,draw,fill=blue!50,minimum size=0.2cm},
+  every neuron3/.style={circle,draw,fill=green!50,minimum size=0.2cm},
+  every neuron4/.style={circle,draw,fill=green!50,minimum size=0.2cm},
+  every neurontar/.style={circle,draw,fill=brown!50,minimum size=0.5cm},
+  every text-box/.style={rectangle,minimum size=0.6cm},
+  every rect/.style={rectangle,draw,fill=gray!50,minimum size=0.6cm},
+  every vecrec/.style={rectangle,draw,fill=none,minimum width=1.5cm, minimum height=0.8cm},
+  every oper/.style={rectangle,draw,fill=red!50,minimum size=0.5cm},
+  every oper2/.style={rectangle,draw,fill=pink!50,minimum size=0.5cm},
+  neuron missing/.style={draw=none,fill=none,scale=2,execute at begin node=\color{black}$\cdots$}
+  ]
+  
+
+
+% Data points
+
+\node at (0,0) {$(D_1, r_1, P_1), \dots, (D_i, r_i, P_i), \dots, (D_n, r_n, P_n)$};
+
+\draw [-, Cerulean] ( -0.8, -0.2) -- (-3, -2.5);
+\draw [-, Cerulean] ( 0.8, -0.2) -- (3, -2.5);
+%\draw [->] (text-15.south west)++(0,-1) -- (text-23.south east);
+
+\node[inner sep=0pt] (detective) at (0,-1.1)
+    {\includegraphics[width=.1\textwidth]{detective}};
+
+
+\node at (0, -2.7) {\textit{Homeland} was aired on [MASK]};
+\node at (0, -3.1) {\textit{Homeland} was premiered on [MASK]};
+
+\node at (0, -3.5) {\dots};
+
+\node at (0, -3.9) {\textit{Seinfeld} was aired on [MASK]};
+\node at (0, -4.3) {\textit{Seinfeld}  was premiered on [MASK]};
+
+
+
+
+% KB Data
+\node (data) at (-6, 0) {\textbf{Data Pairs ($D$)}};
+
+\coordinate (leftl) at (-7.5, -0.5);
+\coordinate (leftr) at (-4.5, -0.5);
+
+
+%\draw [-, ForestGreen] (below=1 of rightl) -- (below=1 of rightr);
+\draw [-, ForestGreen] ($ (leftl) - (0,0.1) $) -- ($ (leftr) - (0,0.1) $);
+
+%\draw [-, ForestGreen] (-7, 0.3) -- (-3.2, 0.3);
+\node [below=0.5 of data] {(\textit{Lou Reed}, \textit{Brooklyn})};
+\node [below=1 of data] {(\textit{Masako Natsume}, \textit{Tokyo})};
+\node [below=1.5 of data] {\dots};
+\draw [-, ForestGreen] ($ (leftl) - (0,1.8) $) -- ($ (leftr) - (0,1.8) $);
+
+
+\draw [-, Cerulean] ($ (leftl) - (0,2) $) -- ($ (leftr) - (0,2) $);
+\node [below=2.2 of data] {(\textit{Seinfeld}, \textit{NBC})};
+\node [below=2.7 of data] {(\textit{Homeland}, \textit{Showtime})};
+\node [below=3.2 of data] {\dots};
+\draw [-, Cerulean] ($ (leftl) - (0,3.4) $) -- ($ (leftr) - (0,3.4) $);
+%\draw [-, Cerulean] (-7, -3.3) -- (-3.2, -3.3);
+%
+%\node at (-5, -3.8) {\dots};
+%
+\node [below left=1 and 0.7 of data] {$D_1$};
+%
+\node [below left=2.7 and 0.7 of data] {$D_2$};
+
+
+% Patterns
+\node (patterns) at (5, 0) {\textbf{Patterns ($P$)}};
+
+\coordinate (rightl) at (4.5, -0.5);
+\coordinate (rightr) at (7.5, -0.5);
+
+
+%\draw [-, ForestGreen] (below=1 of rightl) -- (below=1 of rightr);
+\draw [-, ForestGreen] ($ (rightl) - (1,0.1) $) -- ($ (rightr) - (1,0.1) $);
+\node [below=0.5 of patterns] {(\textit{X} was born in \textit{Y})};
+\node [below=1 of patterns] {(\textit{X} is native to \textit{Y})};
+\node [below=1.5 of patterns] {\dots};
+\draw [-, ForestGreen] ($ (rightl) - (1,1.8) $) -- ($ (rightr) - (1,1.8) $);
+
+\draw [-, Cerulean] ($ (rightl) - (1,2) $) -- ($ (rightr) - (1,2) $);
+\node [below=2.2 of patterns] {(\textit{X} was aired in \textit{Y})};
+\node [below=2.7 of patterns] {(\textit{X} was premiered on \textit{Y})};
+\node [below=3.2 of patterns] {\dots};
+\draw [-, Cerulean] ($ (rightl) - (1,3.4) $) -- ($ (rightr) - (1,3.4) $);
+
+\node [below right=1 and 0.7 of patterns] {$P_1$};
+
+\node [below right=2.7 and 0.7 of patterns] {$P_2$};
+%
+%\node[right] at (-1.7,0) {\tiny \textit{Homeland} originally aired on \textsc{[MASK]}};
+%%\node[right] at (-1.7,0) {\tiny \textsc{[MASK]} released \textit{Homeland}};
+%
+%\node[inner sep=0pt] (bert_encoder) at (1.5,-0.9)
+%    {\includegraphics[width=.1\textwidth]{bert.png}};
+%
+%\node[inner sep=0pt] (bert_encoder) at (0.4,-0.8)
+%    {\includegraphics[width=.1\textwidth]{bubble.png}};
+%
+%\node[] at (0.45, -0.6) [fontscale=0.1] {\tiny Showtime};
+%
+%
+%
+%\node[red!60] at (0.45, -1.7) {$\Updownarrow$};
+
+
+
+
+\end{tikzpicture}
+
+\end{document}

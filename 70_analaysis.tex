@@ -3,19 +3,7 @@
 
 
 
-% \begin{figure}[t!]
-% \centering
 
-% \subfloat{\includegraphics[width=1.\columnwidth]{figures/P407_emb.pdf}}\\
-% %   \hfill
-% \subfloat{\includegraphics[width=1.\columnwidth]{figures/P36_emb.pdf}}
-% % \\
-
-
-% \caption{t-SNE plots for encoded patterns from the ``Language of work or name'' and ``Capital'' relations. Points of the same color represent the same subject, Points of the same shape represent the same pattern. A consistent representation should cluster based on subjects (colors) rather than patterns (shapes).}
-% \label{fig:tsne-emb}
-
-% \end{figure}
 
 \input{tables/predictions}
 
@@ -30,6 +18,20 @@ Finally, the predictions in the bottom part demonstrate consistent predictions, 
 
 
 
+\begin{figure}[t!]
+\centering
+
+% \subfloat{\includegraphics[width=1.\columnwidth]{figures/P407_emb.pdf}}\\
+%   \hfill
+\subfloat{\includegraphics[width=1.\columnwidth]{figures/capital-bert-large}}
+% \\
+
+
+\caption{t-SNE plots for encoded patterns from the \textit{Capital} relation. Points of the same color represent the same subject, Points of the same shape represent the same pattern. Expecting from a knowledge-focused representation to cluster based on identical-subjects (color) rather than identical-patterns (shape).}
+\label{fig:tsne-emb}
+
+\end{figure}
+
 \subsection{Representation Analysis}
 
 
@@ -37,9 +39,12 @@ To provide additional insights on the way models operate on the patterns with th
 
 Encouraged from previous work that found that words with the same syntactic structure clusters together \cite{chi-etal-2020-finding,ravfogel-etal-2020-unsupervised} we perform a similar experiment to test if this behavior replicates with respect to knowledge.
 We encode the patterns, after filling the placeholders with subjects and masked tokens and inspect the last layer representations in the masked token position.
-When plotting the results using t-SNE \cite{tsne} we mainly observe clustering based on the patterns \nk{If w say this, I would add a plot where this holds} \ye{no place}, which suggests that the knowledge, therefore the encoding of the entity's knowledge, is not the main component of the representations.
+When plotting the results using t-SNE \cite{tsne} we mainly observe clustering based on the patterns, which suggests that the knowledge, therefore the encoding of the entity's knowledge, is not the main component of the representations.
+Figure \ref{fig:tsne-emb} demonstrates such graph for BERT-large encoding on the \textit{capital} relation.
 We also cluster these representations using two different number of centroids:\footnote {Using the KMeans algorithm} (1) the number of patterns in each relation and (2) the number of entities in each relation. We then measure the purity of these clusters using V-measure. We observe that the clusters are mostly grouped by the patterns, rather than the objects.
-Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. However, the correlation between these variables is low (@@), therefore not explaining the models' behavior.
+% Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. 
+Finally, we compute the spearman correlation between the consistency scores and the v-measure of the 
+However, the correlation between these variables is low (close to zero, and not significant)\footnote{Except for the BERT-large whole-word-masking model, where the correlation is 39.5 ($p<0.02$).}, therefore not explaining the models' behavior.
 This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e. Their main component does not relate to knowledge, and (2) the entire representation does not explain the behavior of the model. This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
 We hypothesize that this disparity between the representation and the behavior of the model may be explained by a situation where distances between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of each sentence
 % We believe that the explanation of these findings is that the relevant information for the word prediction, lies in a subspace of the original representation, and thus much of the encoded information is in practice not relevant for the prediction. \sr{I don't understand this explanation. I'd write something like ``We hypothesize that this disparity between representation and behavior may be explained by a situation where distances between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of each sentence"}.

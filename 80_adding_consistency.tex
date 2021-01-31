@@ -29,7 +29,7 @@ We propose to enforce consistency, by requiring the distribution of the masked t
 $D_{KL}(D^i_n||D^i_m) + D_{KL} (D^i_m||D^i_n)$
 
 As most of the vocabulary is not relevant for the
-predictions, in practice we filter it down to the candidate set, of each relation \ref{sec:framework}. \nk{If I remember correctly typed and untyped did not make a big difference, right? If it doesn't make a difference I would just report the untyped setting.} Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps to achieve this goal since most of the vocabulary is not affected by our new loss.
+predictions, in practice we filter it down to the candidate set, of each relation \ref{sec:framework}. Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps to achieve this goal since most of the vocabulary is not affected by our new loss.
 From preliminary results, we noticed that using only the candidate set is beneficial.
 
 In practice, as we typically have multiple paraphrases, we use all of them, which can help in enforcing a more general solution. Thus, the consistency loss consist of all possible patterns pairs, for a particular relation $R^i$ would be:
@@ -61,7 +61,7 @@ The above loss is computed per relation, for one KB tuple $d_j^i$. In practice, 
 % The TREx relations contain different types and contain many location-related relations. 
 Since we evaluate our method on relations other than the ones we train on, it's better to avoid relations of the same type (e.g. location-based relations, which are very common in TREx).
 Moreover, our method is aimed to be simple, effective, and requires only minimal supervision, therefore we opt to use only a minimal number of relations for training.
-In practice, we use only three relations: @@, @@, and @@, that were chosen randomly, out of the non-location related relations.\footnote{Since many of the relations in t-REX are location-based we wish to avoid a train-test leakage.} % \nk{People would not understand why we exclude locations. I would cut this?}.
+In practice, we use only three relations: \textit{original-language}, \textit{named-after}, and \textit{original-network} that were chosen randomly, out of the non-location related relations.\footnote{Since many of the relations in t-REX are location-based we wish to avoid a train-test leakage.} % \nk{People would not understand why we exclude locations. I would cut this?}.
 Since we train only on 3 relations, and the paraphrases are short, we manage to include many tuples in each batch, resulting in a short training phase.
 For validation, we randomly pick 5 relations %\nk{We picked 3 right? But as I have to train this again anyways, I can also do 5} 
 of the remaining relations and use the remaining 32 for testing.
