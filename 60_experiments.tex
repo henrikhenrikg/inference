@@ -102,20 +102,22 @@ but follow the same trend: albert-base perform worse (15.8\%) and bert-large  be
 
 % For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
 
-
-An interesting observation  is the clear superiority of
+A striking result of the model comparison is
+is the clear superiority of
 BERT, both in knowledge accuracy and knowledge
 consistency. This result, which we hypothesise to be due to
 the training data, may have a broader impact on models to
 come: Training bigger models with more data is not always
 beneficial. Since Wikipedia is likely the largest unified source
 of factual knowledge that exists in unstructured data,
-t
-
-the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models incorporate it better.
-As such, it is unclear if models such as GPT-3 \cite{gpt3},
-or other future models that solely train on more data with
-more parameters are likely to be more consistent.
+giving prominence to Wikipedia in pretraining a model makes it more
+likely that the model will incorporate the factual knowledge
+well. 
+This may indicate that  the consistency of models such as GPT-3 \cite{gpt3},
+(or other future models) -- i.e., models that
+have a much larger size and
+are trained on very large corpora of
+which Wikipedia is just a small part -- may suffer.
 
 % \am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
 
