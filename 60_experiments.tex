@@ -55,24 +55,46 @@ For instance, for BERT-large, Know-Const  is 62.7\% and Unk-Const is 47.8\%.
 
 
 \subsection{Consistency \& Knowledge}
-\input{tables/consistency_small}
-In this section, we report the overall knowledge metric that was used in \citet{lama}, our consistency results, as well as a new metric that combines both knowledge and consistency metrics.
-The results are summarized in Table \ref{tab:consistency_results_small}.
+\input{tables/consistency_small} In this section, we report
+the overall knowledge metric that was used in \citet{lama},
+our consistency results, as well as a new metric that
+combines both knowledge and consistency metrics.  The
+results are summarized in Table
+\ref{tab:consistency_results_small}.
 
-We begin with the LAMA results, that is, the acc@1 of a model in predicting the object, using the original patterns from \citet{lama}. This metric inspects whether the first object within the candidate set of each relation is the correct answer. The reported numbers for this metric differ from \citet{lama} as we use a candidate set, as well as take only the KB triple where the objects are a single token in all models we inspect. The results range between 28.4\% with albert-base to 45.0\% with bert-large whole-word-masking, being the best model in that aspect.
+We begin with the LAMA results, that is, the acc@1 of a
+model in predicting the object, using the original patterns
+from \citet{lama}. acc@1 is defined as accuracy of the
+top-ranked object within the candidate set of each
+relation. Our numbers differ from \citet{lama} as we use a
+candidate set (\S\ref{sec:probe}) and only consider KB
+triples whose object is a single token
+(\S\ref{setupdata}). The results range between 28.4\%
+(albert-base) and 45.0\% (bert-large whole-word-masking).
 
-Next, we report the consistency metric that was introduced in the previous section.
-The BERT-based models achieve higher scores over the rest. Moreover, there is a consistent improvement from the \textit{base} to \textit{large} versions of each model.
+Next, we report consistency measure (\S\ref{sec:eval}).
+BERT-based models achieve the highest scores. There is a consistent improvement from the \textit{base} to \textit{large} versions of each model.
 % , although it is not always significantly \am{is there a significance test?} higher (e.g. 57.3\% to 59.1\% in BERT, and 50.1\% to 54.8\% in RoBERTa).
-In contrast to many previous works that observed quantitative and qualitative improvements of RoBERTa-based models over BERT, in terms of consistency, BERT is more consistent than RoBERTa and ALBERT.
-Still, the overall results are remarkably low (59.6\% for the best model, %\yg{meaning that out of XXX, YYY are ZZZ}),
-especially given the permissive evaluation that only looks at the candidate set.
-We note that the results are highly variant between models and relations. For instance, the best performing model on the `capital of' relation achieves 94\%, whereas the best performing model achieves on the `owned by' relation 44\%. 
-On the other hand, the models' performance on the `original language of film or TV show' relation, varies between 52\% and 90\% accuracy.
+In contrast to much previous work that observed quantitative and qualitative improvements of RoBERTa-based models over BERT, in terms of consistency, BERT is more consistent than RoBERTa and ALBERT.
+Still, the overall results are remarkably low (59.6\% for
+the best model), %\yg{meaning that out of XXX, YYY are
+%ZZZ}),
+even more remarkably so because the restricted candidate set
+makes the task easier.
+We note that the results are highly variant between models
+(the best performance of any of the models on
+`capital of' is 94\% whereas it is 44\% for `owned by')
+and relations (models' performance on `original language of film or TV show'  varies between 52\% and 90\%).
 % We report the full consistency results for each relation in the Appendix.
 
-Finally, we report another metric, \textsc{Group-Score}, where a point is given only when all patterns predict the object correctly. This metric is much stricter, while combining both the requirement of a model to be consistent and factually correct. 
-The results are much lower than the LAMA metric, as expected, but follow the same trend: albert-base perform worse, 15.8\% and bert-large performs best with 26.8\% accuracy.
+Finally, we report
+\emph{Group-Score}: it evaluates an object as correct only
+if \emph{all} patterns predict the object
+correctly. Group-Score is much stricter and it combines  the
+requirements
+of consistency and factual correctness.
+The results are much lower than  LAMA acc@1, as expected,
+but follow the same trend: albert-base perform worse (15.8\%) and bert-large  best  (26.8\%).
 
 
 
@@ -81,8 +103,20 @@ The results are much lower than the LAMA metric, as expected, but follow the sam
 % For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
 
 
-An interesting observation from the results, is the clear superiority of the BERT models over the others, both in the factual knowledge correctness and consistency. This result, which we hypothesise to be due to the training data, may have a broader impact on models to come: Training bigger models with more data is not always beneficial. Since Wikipedia is likely a large unified source of factual knowledge that exists in unstructured data, the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models incorporate it better.
-As such, it is unclear if models such as GPT-3 \cite{gpt3}, or other future models that solely train on more data with more parameters are likely to be more consistent.
+An interesting observation  is the clear superiority of
+BERT, both in knowledge accuracy and knowledge
+consistency. This result, which we hypothesise to be due to
+the training data, may have a broader impact on models to
+come: Training bigger models with more data is not always
+beneficial. Since Wikipedia is likely the largest unified source
+of factual knowledge that exists in unstructured data,
+t
+
+the focused\am{I don't like the word "focused"} training on it (besides from the book corpus) was likely to make the BERT models incorporate it better.
+As such, it is unclear if models such as GPT-3 \cite{gpt3},
+or other future models that solely train on more data with
+more parameters are likely to be more consistent.
+
 % \am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
 
 
