@@ -6,11 +6,9 @@ We experiment with four PLMs
 %variants
 from three PLM families: BERT, BERT whole-word-masking
 \cite{bert}, RoBERTa \cite{roberta} and ALBERT
-\cite{albert}. For each of the four, we use small and large versions.\footnote{For ALBERT we use the smallest and largest versions.}
+\cite{albert}. For BERT, RoBERTa and ALBERT, we use a base and a large version.\footnote{For ALBERT we use the smallest and largest versions.}
 % Additionally, we use the whole-word-masking version of BERT large, which was shown to perform well in multiple tasks \cite{talmor2019olmpics}.
 
-\enote{hs}{above: check correctness of ``For each of the four,
-  we use small and large versions''}
 
 In addition, we also report a majority baseline that always predicts the most common object for a specific relation. By definition, this baseline is perfectly consistent.
 
