@@ -86,17 +86,31 @@ discarding patterns they could not agree on.
 
 
 \paragraph{Human Agreement}
-To assure the quality of \resource{}, we run a study to test for agreement with our annotations.
-For each relation, we sample up to five paraphrases, comparing each of the new patterns to the base pattern that came with that resource, and which is assumed to correctly describe the relation.
-By definition, two different patterns that are paraphrases of of the LAMA pattern, are also paraphrases of each other.
+To assess the quality of \resource{}, we run a
+human annotation study.
+For each relation, we sample up to
+five paraphrases, comparing each of the new patterns to the base pattern that came with that resource, and which is assumed to correctly describe the relation.
+By definition, two patterns that are paraphrases of the base pattern are also paraphrases of each other.
 
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
 We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
-Overall, each task contains five patterns that are thought to be paraphrases, and two that are not.\footnote{Note that the control patterns contain the same subject and object for avoiding shortcuts in solving the task.}
-Overall, we collect annotations for 156 paraphrase candidates, and 61 false paraphrases for control.
+Overall, each task contains five patterns that are thought
+to be paraphrases, and two that are not.\footnote{The
+  control patterns contain the same subjects and objects, so
+  that only the pattern (not its argument) can be used to
+  solve the task.}
+Overall, we collect annotations for 156 paraphrase candidates and 61 false paraphrases for control.
 
-We asked graduate students in NLP to perform the annotations and collected one answer per question.
-Due to random errors in the annotations, for every question that does not match our original label (either for paraphrases or controls), we ask the annotators to relabel them (without specifying the reason), to allow them to fix random mistakes.\footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
+We asked graduate students in NLP to  annotate the pairs and collected one answer per pair.
+Due to random errors in the annotations, for every question
+that does not match our original label (either for
+paraphrases or controls), we ask the annotators to relabel
+them (without specifying the reason), to allow them to fix
+random mistakes.\footnote{Moreover, due to the sampling of
+  patterns from different relations, seldom the patterns may
+  be paraphrases of one another, which we do not count as
+  mistakes.}
+
 % \nk{I would cut that last sentence}
 
 The agreement score for the paraphrases and the control are: 95.5\% and 98.3\%, which are high and reassures \resource's quality.

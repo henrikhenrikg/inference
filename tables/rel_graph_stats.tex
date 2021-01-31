@@ -2,9 +2,10 @@
 % \small
     \centering
 \begin{tabular}{lr}
-\toprule
-         Property &  Value \\
-\midrule
+  \toprule
+  % do we really need this?:
+%         Property &  Value \\
+%\midrule
     \# Relations &   38 \\
     \midrule
  Min patterns &    2 \\
@@ -19,3 +20,9 @@
     The last two rows correspond to the average number of unique syntactic and lexical patterns of the relations.}
     \label{tab:rel-graph-stats}
 \end{table}
+
+\enote{hs}{``Avg syntax'' and ``Avg
+  lexical'' is not clear to me. If there are 5 unique
+  patterns for relation R and 2 of them only differ in
+  syntax (e.g., active/passive alternation), woudl the
+  number of unique syntacit patterns then be 4?} 
