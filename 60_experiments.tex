@@ -120,24 +120,64 @@ First, the model that was trained on one million tokens is more consistent than 
 
 
 
+\enote{hs}{below: many people might think that a difference
+  in tense is a difference in syntax. Tense is part of
+  syntax?
+}
 
 \subsection{Do PLMs Generalize Over Syntax?} 
 
 \input{tables/syntax_results}
 
-Many papers found models (especially PLMs) to naturally encode syntax \cite{linzen2016assessing,marvin-linzen-2018-targeted,yoav-syntax,hewitt2019structural}. How does this reflect in their ability to abstract knowledge and produce it while controlling for syntactic variations?
-We consider two scenarios: (1) the syntax is the only component that differs between the patterns and (2) both the syntax and the lexical choice remain the same.
-Success on the first scenario indicates the ability of the model to abstract the knowledge, and extract it using different syntactic patterns. Success on the second indicates the abstraction over word order and tense. This way, we can test for consistency in models, while controlling for syntactic variation.\footnote{We consider two patterns to have the same syntax if the path between the entities are equal} 
+Many papers have found models (especially PLMs) to naturally
+encode syntax
+\cite{linzen2016assessing,marvin-linzen-2018-targeted,yoav-syntax,hewitt2019structural}.
+%How does this reflect in their ability to abstract
+%knowledge and produce it while controlling for syntactic
+%variations?
+Does this mean that PLMs have successfully abstracted
+knowledge and can comprehend and produce it regardless of
+syntactic variation?
+We consider two scenarios. (1) two patterns differ only in
+syntax. (2) Both  syntax and  lexical choice are the same.
+Here we define identical syntax as identical dependency
+paths between subject and object.
+We parse all patterns from \resource{} using a dependency parser \cite{spacy}\footnote{\url{https://spacy.io/}} and retain the path between  subject and object.
+
+Success on (1) indicates
+that the model's knowledge processing is robust to syntactic
+variation.
+Success on (2) indicates
+that the model's knowledge processing is robust to
+variation in word order and tense.
+
+%the ability of the model to abstract the knowledge, and extract it using different syntactic patterns. Success on (2) indicates the abstraction over word order and tense. This way, we can test for consistency in models, while controlling for syntactic variation.\footnote{We consider two patterns to have the same syntax if the path between the entities are equal} 
 % \sr{needs a footnote on our \emph{proxy} for syntactic change.}
 % staying invariant to alternations while the syntax is the only component that differs, and when 
-We parse all the patterns from \resource{} using a dependency parser \cite{spacy}\footnote{\url{https://spacy.io/}} and retain the path between the subject and object.
 % Then, for every pattern pair, we split into two groups: (1) patterns where the only difference is the syntactic path, but the lexical items are equal, and (2) patterns where both the syntactic path and the lexical items are identical. \nk{This sentence seems repetitive}
 % we filter out all cases where the syntactic path is different. 
 
 
-The results are reported in Table \ref{tab:syntax_results}.  While the results are not comparable to the main results on the entire data, as they contain different patterns, overall the results are low: 61.5\% for BERT-large when only the syntax differs, and 78.7\% when even the syntax is identical.
-While PLMs have shown impressive syntactic ability, the ability to abstract syntax and make use of it to extract factual knowledge is still lacking.
+Table \ref{tab:syntax_results}
+reports results.
+While the results are not comparable to the main results on
+the entire dataset as the pattern subsets are different, overall
+the results are low: 61.5\% for BERT-large when only 
+syntax differs, and 78.7\% when syntax is
+identical.  This demonstrates that while PLMs have impressive syntactic
+abilities, 
+they struggle to extract factual knowledge in the face of
+tense, word-order and syntactic variation.
+
 % These results are surprising, since the ability to abstract over syntax is perhaps the easier abstraction, and was expected to perform better, given other results on PLMs syntactic abilities. \sr{not sure if we can say it's easier/harder.}
 
-These results reminiscent of the findings of \citet{mccoy2019right}, which showed that models trained on an NLI dataset \cite{dagan-rte,snli} such as MNLI \cite{mnli}, are bound to use superficial syntactic heuristics, rather than more generalizable methods.
-However, we demonstrate that even PLMs are susceptible to these errors. 
+\citet{mccoy2019right}  show that supervised models trained on an NLI
+dataset \cite{dagan-rte,snli} such as MNLI \cite{mnli} use
+superficial syntactic heuristics rather than more
+generalizable properties of the data.
+Our results show that pretrained PLMs have  problems along
+the same lines:
+they are not robust to surface variation.
+
+%These results reminiscent of the findings of
+%However, we demonstrate that even PLMs are susceptible to these errors. 
