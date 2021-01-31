@@ -113,8 +113,8 @@ of factual knowledge that exists in unstructured data,
 giving prominence to Wikipedia in pretraining a model makes it more
 likely that the model will incorporate the factual knowledge
 well. 
-This may indicate that  the consistency of models such as GPT-3 \cite{gpt3},
-(or other future models) -- i.e., models that
+This may indicate that  the consistency of models such as GPT-3 \cite{gpt3}
+or other future models -- i.e., models that
 have a much larger size and
 are trained on very large corpora of
 which Wikipedia is just a small part -- may suffer.
@@ -143,8 +143,8 @@ which Wikipedia is just a small part -- may suffer.
 
 \paragraph{Effect of Pretraining Corpus Size}
 Next, we study the question of whether the number of tokens used during pretraining contributes to consistency.
-We use the pretrained RoBERTas model provided by \citet{robertas} and repeat the experiments on four additional models.
-These models are RoBERTa-based models that were trained on a sample of Wikipedia and the book corpus, with varying training size and parameters. In practice, we use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
+We use the pretrained RoBERTa model provided by \citet{robertas} and repeat the experiments on four additional models.
+These models are RoBERTa-based models that were trained on a sample of Wikipedia and the book corpus, with varying training size and parameters. We use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
 Overall, the consistency and the knowledge scores (LAMA and
 Group-Score) improve
 with more training data.
