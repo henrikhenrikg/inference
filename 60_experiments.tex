@@ -56,9 +56,9 @@ For instance, for BERT-large, Know-Const  is 62.7\% and Unk-Const is 47.8\%.
 
 \subsection{Consistency \& Knowledge}
 \input{tables/consistency_small} In this section, we report
-the overall knowledge metric that was used in \citet{lama},
-our consistency results, as well as a new metric that
-combines both knowledge and consistency metrics.  The
+the overall knowledge measure that was used in \citet{lama},
+our consistency results, as well as a new measure that
+combines both knowledge and consistency measures.  The
 results are summarized in Table
 \ref{tab:consistency_results_small}.
 
@@ -72,8 +72,8 @@ triples whose object is a single token
 (\S\ref{setupdata}). The results range between 28.4\%
 (albert-base) and 45.0\% (bert-large whole-word-masking).
 
-Next, we report consistency measure (\S\ref{sec:eval}).
-BERT-based models achieve the highest scores. There is a consistent improvement from the \textit{base} to \textit{large} versions of each model.
+Next, we report the consistency measure (\S\ref{sec:eval}).
+BERT-based models achieve the highest scores. There is a consistent improvement from the {base} to {large} versions of each model.
 % , although it is not always significantly \am{is there a significance test?} higher (e.g. 57.3\% to 59.1\% in BERT, and 50.1\% to 54.8\% in RoBERTa).
 In contrast to much previous work that observed quantitative and qualitative improvements of RoBERTa-based models over BERT, in terms of consistency, BERT is more consistent than RoBERTa and ALBERT.
 Still, the overall results are remarkably low (59.6\% for
@@ -103,7 +103,7 @@ but follow the same trend: albert-base perform worse (15.8\%) and bert-large  be
 % For brevity, we report the results solely on BERT-large, which achieved the highest results. The results can be viewed in Table \ref{tab:bert-results}.
 
 A striking result of the model comparison is
-is the clear superiority of
+the clear superiority of
 BERT, both in knowledge accuracy and knowledge
 consistency. This result, which we hypothesise to be due to
 the training data, may have a broader impact on models to
@@ -142,11 +142,18 @@ which Wikipedia is just a small part -- may suffer.
 %   over ``number of tokens'' if that's what you mean}
 
 \paragraph{Effect of Pretraining Corpus Size}
-Next, we study the question of whether the number of tokens used during the pretraining contributes to consistency.
+Next, we study the question of whether the number of tokens used during pretraining contributes to consistency.
 We use the pretrained RoBERTas model provided by \citet{robertas} and repeat the experiments on four additional models.
-These models are RoBERTa-based models, that were trained on a sample of Wikipedia and the book corpus, with varying training size, and parameters. In practice, we use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
-Overall, the consistency and the knowledge scores (LAMA and Group-Score) improve when trained on more data. However, there is an interesting outlier to this trend.
-First, the model that was trained on one million tokens is more consistent than the models trained on ten and one-hundred million tokens. A potentially crucial difference is that this model is also smaller in terms of the number of parameters than the rest, in order to avoid overfitting. Still, it is nonetheless interesting that a model that is trained on significantly less data can achieve better consistency. On the other hand, the knowledge scores are lower, arguably due to the model being exposed to less factual knowledge during pretraining.
+These models are RoBERTa-based models that were trained on a sample of Wikipedia and the book corpus, with varying training size and parameters. In practice, we use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
+Overall, the consistency and the knowledge scores (LAMA and
+Group-Score) improve
+with more training data.
+However, there is an interesting outlier to this trend.
+First, the model that was trained on one million tokens is
+more consistent than the models trained on ten and
+one-hundred million tokens. A potentially crucial difference
+is that this model
+has many fewer parameters than the rest (to avoid overfitting). It is nonetheless interesting that a model that is trained on significantly less data can achieve better consistency. On the other hand, the knowledge scores are lower, arguably due to the model being exposed to less factual knowledge during pretraining.
 
 % Finally, the original RoBERTa that was trained on ten billion parameters, achieves the same consistency performance as the one trained on one billion tokens, suggesting a limit to the benefit of training examples in pretraining. \nk{not sure about this as the table is not there yet, but shouldn't it be: Finally, the original RoBERTa that was trained on ten billion tokens, achieves the same consistency performance as the one trained on one billion tokens, suggesting on a limit to the benefit of large training corpora. }
 
