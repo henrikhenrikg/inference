@@ -14,24 +14,39 @@
 % \yg{wdym by ``to asses the knowledge and ability of the different patterns to extract knowledge''? in particular, what is the first `knowledge'?}
 % To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help understanding the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
 
-We begin by assessing the variability of our patterns, as well as the degree of which they extract the correct entities. These results are summarized in Table \ref{tab:extractability_results}.
+We begin by assessing the variability of our patterns as
+well as the degree to which they extract the correct
+entities. These results are summarized in Table
+\ref{tab:extractability_results}.
 
-First, we report the percentage of patterns that successfully predicted the right object at least once (Succ-Patt). A high score in this measure suggests that the patterns are decent, and models make use of them to extract the correct answer. As seen from the results, all PLMs achieve an almost perfect score (between 99.7\% - 100\%).
-Next, we report the percentage of entities that were predicted correctly by at least one of the patterns (Succ-Objs). 
-This metric quantifies the degree to which the knowledge is stored by the models.
-Notably, some tuples are not predicted correctly by any of our patterns, where the scores varies between 43.8\% for albert-base and 62.2 for BERT-large
-Since the average number of patterns is 8.63, i.e there are multiple ways to extract the knowledge, we interpret these results as evidence that a large part knowledge is not stored in these models. 
+First, we report \emph{Succ-Patt}, the percentage of
+patterns that successfully predicted the right object at
+least once. A high score  suggests that the patterns are
+decent and models use  them to extract the correct
+answer. We see that all PLMs achieve an almost perfect score (between 99.7\% - 100\%).
+Next, we report
+\emph{Succ-Objs},
+the percentage of entities that were predicted correctly by at least one of the patterns.
+Succ-Objs quantifies the degree to which the knowledge is stored by the models.
+We see that some tuples are not predicted correctly by any of our patterns: the scores vary between 43.8\% for albert-base and 62.2 for BERT-large.
+Since the average number of patterns is 8.63, i.e., there
+are multiple ways to extract the knowledge, we interpret
+these results as evidence that the models do not store a large part of the
+\resource{} knowledge.
 % \nk{This seems to suggest that it is the fault of the pattern that knowledge is not extracted from the model but an unsuccessful prediction across all models of the same tuple rather says that this knowledge is not stored} 
 % The average number of factual knowledge that are correctly extracted varies between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
 
 
 % \yg{give this part a paragraph title?}
-Finally, we measure the consistency results for the tuples
-subset where no pattern predicted the correct answer correctly (Unk-Const) and where at least one of the patterns for a specific
-relation predicted the correct answer \textsc{Know-Const}.
+Finally, we measure \emph{Unk-Const}, consistency  for the subset of tuples
+for which no pattern predicted the correct answer correctly;
+and \emph{Know-Const},
+consistency for the subset of tuples for which
+at least one of the patterns for a specific
+relation predicted the correct answer.
 % A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model and performing consistent predictions across paraphrases.
 Overall, the results indicate that when the factual knowledge is successfully extracted, the model is also more consistent.
-For instance, the Know-Const metric for BERT-large is 62.7\% and Unk-Const is 47.8\%. 
+For instance, for BERT-large, Know-Const  is 62.7\% and Unk-Const is 47.8\%. 
 \nk{I would emphasize this even more and say that our graph is able to distinguish pattern dependent guessing and the other is knowledge stored in the model}
 % point on a connection between acquiring the correct knowledge, and the ability to extract it robustly. 
 % We refer to these metrics as \textsc{Know} and \textsc{Unk}, respectively, that stands for Knowledgeable and Unknowledgeable consistency.
