@@ -144,15 +144,22 @@ baseline (BERT-base), but it lags behind our full model.
 Second, applying our loss on the candidate set rather than
 on the entire vocabulary is beneficial (-typed). Finally, by
 not performing the MLM training on the generated patterns
-(-MLM), the consistency results improved significantly
-(80.8), however, it also hurt the LAMA and Group-Score
-metrics. Thus, we see the MLM training as a regularizer,
-that prevents a catastrophic forgetting.
+(-MLM), the consistency results improve significantly
+(80.8), however, it also hurts the LAMA and Group-Score
+metrics. Thus, we see the MLM training as a regularizer
+that prevents catastrophic forgetting.
 
 %  \nk{Maybe that will follow later: But I would add that this is only a case study and we would want follow up research on improving model consistency inside the pretrained model}
 
-Our initial goal is to improve consistency in PLMs that would also reflect in downstream tasks. Therefore, we also experiment with finetuning on SQuAD \cite{squad}, and evaluating on a paraphrased questions from SQuAD \cite{squad-paraphrase} using our consistency model. However, the results perform on par with the baseline model.
-We believe more research is required to show that consistent PLMs can also benefit downstream tasks.
+Our ultimate  goal is to improve consistency in PLMs
+for better performance on downstream tasks. Therefore, we also
+experiment with finetuning on SQuAD \cite{squad}, and
+evaluating on paraphrased questions from SQuAD
+\cite{squad-paraphrase} using our consistency
+model. However, the results perform on par with the baseline
+model.  We believe more research is required to show that
+consistent PLMs can also benefit downstream tasks.
+
 % \subsection{Effect on Downstream Tasks}
 
 
