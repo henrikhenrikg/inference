@@ -31,7 +31,7 @@ In this paper, we show that this is not the case.
 
 \includegraphics[width=1.\columnwidth]{figures/overview}
 
-\caption{Overview of our approach. We begin with KB tuples (\textit{subject}, \textit{object}), of which we fill into a relational \textit{pattern} the: (\textit{subject}, \textit{[MASK]}) tuple,
+\caption{Overview of our approach. We begin with KB tuples (\textit{X}, \textit{Y}), of which we fill into a relational \textit{pattern} the: (\textit{X}, \textit{[MASK]}) tuple,
 % \nk{() are off here, also not sure if "populated" pattern is clear. Maybe also mention that the pattern is an relational pattern.}, 
 and feed it into a PLM. 
 We expect that a consistent model would predict the same answer for every two patterns $pattern_1$, $pattern_2$ which are paraphrases. 
@@ -48,7 +48,7 @@ Consistency is a key property of KBs and is particularly important for automatic
 One of the biggest appeals of using a PLM as a KB is that we can
 query it in natural language -- instead of relying on a specific schema.
 The expectation is that PLMs abstract away from language and map queries in natural language into meaningful representations such that queries with identical intent but different language form yield the same answer. 
-For example, the query ``\textit{Homeland} was released on [MASK]'' should produce the same answer as ``\textit{Homeland} was originally aired on [MASK]''.
+For example, the query ``\textit{Homeland} premiered on \textit{[MASK]}'' should produce the same answer as ``\textit{Homeland} originally aired on \textit{[MASK]}''.
 Studying inconsistencies of PLM-KBs can also teach us about the organization of knowledge in the model or lack thereof. 
 Finally, failure to behave in a consistent manner may point
 to other representational issues

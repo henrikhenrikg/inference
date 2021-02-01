@@ -17,16 +17,14 @@ In addition, we also report a majority baseline that always predicts the most co
 
 % To probe for consistency of PLMs we use cloze-style queries using a (subject, relation, object) triple from a KB. We then populate the subjects and objects from the KB into patterns for all triplets in $D$ from \resource{} to create the cloze-style queries; e.g, ``\subj{} was aired in \obj{}''. \subj{} is substituted with the subject and \obj{} with a masked token (e.g. `[MASK]'). \nk{not sure if this is a bit confusing as it is saying the same as earlier a bit differently}\yg{I agree. Don't repeat, and refer to prev description.}
 
-We use knowledge graph data from TREx \cite{trex}, which
-contains 34,039 tuples across 40 relations. To make the
-results comparable across all models, we remove objects that
-are not represented as a single token in all models'
-vocabularies.\footnote{In a few cases, we filter entities from certain relations that contain multiple fine-grained relations to make our patterns compatible with the data.}
+We use knowledge graph data from T-REx \cite{trex}.\footnote{We discard three relations from the LAMA that were not well defined} To make the results comparable across models, we remove objects that are not represented as a single token in all models'
+vocabularies, to a total of 26,813 tuples.
+%TODO - {add back for camera ready}\footnote{In a few cases, we filter entities from certain relations that contain multiple fine-grained relations to make our patterns compatible with the data.}
+We further split the data into many-to-many relations of which we report the determinism results apart (seven relations), as well as the one-to-one and many-to-one which we use for measuring consistency (thirty-one relations). 
 % Moreover, some relations contain aggregated data of different types, which makes the original LAMA pattern sometimes obsolete as it does not fit the type (e.g. the tuple (`My Family', `sitcom') in the \textit{genre} relation, that mainly contains music-genre entities).\yg{the prev sentence is not clear}\am{I agree} In these cases, we manually filter these entities from our test set.
-After this filtering step, @@ tuples remain.
 % We use the patterns from our resource \resource{}, described in the previous section. \am{use them for, what?}
 
-\enote{hs}{above: i don't understand the footnote}
+% \enote{hs}{above: i don't understand the footnote}
 
 \subsection{Evaluation}
 \label{sec:eval}
@@ -43,16 +41,16 @@ After this filtering step, @@ tuples remain.
 % (e.g., \cite{yaghoobzadeh-schutze-2016-intrinsic}), but this
 % is beyond the scope of this paper.
 
-Our consistency measure for a relation $R_i$ is simply the
+Our consistency measure for a relation $r_i$ is the
 percentage of consistent predictions of all the pattern pairs
 of that relation $p_k^i,p_l^i \in P_i$, for all the tuples
-$d_j^i \in D_i$.
+$d_j^i \in D_i$. Thus, for every KB tuple with $n$ patterns, we compare $n(n-1)/2$ pairs.
 %adding this here: "corresponding to the relations."
 %would imply that there are also members of D_i that
 %do not correspond to the realtion. but that is not the case?
 We
 report the
-average over all relations. This measure can be viewed as a macro
+average over all relations, which can be viewed as a macro
 average.
 
 % We compute the accuracy of predictions per relation as the number of consistent predictions for every pattern pair for all triples in the KB, dividing by the total number of predictions.

@@ -40,7 +40,7 @@ Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}
 \paragraph{Construction Method}
 \resource{} was constructed in four steps. (1) We began with
 the patterns provided by LAMA \cite{lama} (one pattern per
-relation, referred to as ``base pattern"). (2) We augmented
+relation, referred to as ``base pattern''). (2) We augmented
 each base pattern with other patterns that are paraphrases of
 the base pattern. Some of these paraphrases are taken from
 LPAQA \cite{alpaqa}. However, since LPAQA was
@@ -56,8 +56,8 @@ that appeared in Wikipedia and added them to
 containing a  subject-object
 tuple from T-REx and then manually extracted 
 patterns from the  sentences. (4) Lastly, we added
-additional patterns that are paraphrases of the base pattern
-using the annotators' linguistic expertise.  Two additional
+additional paraphrases of the base pattern
+using the annotators' linguistic expertise. Two additional
 experts went over all the patterns and corrected them, while
 engaging in a discussion until reaching  agreement,
 discarding patterns they could not agree on.
@@ -89,8 +89,10 @@ discarding patterns they could not agree on.
 To assess the quality of \resource{}, we run a
 human annotation study.
 For each relation, we sample up to
-five paraphrases, comparing each of the new patterns to the base pattern that came with that resource, and which is assumed to correctly describe the relation.
-By definition, two patterns that are paraphrases of the base pattern are also paraphrases of each other.
+five paraphrases, comparing each of the new patterns to the \textit{base-pattern} that came with LAMA, which reflects the relation.
+That is, given that relation $r_i$ contain the following patterns: $p_1, p_2, p_3, p_4$, and $p_1$ being the \textit{base-pattern}, we compare the following pairs $(p_1, p_2), (p_1, p_3), (p_1,p_4)$.
+
+% By definition, two patterns that are paraphrases of the base pattern are also paraphrases of each other.
 
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
 We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
@@ -101,25 +103,20 @@ to be paraphrases, and two that are not.\footnote{The
   solve the task.}
 Overall, we collect annotations for 156 paraphrase candidates and 61 false paraphrases for control.
 
-We asked graduate students in NLP to  annotate the pairs and collected one answer per pair.
-Due to random errors in the annotations, for every question
+We asked five NLP graduate students to  annotate the pairs and collected one answer per pair.\footnote{Due to random errors in the annotations, for every question
 that does not match our original label (either for
 paraphrases or controls), we ask the annotators to relabel
 them (without specifying the reason), to allow them to fix
-random mistakes.\footnote{Moreover, due to the sampling of
-  patterns from different relations, seldom the patterns may
-  be paraphrases of one another, which we do not count as
-  mistakes.}
-
-% \nk{I would cut that last sentence}
-
+random mistakes.}
+% \footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
 The agreement score for the paraphrases and the control are: 95.5\% and 98.3\%, which are high and reassures \resource's quality.
 We further went through the disagreements  %of the paraphrases 
 and fixed any additional problem %that we agree with, 
 to further improve the resource quality.
-Examples of paraphrases are displayed in Table \ref{tab:predictions}. 
+% Examples of paraphrases are displayed in Table \ref{tab:predictions}. 
 % \am{a bit odd to send the reader all the way to table 4, at this stage}
 % \input{tables/rel_graph_examples}
 
-One of the disagreements with our annotation arised from the following paraphrases: ``Royal Dutch Football Association is a member of FIFA.'' and ``Royal Dutch Football Association is affiliated with the FIFA organization.''
+One of the disagreements with our annotation arised from the following paraphrases: ``\textit{Royal Dutch Football Association} is a member of \textit{FIFA}.'' and ``\textit{Royal Dutch Football Association} is affiliated with the \textit{FIFA} organization.''
 Although these phrases are not paraphrases in the general case, we believe they are in our case with football association. Such disagreement may arise from the lack of specific domain knowledge, but also from inherent disagreement in this sort of annotation that may arise from inherent disagreements \cite{pavlick2019inherent} or from different construals \cite{trott2020re}, which were recently observed in NLI \cite{elazar2020extraordinary}.
+\nk{I am not convinced that this paragraph is helping the paper. I think it might trigger people to doubt the resource}

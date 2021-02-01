@@ -92,22 +92,28 @@
     {\includegraphics[width=.1\textwidth]{detective}};
 
 
-\node at (0, -2.7) {\textit{Homeland} was aired on [MASK]};
-\node at (0, -3.1) {\textit{Homeland} was premiered on [MASK]};
+\node at (0, -2) {\small $r_i=$\textit{originally-aired-on}};
+
+\node at (0, -2.7) {\textit{Homeland} originally aired on [MASK]};
+\node at (0, -3.1) {\textit{Homeland} premiered on [MASK]};
+
+\draw[-,gray] (-3, -2.7) to [out=180,in=-180] (-3, -3.1); node[anchor=west];
+
+%\path[draw,-, opacity=0.8, line width=0.3mm, color=Orchid] (-2, -2.7) to (-2, -3.1);
 
 \node at (0, -3.5) {\dots};
 
-\node at (0, -3.9) {\textit{Seinfeld} was aired on [MASK]};
-\node at (0, -4.3) {\textit{Seinfeld}  was premiered on [MASK]};
+\node at (0, -3.9) {\textit{Seinfeld} originally aired on [MASK]};
+\node at (0, -4.3) {\textit{Seinfeld}  premiered on [MASK]};
 
-
+\draw[-,gray] (-3, -3.9) to [out=180,in=-180] (-3, -4.3); node[anchor=west];
 
 
 % KB Data
-\node (data) at (-6, 0) {\textbf{Data Pairs ($D$)}};
+\node (data) at (-5.5, 0) {\textbf{Data Pairs ($D$)}};
 
-\coordinate (leftl) at (-7.5, -0.5);
-\coordinate (leftr) at (-4.5, -0.5);
+\coordinate (leftl) at (-7, -0.5);
+\coordinate (leftr) at (-4, -0.5);
 
 
 %\draw [-, ForestGreen] (below=1 of rightl) -- (below=1 of rightr);
@@ -119,19 +125,20 @@
 \node [below=1.5 of data] {\dots};
 \draw [-, ForestGreen] ($ (leftl) - (0,1.8) $) -- ($ (leftr) - (0,1.8) $);
 
+\node [below=2.2 of data] {\dots};
 
-\draw [-, Cerulean] ($ (leftl) - (0,2) $) -- ($ (leftr) - (0,2) $);
-\node [below=2.2 of data] {(\textit{Seinfeld}, \textit{NBC})};
-\node [below=2.7 of data] {(\textit{Homeland}, \textit{Showtime})};
-\node [below=3.2 of data] {\dots};
-\draw [-, Cerulean] ($ (leftl) - (0,3.4) $) -- ($ (leftr) - (0,3.4) $);
+\draw [-, Cerulean] ($ (leftl) - (0,2.5) $) -- ($ (leftr) - (0,2.5) $);
+\node [below=2.7 of data] {(\textit{Seinfeld}, \textit{NBC})};
+\node [below=3.2 of data] {(\textit{Homeland}, \textit{Showtime})};
+\node [below=3.7 of data] {\dots};
+\draw [-, Cerulean] ($ (leftl) - (0,3.9) $) -- ($ (leftr) - (0,3.9) $);
 %\draw [-, Cerulean] (-7, -3.3) -- (-3.2, -3.3);
 %
 %\node at (-5, -3.8) {\dots};
 %
 \node [below left=1 and 0.7 of data] {$D_1$};
 %
-\node [below left=2.7 and 0.7 of data] {$D_2$};
+\node [below left=3.2 and 0.7 of data] {$D_i$};
 
 
 % Patterns
@@ -148,15 +155,17 @@
 \node [below=1.5 of patterns] {\dots};
 \draw [-, ForestGreen] ($ (rightl) - (1,1.8) $) -- ($ (rightr) - (1,1.8) $);
 
-\draw [-, Cerulean] ($ (rightl) - (1,2) $) -- ($ (rightr) - (1,2) $);
-\node [below=2.2 of patterns] {(\textit{X} was aired in \textit{Y})};
-\node [below=2.7 of patterns] {(\textit{X} was premiered on \textit{Y})};
-\node [below=3.2 of patterns] {\dots};
-\draw [-, Cerulean] ($ (rightl) - (1,3.4) $) -- ($ (rightr) - (1,3.4) $);
+\node [below=2.2 of patterns] {\dots};
+
+\draw [-, Cerulean] ($ (rightl) - (1,2.5) $) -- ($ (rightr) - (1,2.5) $);
+\node [below=2.7 of patterns] {(\textit{X} originally aired in \textit{Y})};
+\node [below=3.2 of patterns] {(\textit{X} premiered on \textit{Y})};
+\node [below=3.7 of patterns] {\dots};
+\draw [-, Cerulean] ($ (rightl) - (1,3.9) $) -- ($ (rightr) - (1,3.9) $);
 
 \node [below right=1 and 0.7 of patterns] {$P_1$};
 
-\node [below right=2.7 and 0.7 of patterns] {$P_2$};
+\node [below right=3.2 and 0.7 of patterns] {$P_i$};
 %
 %\node[right] at (-1.7,0) {\tiny \textit{Homeland} originally aired on \textsc{[MASK]}};
 %%\node[right] at (-1.7,0) {\tiny \textsc{[MASK]} released \textit{Homeland}};

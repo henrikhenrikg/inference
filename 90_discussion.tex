@@ -29,4 +29,11 @@ For example, \citet{squad-paraphrase} created a paraphrase version for a subset 
 \citet{ribeiro2018semantically} proposed another method for creating paraphrases and performed a similar analysis for visual question answering and sentiment analysis. Recently, \citet{ribeiro-etal-2020-beyond} proposed \textsc{CheckList}, a system that tests models' vulnerability to several linguistic perturbations.
 In this work, we show that also the PLMs are susceptible to small perturbations, and thus, finetuning on some downstream task (and dataset), that typically are not extensive, and do not contain equivalent examples, are not likely to perform better with this regard.
 
+\resource{} enables us to study the brittleness of PLMs, and separate between facts which are robustly encoded in the model, compared to mere `guesses', which may arise from some heuristic or spurious correlations with certain patterns \cite{poerner2020bert}. In practice, we show that PLMs are susceptible to small perturbations, and thus, finetuning on some downstream task (and dataset), that typically are not extensive, and do not contain equivalent examples, are not likely to perform better with this regard.
+
+
+% In this work, we show that also the PLMs are susceptible to small perturbations, and thus, finetuning on some downstream task (and dataset), that typically are not extensive, and do not contain equivalent examples, are not likely to perform better with this regard.
+
+% In this work, we are also able to separate between facts which are robustly encoded in the model, compared to mere `guesses', which may arise from some heuristic or spurious correlations with certain patterns \cite{poerner2020bert}.
+
 % Finally, the ability to be consistent with respect to multiple ways of expressing the same meaning, indicates on the robustness of a model \sr{isn't it what the previous paragraph is saying?}. As such, a single pattern that a model succeeds on, cannot truly indicate on the knowledge that a model possess, but can come from other reasons such as spurious correlations, memorization, etc. A recent and related approach for behavioral testing of NLP models is \textsc{CheckList} that tests models' vulnerability to several linguistic perturbations \cite{ribeiro-etal-2020-beyond}.

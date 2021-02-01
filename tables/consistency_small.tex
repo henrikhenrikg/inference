@@ -4,26 +4,27 @@
 \resizebox{1\columnwidth}{!}{%
 \begin{tabular}{lrrr}
 \toprule
-Model &        LAMA & Consistency & Group-Score \\
+Model &        Acc & Consistency & Consistent-Acc \\
 \midrule
-majority-baseline &  25.0+-22.0 &  100.0+-0.0 &  25.0+-22.0 \\
+majority       &  23.1+-21.0 &  100.0+-0.0 &  23.1+-21.0 \\
 \midrule
-bert-base         &  42.8+-26.4 &  57.6+-23.1 &  24.3+-24.2 \\
-bert-large        &  44.6+-27.3 &  59.6+-22.3 &  26.8+-26.8 \\
-bert-large-wwm    &  45.0+-26.3 &  59.0+-23.1 &  26.2+-26.9 \\
-\bottomrule
-roberta-base      &  35.9+-24.5 &  50.7+-17.6 &  15.2+-17.8 \\
-roberta-large     &  39.4+-26.1 &  55.3+-19.8 &  20.8+-22.7 \\
-\bottomrule
-albert-base       &  28.4+-23.2 &  51.0+-19.4 &  15.8+-20.3 \\
-albert-xxlarge    &  38.8+-25.9 &  51.1+-21.5 &  21.4+-24.8 \\
+BERT-base      &  45.8+-25.6 &  58.5+-24.2 &  27.0+-23.8 \\
+BERT-large     &  48.1+-26.1 &  \textbf{61.1}+-23.0 &  \textbf{29.5}+-26.6 \\
+BERT-large-wwm &  \textbf{48.7}+-25.0 &  60.9+-24.2 &  29.3+-26.9 \\
+\midrule
+RoBERTa-base   &  39.0+-22.8 &  52.1+-17.8 &  16.4+-16.4 \\
+RoBERTa-large  &  43.2+-24.7 &  56.3+-20.4 &  22.5+-21.1 \\
+\midrule
+ALBERT-base    &  29.8+-22.8 &  49.8+-20.1 &  16.7+-20.3 \\
+ALBERT-xxlarge &  41.7+-24.9 &  52.1+-22.4 &  23.8+-24.8 \\
 \bottomrule
 \end{tabular}
 
 
 
 }
-    \caption{Knowledge and Consistency Results}
+    \caption{Knowledge and Consistency Results %\nk{As mentioned for the figure: I usually like if captions summarize what I see. I would summarize the main findings. What do you think?}
+    }
     \label{tab:consistency_results_small}
 \end{table}
 

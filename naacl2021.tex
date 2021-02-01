@@ -5,7 +5,7 @@
 \documentclass[11pt]{article}
 
 % Remove the "review" option to generate the final version.
-\usepackage[review]{naacl2021}
+\usepackage[]{naacl2021}
 
 % Standard package includes
 \usepackage{times}
@@ -50,19 +50,21 @@
 
 \usepackage{transparent} % transparent
 
-\definecolor{WildStrawberry}{HTML}{ff6467}
-\definecolor{OrangeRed}{HTML}{F26035}
+\definecolor{WildStrawberry}{HTML}{ffab91}
+\definecolor{OrangeRed}{HTML}{ff7043}
+
+\definecolor{LightBlue}{HTML}{98F5FF}
 
 
-
-\DeclareRobustCommand{\hltrue}[1]{{\sethlcolor{cyan}\hl{#1}}}
+\DeclareRobustCommand{\hltrue}[1]{{\sethlcolor{LightBlue}\hl{#1}}}
 \DeclareRobustCommand{\hlfalseo}[1]{{\sethlcolor{pink}\hl{#1}}}
 \DeclareRobustCommand{\hlfalset}[1]{{\sethlcolor{WildStrawberry}\hl{#1}}}
 \DeclareRobustCommand{\hlfalsetr}[1]{{\sethlcolor{OrangeRed}\hl{#1}}}
 
 
 % \DeclareRobustCommand{\hlgray}[1]{{\sethlcolor{lightgray}\hl{#1}}}
-
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
 
 
 \newcommand{\ye}[1]{\textcolor{purple}{Yanai: #1}}
@@ -73,10 +75,10 @@
 \newcommand{\yg}[1]{\textcolor{purple}{Yoav: #1}}
 \newcommand{\am}[1]{\textcolor{red}{[Amit: #1]}}
 
-\newcommand{\resource}{\textsc{ParaRel}}
+\newcommand{\resource}{\textsc{RelPara}}
 
-\newcommand{\subj}{SUBJ}
-\newcommand{\obj}{OBJ}
+\newcommand{\subj}{\textit{X}}
+\newcommand{\obj}{\textit{Y}}
 
 \title{Assessing Consistency of Language Models}
 \title{Consistency in Language Models}
@@ -99,16 +101,25 @@
 %         Author 2 \\ Address line \\ ... \\ Address line \And
 %         Author 3 \\ Address line \\ ... \\ Address line}
 
-\author{First Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  \texttt{email@domain} \\\And
-  Second Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  \texttt{email@domain} \\}
+
+  
+ \author{Yanai Elazar\textsuperscript{1,2} \,
+ Nora Kassner\textsuperscript{3} \,
+ Shauli Ravfogel\textsuperscript{1,2} \, 
+ Abhilasha Ravichander\textsuperscript{4} \, \\
+ {\bf Eduard Hovy\textsuperscript{4}\, 
+ \bf Hinrich Sch\"utze\textsuperscript{3}\, 
+ Yoav Goldberg\textsuperscript{1,2}}\\
+\textsuperscript{1}Computer Science Department, Bar Ilan University \\
+\textsuperscript{2}Allen Institute for Artificial Intelligence \\
+\textsuperscript{3}Center for Information and Language Processing (CIS), LMU Munich, Germany\\
+\textsuperscript{4}Language Technologies Institute, Carnegie Mellon University \\
+  {\tt  \{yanaiela,shauli.ravfogel,yoav.goldberg\}@gmail.com}\\
+  {\tt kassner@cis.lmu.de} 
+  {\tt \{aravicha,hovy\}@cs.cmu.edu} 
+  {\tt hs2016@cislmu.org}
+  }
+ 
 
 \newcounter{notecounter}
 \newcommand{\enotesoff}{\long\gdef\enote##1##2{}}
