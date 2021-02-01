@@ -10,14 +10,18 @@
 \subsection{Qualitative Analysis}
 In order to better understand the factors affecting consistent predictions, we inspect the predictions of BERT-large on different patterns, which are summarized in Table \ref{tab:predictions}.
 We highlight several cases.
-The predictions in the first row are inconsistent, and correct for first pattern, but not for the other two. 
-The predictions in the second row, also shows a single pattern that predicted the right object, however, the two other patterns, which are lexically similar, predicted the same, wrong answer - Renault.
+The predictions in the first row are inconsistent, and
+correct for the first pattern, but not for the other two. 
+The predictions in the second row also show a single pattern that predicted the right object, however, the two other patterns, which are lexically similar, predicted the same, wrong answer - Renault.
 % However, the third pattern prediction is related in the sense that Ireland is close to London. \ye{is the Ireland-London argument convincing?}
 % The last row of the upper part detail three different incorrect predictions. 
 % Note that the patterns of the penultimate row predicted two factually correct answers out of three (Greece, Kosovo), but simply do not correspond to the gold object in T-REx (Albania), since this is an M-N relation. 
 The last row of the upper part demonstrates three different predictions, all factually incorrect. 
 % Note that even when more than a single answer is correct, we still argue that the model should make consistent predictions.
-Finally, the predictions in the bottom part demonstrate consistent predictions, which the first are factually incorrect (surprisingly due to the fact the object is a substring of the subject), and the second is consistent and factual.
+Finally, the predictions in the bottom part demonstrate
+consistent predictions:
+The last row  is consistent and factual, the last but one
+row is consistent, but factually incorrect (surprisingly due to the fact the object is a substring of the subject).
 
 
 
@@ -32,7 +36,10 @@ Finally, the predictions in the bottom part demonstrate consistent predictions, 
 % \\
 
 
-\caption{t-SNE plots for encoded patterns from the \textit{capital} relation. Points of the same color represent the same subject, Points of the same shape represent the same pattern. Expecting from a knowledge-focused representation to cluster based on identical-subjects (color) rather than identical-patterns (shape).}
+\caption{t-SNE plots for encoded patterns from the
+  \textit{capital} relation. Points of the same color
+  represent the same subject, points of the same shape
+  represent the same pattern. We expect that a knowledge-focused representation  clusters based on identical-subjects (color) rather than identical-patterns (shape).}
 \label{fig:tsne-emb}
 
 \end{figure}
@@ -42,10 +49,19 @@ Finally, the predictions in the bottom part demonstrate consistent predictions, 
 
 To provide insights on the models' representations, we inspect these after encoding the cloze-style patterns.
 
-Motivated from previous work that found that words with the same syntactic structure clusters together \cite{chi-etal-2020-finding,ravfogel-etal-2020-unsupervised} we perform a similar experiment to test if this behavior replicates with respect to knowledge:
+Motivated by previous work that found that words with the same syntactic structure cluster together \cite{chi-etal-2020-finding,ravfogel-etal-2020-unsupervised} we perform a similar experiment to test if this behavior replicates with respect to knowledge:
 We encode the patterns, after filling the placeholders with subjects and masked tokens and inspect the last layer representations in the masked token position.
-When plotting the results using t-SNE \cite{tsne} we mainly observe clustering based on the patterns, which suggests that the knowledge, therefore the encoding of the entity's knowledge, is not the main component of the representations.
-Figure \ref{fig:tsne-emb} demonstrates such graph for BERT-large encoding on the \textit{capital} relation.\footnote{While some patterns are clutered based on the subjects in the top-left part, most of them are clustered based on pattern.}
+When plotting the results using t-SNE \cite{tsne} we mainly
+observe clustering based on the patterns, which suggests
+that
+%the knowledge, therefore the
+encoding of knowledge of the entity is not the main component of the representations.
+Figure \ref{fig:tsne-emb} demonstrates
+%such graph
+this
+for BERT-large encodings of the \textit{capital} relation.\footnote{While some patterns are clustered based on the subjects in the top-left part, most of them are clustered based on pattern.}
+\enote{hs}{following sentences: i didn't understand how the
+  clustering is done}
 We also cluster these representations using two different number of centroids:\footnote {Using the KMeans algorithm} (1) the number of patterns in each relation and (2) the number of entities in each relation. We then measure the purity of these clusters using V-measure. We observe that the clusters are mostly grouped by the patterns, rather than the objects.
 % Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. 
 Finally, we compute the spearman correlation between the consistency scores and the v-measure of the representations.
