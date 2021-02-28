@@ -75,7 +75,7 @@ we also cluster the representations, and set the number of centroids based on:\f
 We measure the purity of these clusters using V-measure, and observe that the clusters are mostly grouped by the patterns, rather than the objects.
 % Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. 
 Finally, we compute the spearman correlation between the consistency scores and the V-measure of the representations.
-However, the correlation between these variables is close to zero,\footnote{Except for BERT-large whole-word-masking, where the correlation is 39.5 ($pval<0.05$).} therefore not explaining the models' behavior.
+However, the correlation between these variables is close to zero,\footnote{Except for BERT-large whole-word-masking, where the correlation is 39.5 ($p<0.05$).} therefore not explaining the models' behavior.
 This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e., their main component does not relate to knowledge, and (2) the representation by its entirety does not explain the behavior of the model, and thus only a subset of the representation does. This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
 We hypothesize that this disparity between the
 representation and the behavior of the model may be

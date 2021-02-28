@@ -15,9 +15,12 @@ We make use of the T-REx tuples and a subset of paraphrases from \resource{}.
 
 % \enote{hs}{below: why is the notation used here different from the rest ofthe paper?}
 Given a relation $r_i$, we
-assume a set paraphrased patterns $P_i$ describing that relation.
+assume a set of paraphrased patterns $P_i$ describing that relation.
 %, each $P_j^i$ represents a paraphrase of some relation $R^i$.
-We use a PLM to encode all patterns in $P_i$, after populating a subject and a mask token that corresponds to the relation $r_i$. Finally we expect the model to make the same prediction for the masked token.
+We use a PLM to encode all patterns in $P_i$, after
+populating a subject  that corresponds to the relation $r_i$
+and a mask token. We expect the model to make the same
+prediction for the masked token for all patterns.
 % Then we consider the probability distribution over the vocabulary of the masked word, denoted by $D^i_l$. Our goal is to make the distribution of every pair $D^i_l,D^i_m$ as close as possible.
 
 
@@ -29,13 +32,18 @@ As we evaluate the model using acc@1, the straight-forward consistency loss woul
 %s.t. Q_n = f(P_n; \theta), Q_m = f(P_m; \theta)
 \end{gather*}
 where $f_\theta(P_n)$ is the output of an encoding function (e.g., BERT) parameterized by $\theta$ (a vector) over input $P_n$, and $f_\theta(P_n)[i]$ is the score of the $i$th vocabulary item.
+
+\enote{hs}{last bit: the score of the $i$th element of the
+  language models' input
+  vocabulary?}
+
 %where $Q_n,Q_m$ are the vocabulary distributions for the masked token in the patterns $P_n,P_m$  and $f$ is the encoding function, e.g. BERT, parameterized by $\theta$.
 % \nk{Is it necessary to talk about this option? Also we do that for the local training, right?}
 
-However, this objective contains a comparison between the output of two argmax operations, making it discrete and discontinuous, and hard to optimize in a gradient-based framework. We instead relax the objective, and require that the predicted \emph{distributions} $Q_n = softmax(f_\theta(P_n))$, rather than the top-1 prediction, be identical to each other. %we use a softer constraint.
+However, this objective contains a comparison between the output of two argmax operations, making it discrete and discontinuous, and hard to optimize in a gradient-based framework. We instead relax the objective, and require that the predicted \emph{distributions} $Q_n = \mbox{softmax}(f_\theta(P_n))$, rather than the top-1 prediction, be identical to each other. %we use a softer constraint.
 %Instead of optimizing for the same argmax, we optimize for the same distribution.
 % We propose to enforce consistency, by requiring the distribution of the masked tokens to be identical. 
-We use two-sided KL Divergence to measure similarity between distributions: $D_{KL}(Q_n^{r_i}||Q_m^{r_i}) + D_{KL}(Q_m^{r_i}||Q_n^{r_i})$.
+We use two-sided KL Divergence to measure similarity between distributions: $D_{KL}(Q_n^{r_i}||Q_m^{r_i}) + D_{KL}(Q_m^{r_i}||Q_n^{r_i})$
 %the distributions $Q_n,Q_m$
 %more similar. Since DKL is not a symmetric metric, we use a two-sided DKL for two patterns $P^i_m,P^i_n$:
 %$D_{KL}(Q^i_n||Q^i_m) + D_{KL} (Q^i_m||Q^i_n)$
@@ -44,7 +52,13 @@ where $Q_n^{r_i}$ is the predicted distribution for pattern $n$ of relation $r_i
 % \enote{hs}{above: is this simply the jensen shannon divdergence?}
 
 As most of the vocabulary is not relevant for the
-predictions, we filter it down to the candidate set of each relation (\S\ref{sec:framework}). Moreover, since we are motivated by maintaining the original capabilities of the model, focusing on the candidate set helps to achieve this goal since most of the vocabulary is not affected by our new loss.
+predictions, we filter it down to the candidate set of each
+relation (\S\ref{sec:framework}). We want to
+maintain the original capabilities of the
+model -- focusing on the candidate set helps to achieve this
+goal since most of the vocabulary is not affected by our new
+loss.
+
 % From preliminary results, we noticed that using only the candidate set is beneficial.
 
 % We typically have multiple paraphrases; we use all of them, which can help in enforcing a more general solution. 
@@ -57,9 +71,11 @@ Thus, the consistency loss for all pattern pairs for a particular relation $r^i$
 
 
 \paragraph{MLM Loss}
-Since the consistency loss is different from the Cross-Entropy loss the PLM is trained on, we find it important to continue the MLM loss on text data, as was observed in previous work \cite{geva2020injecting}.
+Since the consistency loss is different from the
+Cross-Entropy loss the PLM is trained on, we find it
+important to continue the MLM loss on text data, similar to previous work \cite{geva2020injecting}.
 
-We consider two alternatives for continuing the pretraining objective: (1) MLM on Wikipedia and (2) MLM on the patterns of the relations used for the consistency loss. We found that the latter works better. We denote this loss by $\mathcal{L}_{MLM}$
+We consider two alternatives for continuing the pretraining objective: (1) MLM on Wikipedia and (2) MLM on the patterns of the relations used for the consistency loss. We found that the latter works better. We denote this loss by $\mathcal{L}_{MLM}$.
 
 
 \paragraph{Consistency Guided MLM Continual Training}
@@ -83,16 +99,16 @@ This loss is computed per relation, for one KB tuple. We have many of these inst
 \subsection{Setup}
 
 
-Since we evaluate our method on unseen relations, we also split the train/test by the relation type (e.g., location-based relations, which are very common
+Since we evaluate our method on unseen relations, we also
+split  train and test by  relation type (e.g., location-based relations, which are very common
 in T-REx).  Moreover, our method is aimed to be simple,
-effective and to require only minimal supervision. Therefore
-we opt to use only a minimal number of relations for
-training.  In practice, we use only three relations:
+effective and to require only minimal supervision. Therefore,
+we opt to use only three relations:
 \textit{original-language}, \textit{named-after}, and
-\textit{original-network}, which were chosen randomly, out of
-the non-location related relations.\footnote{Since many of
-  the relations are location-based we wish to avoid
-  a train-test leakage.} 
+\textit{original-network}; these were chosen randomly, out of
+the non-location related relations.\footnote{Many
+  relations are location-based -- no training on them prevents
+ train-test leakage.} 
 For validation, we randomly pick three
 relations of the remaining relations and use the remaining
 twenty-five for testing.
@@ -109,19 +125,18 @@ For efficiency reasons, we use the base version of BERT.
 \input{tables/ft_consistency}
 
 The results are presented in Table
-\ref{tab:consistency-ft}. We report the aggregated results
-for all of the relations, apart from those that were used
-for training or validation. As in the previous section, we
-report the mean over the inspected relations and the
+\ref{tab:consistency-ft}. We report aggregated results
+for the 25 relations in test.
+We again
+report macro average (mean over relations) and
 standard deviation.  We report the results of the majority
-baseline (first row), as well as the vanilla BERT-base model (second row). Finally, we report
-the results of our new model (third row).  First, we note
+baseline (first row),   BERT-base  (second row)
+and our new model (BERT-ft, third row).  First, we note
 that our model significantly improves consistency:
 to 64.0\%
 (compared with 58.2\% for BERT-base,
 an increase
-of 5.8 points).  The \textit{Accuracy} also improves from the BERT
-baseline, from 45.6\% to 47.4\%. Finally, and most
+of 5.8 points).  \textit{Accuracy} also improves compared to BERT-base, from 45.6\% to 47.4\%. Finally, and most
 importantly, we see an increase of 5.9 points in
 \textit{Consistent-Acc}, which is achieved due to the improved
 consistency of the model.  Notably, these improvements
@@ -131,7 +146,7 @@ to new relations.  We measure the statistical
 significance of our method compared to the BERT baseline,
 using McNemar's test (following
 \citet{dror2018hitchhiker,dror2020statistical}) and find all
-results to be significant ($pval \ll 0.01$).
+results to be significant ($p \ll 0.01$).
 
 % \nk{I would emphasize here again that it was able to transfer consistency from the seen to the unseen relations and we should maybe add that this in not only syntax based (is it?)}
 
@@ -144,8 +159,8 @@ Second, applying our loss on the candidate set rather than
 on the entire vocabulary is beneficial (-typed). Finally, by
 not performing the MLM training on the generated patterns
 (-MLM), the consistency results improve significantly
-(80.8\%), however, it also hurts the \textit{Accuracy} and \textit{Consistent-Acc}
-metrics. Thus, we see the MLM training as a regularizer
+(80.8\%), however, this also hurts  \textit{Accuracy} and \textit{Consistent-Acc}.
+MLM training seems to serve as a regularizer
 that prevents catastrophic forgetting.
 
 
