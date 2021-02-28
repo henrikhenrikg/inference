@@ -29,8 +29,10 @@ In this paper, we show that this is not the case.
 \includegraphics[width=1.\columnwidth]{figures/overview2}
 
 \caption{Overview of our approach. 
-We expect that a consistent model would predict the same answer for every two paraphrases.
-In this example, the model is inconsistent on \textit{Homeland} and consistent on \textit{Seinfeld}.}
+We expect that a consistent model would predict the same answer for %every
+ two paraphrases.
+In this example, the model is inconsistent on the
+\textit{Homeland} and consistent on the \textit{Seinfeld} paraphrases.}
 \label{fig:overview}
 % \vspace{-6mm}
 \end{figure}
@@ -42,6 +44,9 @@ One of the biggest appeals of using a PLM as a KB is that we can
 query it in natural language -- instead of relying on a specific KB schema.
 The expectation is that PLMs abstract away from language and map queries in natural language into meaningful representations such that queries with identical intent but different language form yield the same answer. 
 For example, the query ``\textit{Homeland} premiered on \textit{[MASK]}'' should produce the same answer as ``\textit{Homeland} originally aired on \textit{[MASK]}''.
+\enote{hs}{this paragraph may suggest that PLM-KBs are not
+  consistent based on our results, but I don't think it is ever said? If that's
+  true, then it should be said}
 Studying inconsistencies of PLM-KBs can also teach us about the organization of knowledge in the model or lack thereof. 
 Finally, failure to behave in a consistent manner may point
 to other representational issues
@@ -73,4 +78,5 @@ current models have poor consistency, although with high variance between relati
 
 Finally, we propose a method that improves model consistency
 by introducing a novel consistency loss
-(\S \ref{sec:adding_consistency}). We demonstrate that BERT, trained with this loss achieves better consistency performance on unseen relations. However, more work is required to achieve fully consistent models.
+(\S \ref{sec:adding_consistency}). We demonstrate that
+trained with this loss, BERT achieves better consistency performance on unseen relations. However, more work is required to achieve fully consistent models.
