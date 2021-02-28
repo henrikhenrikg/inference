@@ -19,13 +19,14 @@ well as the degree to which they extract the correct
 entities. These results are summarized in Table
 \ref{tab:extractability_results}.
 
-First, we report \emph{Succ-Patt} that measures the percentage of
+First, we report \emph{Succ-Patt}, the percentage of
 patterns that successfully predicted the right object at
-least once. A high score suggests that the patterns are of high quality and enables the models to extract the correct answers. All PLMs achieve a perfect score.
+least once. A high score suggests that the patterns are of high quality and enable the models to extract the correct answers. All PLMs achieve a perfect score.
 Next, we report
 \emph{Succ-Objs},
 the percentage of entities that were predicted correctly by at least one of the patterns.
-\textit{Succ-Objs} quantifies the degree to which the knowledge is stored by the models.
+\textit{Succ-Objs} quantifies the degree to which the models
+``have'' the required knowledge.
 We observe that some tuples are not predicted correctly by any of our patterns: the scores vary between 45.8\% for ALBERT-base and 65.7\% for BERT-large. %\nk{should we say we consider these facts to be \emph{Known} in reference to \emph{Know-Const}.}
 With an average number of 8.63 patterns per relation, there are multiple ways to extract the knowledge, we thus interpret these results as evidence that a large part of T-REx knowledge is not stored in these models.
 % \nk{should we say we consider these facts to be \emph{Unknown} in reference to \emph{Unk-Const}.}
@@ -34,11 +35,13 @@ With an average number of 8.63 patterns per relation, there are multiple ways to
 
 
 % \yg{give this part a paragraph title?}
-Finally, we measure \emph{Unk-Const}, a consistency measurement for the subset of tuples
-for which no pattern predicted the correct answer correctly;
+Finally, we measure \emph{Unk-Const}, a consistency measure for the subset of tuples
+for which no pattern predicted the correct answer; % correctly;
 and \emph{Know-Const}, consistency for the subset where
 at least one of the patterns for a specific
-relation predicted the correct answer. This split is based on the \textit{Succ-Objs}, which splits the data into two parts.
+relation predicted the correct answer.
+This split into subsets is
+based on \textit{Succ-Objs}.
 % A higher score on the first metric would suggest that storing the correct answer is related to the consistency of the model and performing consistent predictions across paraphrases.
 Overall, the results indicate that when the factual knowledge is successfully extracted, the model is also more consistent.
 For instance, for BERT-large, \textit{Know-Const}  is 65.2\% and \textit{Unk-Const} is 48.1\%. 
@@ -56,7 +59,9 @@ For instance, for BERT-large, \textit{Know-Const}  is 65.2\% and \textit{Unk-Con
 \subsection{Consistency \& Knowledge}
 \input{tables/consistency_small} In this section, we report
 the overall knowledge measure that was used in \citet{lama} (\textit{Accuracy}),
-the consistency metric (\textit{Consistency}), as well as the new measure that combines both knowledge and consistency measures (\textit{Consistent-Acc}). %\nk{An alternative would be to mention and define all of these in 5.3}
+the consistency measure (\textit{Consistency}),
+and \textit{Consistent-\
+  Acc}, which combines knowledge and consistency  (\textit{Consistent-Acc}). %\nk{An alternative would be to mention and define all of these in 5.3}
 The results are summarized in Table
 \ref{tab:consistency_results_small}.
 
@@ -66,8 +71,8 @@ Notice that our numbers differ from \citet{lama} as we use a
 candidate set (\S\ref{sec:probe}) and only consider KB
 triples whose object is a single token in all the PLMs we consider (\S\ref{setupdata}). 
 
-Next, we report the main \textit{Consistency} metric (\S\ref{sec:eval}).
-The BERT models achieve the highest scores. There is a consistent improvement from the {base} to {large} versions of each model.
+Next, we report  \textit{Consistency}  (\S\ref{sec:eval}).
+The BERT models achieve the highest scores. There is a consistent improvement from  {base} to {large} versions of each model.
 % , although it is not always significantly \am{is there a significance test?} higher (e.g. 57.3\% to 59.1\% in BERT, and 50.1\% to 54.8\% in RoBERTa).
 In contrast to previous work that observed quantitative and qualitative improvements of RoBERTa-based models over BERT \cite{roberta,talmor2019olmpics}, in terms of consistency, BERT is more consistent than RoBERTa and ALBERT.
 Still, the overall results are low (61.1\% for
@@ -76,15 +81,19 @@ the best model), %\yg{meaning that out of XXX, YYY are
 even more remarkably so because the restricted candidate set
 makes the task easier.
 We note that the results are highly variant between models
- (performance on \textit{original-language} varies between 52\% and 90\%), and relations (BERT-large performs on 92\% on \textit{capital-of}, whereas 44\% on \textit{owned-by}).
+ (performance on \textit{original-language} varies between
+52\% and 90\%), and relations (BERT-large performance is
+92\% on \textit{capital-of} and 44\% on \textit{owned-by}).
 % We report the full consistency results for each relation in the Appendix.
 
 Finally, we report
 \emph{Consistent-Acc}:
-the results are much lower than the \textit{Accuracy} metric, as expected,
+the results are much lower than for \textit{Accuracy}, as expected,
 but follow similar trends: RoBERTa-base perform worse (16.4\%) and BERT-large  best  (29.5\%).
 
-Interestingly, we find strong correlations between the Accuracy and Consistency metrics, ranging between 67.3\% for RoBERTa-base to 82.1\% for BERT-large (all with small p-values $\ll0.01 $).
+Interestingly, we find strong correlations between Accuracy
+and Consistency, ranging from 67.3\% for RoBERTa-base to
+82.1\% for BERT-large (all with small p-values $\ll 0.01 $).
 
 
 
@@ -98,8 +107,8 @@ the training data, may have a broader impact on models to
 come: Training bigger models with more data is not always
 beneficial. Since Wikipedia is likely the largest unified source
 of factual knowledge that exists in unstructured data,
-giving prominence to Wikipedia in pretraining a model, makes it more
-likely that the model will incorporate the factual knowledge
+giving it prominence in pretraining  makes it more
+likely that the model will incorporate Wikipedia's factual knowledge
 well.
 This may indicate that the consistency of models such as GPT-3 \cite{gpt3}
 or other future models -- i.e., models that
@@ -111,7 +120,13 @@ which Wikipedia is just a small part -- may suffer.
 
 
 \paragraph{Determinism}
-We also measure the determinism results on the N-M relations. That is, the same measure as \textit{Consistency}, but since the predictions may be factually correct, these do not necessarily convey consistency violation, but indicate on a determinism issue. For brevity, we do not present the entire results, but the trend is similar to the consistency result (although not comparable, as it inspect different relations): 52.9\% and 44.6\% for BERT-large and RoBERTa-base respectively.
+We also measure determinism for N-M relations, i.e., we use
+the same measure as \textit{Consistency}, but since
+``contradictory'' predictions may be factually correct,
+these do not necessarily convey consistency violations, but
+indicate non-determinism. For brevity, we do not present all
+results, but the trend is similar to the consistency result
+(although not comparable, as the relations are different): 52.9\% and 44.6\% for BERT-large and RoBERTa-base, respectively.
 
 
 
@@ -135,8 +150,8 @@ We also measure the determinism results on the N-M relations. That is, the same 
 \paragraph{Effect of Pretraining Corpus Size}
 Next, we study the question of whether the number of tokens used during pretraining contributes to consistency.
 We use the pretrained RoBERTa models from \citet{robertas} and repeat the experiments on four additional models.
-These are RoBERTa-based models, trained on a sample of Wikipedia and the book corpus, with varying training size and parameters. We use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
-Overall, the \textit{Accuracy} and
+These are RoBERTa-based models, trained on a sample of Wikipedia and the book corpus, with varying training sizes and parameters. We use one of the three published models for each configuration and report the average accuracy over the relations for each model in Table \ref{tab:robertas}.
+Overall, \textit{Accuracy} and
 \textit{Consistent-Acc} improve
 with more training data.
 However, there is an interesting outlier to this trend.
@@ -159,10 +174,10 @@ encode syntax
 Does this mean that PLMs have successfully abstracted
 knowledge and can comprehend and produce it regardless of
 syntactic variation?
-We consider two scenarios. (1) two patterns differ only in
+We consider two scenarios. (1) Two patterns differ only in
 syntax. (2) Both  syntax and  lexical choice are the same.
-As a proxy, we define syntactical equivalence if the dependency
-paths between subject and object are identical.
+As a proxy, we define syntactic equivalence as the dependency
+paths between subject and object being identical.
 We parse all patterns from \resource{} using a dependency parser \cite{spacy}\footnote{\url{https://spacy.io/}} and retain the path between the entities.
 Success on (1) indicates
 that the model's knowledge processing is robust to syntactic
@@ -192,10 +207,10 @@ tense, word-order and syntactic variation.
 % These results are surprising, since the ability to abstract over syntax is perhaps the easier abstraction, and was expected to perform better, given other results on PLMs syntactic abilities. \sr{not sure if we can say it's easier/harder.}
 
 \citet{mccoy2019right}  show that supervised models trained on MNLI \cite{mnli}, an NLI
-dataset \cite{snli} use
+dataset \cite{snli}, use
 superficial syntactic heuristics rather than more
 generalizable properties of the data.
-Our results show that pretrained PLMs have  problems along
+Our results indicate that pretrained PLMs have  problems along
 the same lines:
 they are not robust to surface variation.
 
