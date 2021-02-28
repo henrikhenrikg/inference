@@ -63,10 +63,20 @@ In this work, we focus on consistency, but also measure determinism of the model
 
 \includegraphics[width=1.\columnwidth]{figures/framework}
 
-\caption{Overview of our framework for assessing model consistency. $D_i$ corresponds to a set of KB triplets of some relation $r_i$, which are coupled with a set of \textit{quasi-paraphrase} cloze-patterns $P_i$ that describe that relation. We then populate the subjects from $D_i$ as well as a mask token into all patterns $P_i$ and expect a model to predict the same object across all pattern pairs.}
+\caption{Overview of our framework for assessing model
+  consistency. $D_i$ (``Data Pairs $(D)$'' on the left) is a
+  set of KB triplets of some relation $r_i$, which are
+  coupled with a set of \textit{quasi-paraphrase}
+  cloze-patterns $P_i$
+(``Patterns $(P)$'' on the right)
+  that describe that relation. We then populate the subjects
+  from $D_i$ as well as a mask token into all patterns $P_i$
+(shown in the middle)
+  and expect a model to predict the same object across all pattern pairs.}
 \label{fig:framework}
 % \vspace{-6mm}
 \end{figure}
+
 
 \enote{hs}{``quasi-paraphrase cloze-pattern'': it would be
   better to define clear terminology in the beginning and
@@ -75,8 +85,8 @@ In this work, we focus on consistency, but also measure determinism of the model
 
 
 An illustration of the framework is presented in Figure \ref{fig:framework}.
-Let $D_i$ be a set of subject-object KB tuples (e.g. <\textit{Homeland}, \textit{Showtime}>) from some relation $r_i$ (e.g. \textit{originally-aired-on}), accompanied with a set of \textit{quasi-paraphrases} cloze-patterns $P_i$ (e.g. \textit{X} originally aired on \textit{Y}).
-Our goal is to test whether the model consistently predicts the same object (e.g. \textit{Showtime}) for a particular subject (e.g. \textit{Homeland}). To this end, we substitute \textit{X} with a subject from $D_i$ and \textit{Y} with \textit{[MASK]} in all of the patterns $P_i$ of that relation (e.g. \textit{Homeland} originally aired on \textit{[MASK]} and \textit{Homeland} premiered on \textit{[MASK]}).
+Let $D_i$ be a set of subject-object KB tuples (e.g., <\textit{Homeland}, \textit{Showtime}>) from some relation $r_i$ (e.g., \textit{originally-aired-on}), accompanied with a set of \textit{quasi-paraphrases} cloze-patterns $P_i$ (e.g., \textit{X} originally aired on \textit{Y}).
+Our goal is to test whether the model consistently predicts the same object (e.g., \textit{Showtime}) for a particular subject (e.g., \textit{Homeland}). To this end, we substitute \textit{X} with a subject from $D_i$ and \textit{Y} with \textit{[MASK]} in all of the patterns $P_i$ of that relation (e.g., \textit{Homeland} originally aired on \textit{[MASK]} and \textit{Homeland} premiered on \textit{[MASK]}).
 A consistent model must predict the same entity. 
 
 
@@ -97,7 +107,9 @@ A consistent model must predict the same entity.
 \paragraph{Restricted Candidate Sets}
 
 Since PLMs were not trained for
-serving as KBs, as such, they often predict words
+serving as KBs,
+%as such,
+they often predict words
 that are not KB entities;
 e.g., a PLM may predict, for the pattern ``\textit{Showtime} originally aired on \textit{[MASK]}'', the noun
 `tv' --  which is also a likely substitution for the language
@@ -106,9 +118,13 @@ Therefore,
 following \citep{Xiong2020Pretrained, kassner2021multilingual},
 we
 restrict the PLMs' output vocabulary to the set of possible gold objects for each
-relation. In practice, we compute the full probability
-distribution and then only consider the subset of possible
-gold objects.
+relation.
+
+% I don't think we have to give implementation details at
+% this point in the paper?
+%In practice, we compute the full probability
+%distribution and then only consider the subset of possible
+%gold objects.
 
 Note that this setup makes the task easier for the PLM,
 especially in the context of KBs. However, poor
