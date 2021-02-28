@@ -11,54 +11,44 @@ is \emph{consistency}: the ability of  making consistent
 decisions in semantically equivalent contexts, reflecting a
 systematic ability to generalize in the face of language variability.
 
-%the ability to make consistent decisions, reflecting a systematic generalization ability to understand language, regardless of language variability. \sr{not so clear} %\sr{This sense of ``consistency" focuses on the ability to reason in a way that is invariant to meaning-preserving alternations. Note this differs from the way we initially thought about consistency: a model that always predicts the same answer is also ``consistent" but surely doesn't express this meaning of consistency. It's ok to focus on the meaning we focus on here, but if we do so, shouldn't we focus in the experiments on cases where the model initially predicted correctly? our current evaluation doesn't align, to my understanding, with this definition in the intro.}.  \ar{The definition of inconsistency in my mind, is having beliefs that result in a contradictions. The paraphrase thing is one way to test this for some applicable relations (if you believe 'X was born in Paris' and 'The birthplace of X is Delhi', this results in a contradiction). We can make this clearer.} 
-Examples of consistency include: predicting the same answer in reading comprehension tasks regardless of paraphrase \cite{consistent-qa}; making consistent assignments in coreference resolution \cite{denis2009global,chang2011inference}; or making summaries factually consistent with  the original document \cite{kryscinski2020evaluating}.
+
+Examples of consistency include: predicting the same answer in question answering and reading comprehension tasks regardless of paraphrase \cite{consistent-qa}; making consistent assignments in coreference resolution \cite{denis2009global,chang2011inference}; or making summaries factually consistent with  the original document \cite{kryscinski2020evaluating}.
 While consistency is important in many tasks, nothing in the
 training process explicitly targets it. One could hope that
 the unsupervised training signal from large corpora
 made available to PLMs such as BERT or RoBERTa
 \cite{bert,roberta} is sufficient to induce consistency and
 transfer it to downstream tasks.
-%This property is important for many tasks involving language and is hard to obtain solely in a locally supervised setting. \sr{what is locally supervised? how do we know it's hard?} 
-% Ideally, a PLM such as BERT or RoBERTa \cite{bert,roberta} would arrive with such capability, persist during the finetuning step and allow the new model to make consistent predictions. 
-%Ideally, a PLM such as BERT or RoBERTa \cite{bert,roberta} would learn such capability during the pretraining phase and then transfer it to the downstream task. \sr{I'd present it as a question: is the unsupervised pre-training signal enough to \emph{induce} consistency?} 
 In this paper, we show that this is not the case.
-%\ar{I think we can be more explicit here of how consistency can act as evidence of a more general and systematic ability to understand language.}
+
 
 
 \begin{figure}[t!]
 \centering
 
-\includegraphics[width=1.\columnwidth]{figures/overview}
+\includegraphics[width=1.\columnwidth]{figures/overview2}
 
-\caption{Overview of our approach. We begin with KB tuples (\textit{X}, \textit{Y}), of which we fill into a relational \textit{pattern} the: (\textit{X}, \textit{[MASK]}) tuple,
-% \nk{() are off here, also not sure if "populated" pattern is clear. Maybe also mention that the pattern is an relational pattern.}, 
-and feed it into a PLM. 
-We expect that a consistent model would predict the same answer for every two patterns $pattern_1$, $pattern_2$ which are paraphrases. 
-In the example above, the model makes an inconsistent prediction for the left part of the figure and a consistent prediction on right part, where the subject is different.}
+\caption{Overview of our approach. 
+We expect that a consistent model would predict the same answer for every two paraphrases.
+In this example, the model is inconsistent on \textit{Homeland} and consistent on \textit{Seinfeld}.}
 \label{fig:overview}
 % \vspace{-6mm}
 \end{figure}
 
 
 The recent rise of PLMs has sparked a discussion about whether these models can be used as Knowledge Bases (KBs) \cite{lama,petroni2020how,alpaqa,roberts2020much}. 
-% \nk{I would also cite this one maybe: "How Much Knowledge Can You Pack Into the Parameters of a Language Model?"}. 
-Consistency is a key property of KBs and is particularly important for automatically constructed KBs.
-%However, an important property of KBs, especially in automatically constructed KBs, is consistency.
+Consistency is a key property of KBs and is particularly important for automatically constructed KBs. %\nk{Not sure where to add this but we got the comment about answers could change over time: president now vs past etc. KGs have the same problem. So it is reasonable to use the same setup.}
 One of the biggest appeals of using a PLM as a KB is that we can
-query it in natural language -- instead of relying on a specific schema.
+query it in natural language -- instead of relying on a specific KB schema.
 The expectation is that PLMs abstract away from language and map queries in natural language into meaningful representations such that queries with identical intent but different language form yield the same answer. 
 For example, the query ``\textit{Homeland} premiered on \textit{[MASK]}'' should produce the same answer as ``\textit{Homeland} originally aired on \textit{[MASK]}''.
 Studying inconsistencies of PLM-KBs can also teach us about the organization of knowledge in the model or lack thereof. 
 Finally, failure to behave in a consistent manner may point
 to other representational issues
-% \nk{other issues seems a bit vague. Which other ones beside antonyms and synonyms do you have in mind?},
 such as the similarity between antonyms and synonyms
 \cite{nguyen2016integrating}.
-% , symmetricity of the representation \enote{hs}{explain symmetricity, give citation} and the inability to handle negation. \nk{there was a paper studying this in PLMs right. Shouldn't we cite that one here}
 
-% \ar{should we say "consistency of factual knowledge in PLMS through invariance to paraphrasing? This sentence makes it seem to me that consistency is equivalent to invariance to paraphrasing, but I think consistency is a broader problem. }
-% \ar{Can we change the binary question here. "Is the" -> "to what extent"}
+
 In this work, we study the consistency of factual knowledge
 in PLMs: Is the factual information we extract from PLMs
 invariant to paraphrasing? We use zero-shot evaluation since
@@ -67,13 +57,11 @@ through finetuning. This allows us to assess how
 much consistency was acquired during pretraining and to
 compare the consistency of different models.
 
-%\sr{what does ``progress" mean here?}. %\sr{Question: how do we separate between lack of consistency due to the extraction method (maybe other extraction method would yield more consistent predictions), and an inherent lack of consistency in the model's behavior?}
 
 
-We introduce \resource{}, a new benchmark  measuring
-consistency in PLMs by using factual knowledge that was found to be partially encoded in them (\S \ref{sec:probe}).
+We introduce \resource{}, a new benchmark that enables us to measure consistency in PLMs (\S \ref{sec:probe}), by using factual knowledge that was found to be partially encoded in them \cite{lama,alpaqa}.
 \resource{} is a manually curated resource
-that provides patterns -- short textual prompts -- that are paraphrases of one another, with 328 paraphrases describing thirty-eight binary relations such as \textit{X born-in Y}, \textit{X works-for Y} (\S \ref{sec:rel-graph}).
+that provides patterns -- short textual prompts -- that are paraphrases of one another, with 328 paraphrases describing 38 binary relations such as \textit{X born-in Y}, \textit{X works-for Y} (\S \ref{sec:rel-graph}).
 We then test multiple PLMs for knowledge consistency, i.e., whether
 a model  predicts the same answer for all patterns of a relation.
 Figure \ref{fig:overview} shows an overview of our approach.
@@ -81,27 +69,8 @@ Using \resource{}, we probe for consistency in four PLM
 types: BERT, BERT-whole-word-masking, RoBERTa and ALBERT (\S
 \ref{sec:setup}).
 Our experiments with \resource{} show that
-current models have poor consistency although there is a high variance between different relations (\S \ref{sec:experiments}). 
+current models have poor consistency, although with high variance between relations (\S \ref{sec:experiments}). 
 
 Finally, we propose a method that improves model consistency
 by introducing a novel consistency loss
-(\S \ref{sec:adding_consistency}). We demonstrate that models trained with this
-loss achieve better consistency
-performance on new relations. However, there still is much
-work to do to achieve fully consistent models.
-
-% Extending upon previous work that showed that factual knowledge can be extracted to some degree \cite{lama,alpaqa}, we extend their proposed patterns that were used to extract that information, and manually write paraphrases to the original patterns.
-
-
-% \resource{} contains 40 relations from the T-REx dataset \cite{trex} provided by LAMA \cite{lama}, such as: \textit{born-in}, \textit{is-a-citizen}, \textit{works-for}, etc (\S \ref{sec:rel-graph}).
-% The paraphrases were built by experts, and provide a high-quality resource.
-% \nk{jump from one graph to multiple graphs} 
-% Each of these graphs contains between @@-@@ different nodes, where each node is a pattern, e.g. ``[X] was aired on [Y]'', where \textit{[X]} and \textit{[Y]} are slot fillers for a subject and object.
-% Moreover, each edge is also annotated with the modification type (e.g. syntactic, lexical) \sr{I am not sure we need to mention these in the intro, given the pretty narrow / heuristic way we define those}.
-% Examples of edges of the graphs are displayed in Figure \ref{fig:graph}.
-
-
-%%%%%%%%%%%%%%%
-
-
-% By combining the \resource{} with the proposed framework, we are able to test different PLMs and how strong their consistency capabilities are.
+(\S \ref{sec:adding_consistency}). We demonstrate that BERT, trained with this loss achieves better consistency performance on unseen relations. However, more work is required to achieve fully consistent models.

@@ -1,7 +1,7 @@
 \begin{table}[t]
 % \small
     \centering
-% \resizebox{1\columnwidth}{!}{%
+\resizebox{0.8\columnwidth}{!}{%
 \begin{tabular}{lll}
 \toprule
 Model & Diff-Syntax & No-Change \\
@@ -20,9 +20,8 @@ ALBERT-xxlarge &            51.7+-26.0 &            67.3+-17.1 \\
 \bottomrule
 \end{tabular}
 
-% }
-    \caption{Average consistency and standard deviation over
-      all relations when only  syntax differs
-      (Diff-Syntax) and when syntax and lexical choice are   identical}
+}
+    \caption{Consistency and standard deviation when only syntax differs
+      (\textit{Diff-Syntax}) and when syntax and lexical choice are identical (\textit{No-Change}). Best model for each metric is highlighted in bold.}
     \label{tab:syntax_results}
 \end{table}

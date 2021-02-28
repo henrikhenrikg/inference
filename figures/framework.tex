@@ -84,8 +84,8 @@
 
 \node at (0,0) {$(D_1, r_1, P_1), \dots, (D_i, r_i, P_i), \dots, (D_n, r_n, P_n)$};
 
-\draw [-, Cerulean] ( -0.8, -0.2) -- (-3, -2.5);
-\draw [-, Cerulean] ( 0.8, -0.2) -- (3, -2.5);
+\draw [-, RoyalBlue] ( -0.8, -0.2) -- (-3, -2.5);
+\draw [-, RoyalBlue] ( 0.8, -0.2) -- (3, -2.5);
 %\draw [->] (text-15.south west)++(0,-1) -- (text-23.south east);
 
 \node[inner sep=0pt] (detective) at (0,-1.1)
@@ -94,8 +94,8 @@
 
 \node at (0, -2) {\small $r_i=$\textit{originally-aired-on}};
 
-\node at (0, -2.7) {\textit{Homeland} originally aired on [MASK]};
-\node at (0, -3.1) {\textit{Homeland} premiered on [MASK]};
+\node at (0, -2.7) {\textit{Homeland} originally aired on \textit{[MASK]}};
+\node at (0, -3.1) {\textit{Homeland} premiered on \textit{[MASK]}};
 
 \draw[-,gray] (-3, -2.7) to [out=180,in=-180] (-3, -3.1); node[anchor=west];
 
@@ -103,8 +103,8 @@
 
 \node at (0, -3.5) {\dots};
 
-\node at (0, -3.9) {\textit{Seinfeld} originally aired on [MASK]};
-\node at (0, -4.3) {\textit{Seinfeld}  premiered on [MASK]};
+\node at (0, -3.9) {\textit{Seinfeld} originally aired on \textit{[MASK]}};
+\node at (0, -4.3) {\textit{Seinfeld}  premiered on \textit{[MASK]}};
 
 \draw[-,gray] (-3, -3.9) to [out=180,in=-180] (-3, -4.3); node[anchor=west];
 
@@ -127,12 +127,13 @@
 
 \node [below=2.2 of data] {\dots};
 
-\draw [-, Cerulean] ($ (leftl) - (0,2.5) $) -- ($ (leftr) - (0,2.5) $);
+\draw [-, RoyalBlue] ($ (leftl) - (0,2.5) $) -- ($ (leftr) - (0,2.5) $);
 \node [below=2.7 of data] {(\textit{Seinfeld}, \textit{NBC})};
 \node [below=3.2 of data] {(\textit{Homeland}, \textit{Showtime})};
 \node [below=3.7 of data] {\dots};
-\draw [-, Cerulean] ($ (leftl) - (0,3.9) $) -- ($ (leftr) - (0,3.9) $);
-%\draw [-, Cerulean] (-7, -3.3) -- (-3.2, -3.3);
+\draw [-, RoyalBlue] ($ (leftl) - (0,3.9) $) -- ($ (leftr) - (0,3.9) $);
+\node [below=4.3 of data] {\dots};
+%\draw [-, RoyalBlue] (-7, -3.3) -- (-3.2, -3.3);
 %
 %\node at (-5, -3.8) {\dots};
 %
@@ -157,11 +158,12 @@
 
 \node [below=2.2 of patterns] {\dots};
 
-\draw [-, Cerulean] ($ (rightl) - (1,2.5) $) -- ($ (rightr) - (1,2.5) $);
+\draw [-, RoyalBlue] ($ (rightl) - (1,2.5) $) -- ($ (rightr) - (1,2.5) $);
 \node [below=2.7 of patterns] {(\textit{X} originally aired in \textit{Y})};
 \node [below=3.2 of patterns] {(\textit{X} premiered on \textit{Y})};
 \node [below=3.7 of patterns] {\dots};
-\draw [-, Cerulean] ($ (rightl) - (1,3.9) $) -- ($ (rightr) - (1,3.9) $);
+\draw [-, RoyalBlue] ($ (rightl) - (1,3.9) $) -- ($ (rightr) - (1,3.9) $);
+\node [below=4.3 of patterns] {\dots};
 
 \node [below right=1 and 0.7 of patterns] {$P_1$};
 

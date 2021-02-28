@@ -11,16 +11,20 @@ Model &        Accuracy & Consistency & Consistent-Acc \\
 majority   &  24.4+-22.5 &  100.0+-0.0 &  24.4+-22.5 \\
 \midrule
 BERT-base  &  45.6+-27.6 &  58.2+-23.9 &  27.3+-24.8 \\
-BERT-ft    &  \textbf{47.4}+-27.3 &  \textbf{64.0}+-22.9 &  \textbf{33.2}+-27.0 \\
+BERT-ft    &  \textbf{\textul{47.4}}+-27.3 &  \textbf{64.0}+-22.9 &  \textbf{\textul{33.2}}+-27.0 \\
 \quad -consistency &  46.9+-27.6 &  60.9+-22.6 &  30.9+-26.3 \\
 \quad -typed     &  46.5+-27.1 &  62.0+-21.2 &  31.1+-25.2 \\
-\quad -MLM       &  16.9+-21.1 &  80.8+-27.1 &   9.1+-11.5 \\
+\quad -MLM       &  16.9+-21.1 &  \textul{80.8}+-27.1 &   9.1+-11.5 \\
 
 \bottomrule
 \end{tabular}
 
 }
 
-    \caption{Knowledge and consistency results for the majority baseline, BERT base, and the Finetuned Model. We report the LAMA score using the original patterns, the new group-score metric that combines all patterns for a relation, and the consistency results. The results are average over 25 relations that were not part of the training and evaluation data.}
+    \caption{Knowledge and consistency results for the baseline, BERT base, and our model. 
+    % We report the \textit{Accuracy} using the original patterns from LAMA, the \textit{Consistency}, and \textit{Consistency-Acc} metrics. 
+    The results are average over the 25 test relations. Bolded numbers signifies best performance between the baseline and the finetuned model, underline signifies the best performance including the ablations.}
     \label{tab:consistency-ft}
+    
+    \vspace{-0.2in}
 \end{table}

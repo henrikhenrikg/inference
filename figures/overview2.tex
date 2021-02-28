@@ -1,0 +1,119 @@
+\documentclass{standalone}%
+
+%% Language and font encodings
+%\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+%\usepackage[a4paper,top=3cm,bottom=2cm,left=1cm,right=1cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage[dvipsnames]{xcolor}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+
+
+
+
+%\usepackage{xcolor}
+
+%% tikz packages
+\usepackage{tikz,pgf}
+\usetikzlibrary{trees}
+\usetikzlibrary{backgrounds}
+\usepackage{tikz-dependency}
+
+
+\usepackage{relsize}
+
+\tikzset{fontscale/.style = {font=\relsize{#1}}
+}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\definecolor{my_green}{rgb}{0, 0.6, 0.5}
+\definecolor{my_orange}{rgb}{0.9, 0.6, 0}
+\definecolor{my_purple}{rgb}{0.8, 0.6, 0.7}
+\definecolor{my_blue}{rgb}{0, 0.45, 0.7}
+
+\tikzstyle{bag} = [align=center]
+
+
+
+
+\begin{document}
+
+
+
+\begin{tikzpicture}
+  
+
+
+% text
+\node[right] at (-1.7,0) {\tiny \textit{Homeland} originally aired on \textit{[MASK]}};
+
+\node[inner sep=0pt] (bert_encoder) at (1.5,-1.7)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+
+\node[inner sep=0pt] (bert_encoder) at (0.4,-0.8)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+
+\node[] at (0.45, -0.6) [fontscale=0.1] {\tiny Showtime};
+
+
+
+\node[red!80] at (0.45, -1.7) {$\Updownarrow$};
+\node[] at (-0.5, -1.7) [fontscale=0.1, text=red!80] {\tiny Inconsistent};
+
+
+
+\node[right] at (-1.7,-3.3) {\tiny \textit{Homeland} premiered on \textit{[MASK]}};
+
+
+\node[inner sep=0pt] (bert_encoder) at (0.4,-2.5)
+    {\scalebox{1}[-1]{\includegraphics[width=.1\textwidth]{bubble.png}}};
+
+\node[] at (0.45, -2.7) [fontscale=0.1] {\tiny ABC};
+
+
+
+\draw (2.3,0.1) -- (2.3,-3.4);
+
+
+% Consistent
+\node[right] at (2.3,0) {\tiny \textit{Seinfeld} originally aired on \textit{[MASK]}};
+
+
+\node[inner sep=0pt] (bert_encoder) at (5.5,-1.7)
+    {\includegraphics[width=.1\textwidth]{bert.png}};
+
+\node[inner sep=0pt] (bert_encoder) at (4.4,-0.8)
+    {\includegraphics[width=.1\textwidth]{bubble.png}};
+    
+
+
+\node[] at (4.45, -0.6) [fontscale=0.1] {\tiny NBC};
+
+
+
+\node[ForestGreen] at (4.45, -1.7) {$\Updownarrow$};
+\node[] at (3.5, -1.7) [fontscale=0.1, text=ForestGreen] {\tiny Consistent};
+
+
+\node[inner sep=0pt] (bert_encoder) at (4.4,-2.5)
+    {\scalebox{1}[-1]{\includegraphics[width=.1\textwidth]{bubble.png}}};
+    
+\node[right] at (2.3,-3.3) {\tiny \textit{Seinfeld} premiered on \textit{[MASK]}};
+
+\node[] at (4.45, -2.7) [fontscale=0.1] {\tiny NBC};
+
+
+\end{tikzpicture}
+
+\end{document}
+

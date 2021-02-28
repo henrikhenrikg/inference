@@ -29,7 +29,7 @@ commonsense \cite{forbes2019neural,
 \cite{talmor2019olmpics,
   kassner-etal-2020-pretrained}, usually assessed by
 measures of accuracy.
-However, accuracy is just one measure of PLM performance. It is
+However, accuracy is just one measure of PLM performance \cite{linzen2020can}. It is
 equally important that PLMs do not make contradictory
 predictions (cf.\ Figure \ref{fig:overview}), a type of
 error that humans rarely make.
@@ -37,15 +37,6 @@ There has been
 little research attention devoted to this
 question, i.e., to analyzing if
 models behave \emph{consistently}.
-% \enote{hs}{this sentence:
-% ``that
-% is, to what extent do such probes uncover generalizable
-% capabilities of a model, and how indicative they are of
-% factual knowledge''
-%  seems like a nonsequitur to me: not clear
-%   what ``such probes''
-% refers to and factual knowledge hasn't been mentioned
-% }
 One example concerns negation:
 \citet{Ettinger_2020} and \citet{kassner-schutze-2020-negated}
 show
@@ -57,8 +48,6 @@ propose paired probes for evaluating consistency.
 broader in scope, examining the consistency of PLM behavior across a
 range of factual knowledge types and investigating how
 models can be made to behave more consistently.
-
-% a coherent set of beliefs in the model \sr{not so clear}\yg{i dislike "beliefs"}. 
 
 
 Consistency has also been highlighted as a desirable
@@ -87,6 +76,4 @@ result with the original answer. They show that pretraining on these synthetic d
 
 Work on \textbf{consistency in other domains}
 includes \citep{du2019consistent} where  prediction
-consistency in procedural text is improved. \citet{ribeiro-etal-2020-beyond} use consistency for more robust evaluation. \citet{li-etal-2019-logic} measure and mitigate inconsistency in natural language inference.
-
-%\ar{We should add work examining consistency in PLMs - i.e negated lama, systematicity of probing cwr, }
+consistency in procedural text is improved. \citet{ribeiro-etal-2020-beyond} use consistency for more robust evaluation. \citet{li-etal-2019-logic} measure and mitigate inconsistency in natural language inference (NLI), and finally, \citet{camburu2020make} propose a method for measuring inconsistencies in NLI explanations \cite{camburu2018snli}.

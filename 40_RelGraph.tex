@@ -2,61 +2,29 @@
 \label{sec:rel-graph}
 
 We now describe \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
-% To measure PLMs' consistency, we test their predictions sensitivity to various paraphrased queries. 
-% We create a paraphrase resource that enables us to study this property, which we name \resource{}. \am{last 2 sentences are redundant. keep only the first imo} \resource{} is a high-quality resource, built by experts. %, and results in a high-quality resource which we hope can contribute to others' work as well.
-\resource{} is a high-quality resource, built by experts.
-It contains patterns for thirty-eight relations from the T-REx dataset \cite{trex}, with an average of 8.63 patterns per relation.
+\resource{} is curated by experts, with high level of agreement.
+It contains patterns for thirty-eight relations from the T-REx \cite{trex} --- a large dataset containing KB triples aligned with Wikipedia abstracts --- with an average of 8.63 patterns per relation.
 Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
-% Each pattern is represented as a node in an undirected graph, and each edge signifies the type of modification from one pattern to another (e.g. lexical change).
-% A schematic view of the ``aired on'' relation can be seen in Figure \ref{fig:graph}. 
-
-% All patterns from a specific relation are paraphrases.
-% Each pattern entails the main expression for each pattern, but not necessarily the other way around. 
-% For example, for the relation of ``aired on'', which describes a TV-series that was aired on some network, the original pattern is: ``\subj{} was aired on \obj{}'' and one of the patterns we create is ``\subj{} was premiered on \obj{}'', which entails the main expression, but not vice versa.
-
-
-% For instance, the phrase "\subj{} was aired on \obj{}" entails "\obj{} released \subj{}", but not "\subj{} was premiered on \obj{}", although the other direction is entailed.
-% \ar{The entailment 'Y released X' doesn't seem correct. Suggestion For instance, the phrase "\subj{} was premiered on \obj{}" entails "\subj{} was aired on \obj{}", but not the other way around.}
-
-% \begin{figure}[t!]
-% \centering
-
-% \includegraphics[width=1.\columnwidth]{figures/ent_graph}
-
-% \caption{Overview of \resource{}.}
-% \label{fig:graph}
-% % \vspace{-6mm}
-% \end{figure}
-
-% Overall, \resource{} contains @@ different patterns in total for @@ different relations (@@\% paraphrases per relation in average). 
-% All of the paraphrases for a particular relation are organized as a directed graph to indicate the entailment relation between two patterns. 
-% Each edge also contains information about the transformation type, e.g. a lexical or syntactic transformation (Examples for each can be seen in Figure \ref{fig:graph}).
-%A detailed definition is provided shortly.
-% \ye{need to define this.} 
-% This information allows us to study the different generalization capabilities of models.
-% The nodes of the graph (which account for the phrases), also contain additional information about the number of times that the pattern appeared in Wikipedia, @@ more?. %\ar{will we still have the wikipedia info in the paper?}
 
 \paragraph{Construction Method}
 \resource{} was constructed in four steps. (1) We began with
 the patterns provided by LAMA \cite{lama} (one pattern per
-relation, referred to as ``base pattern''). (2) We augmented
-each base pattern with other patterns that are paraphrases of
-the base pattern. Some of these paraphrases are taken from
+relation, referred to as \textit{base-pattern}). (2) We augmented each base-pattern with other patterns that are paraphrases from
 LPAQA \cite{alpaqa}. However, since LPAQA was
-extracted automatically, many LPAQA patterns are not
+created automatically (either by back-translation, or by extracting patterns from sentences that contain both subject and object), some LPAQA patterns are not
 correct paraphrases.
-We therefore only include the subset of correct paraphrases in \resource{}.
+We therefore only include the subset of correct paraphrases.
 (3) Using SPIKE
 \cite{spike},\footnote{\url{https://spike.apps.allenai.org/}}
-a search engine over Wikipedia sentencecs that supports
+a search engine over Wikipedia sentences that supports
 syntax-based queries, we searched for additional patterns
 that appeared in Wikipedia and added them to 
 \resource{}. Specifically, we searched for Wikipedia sentences
 containing a  subject-object
 tuple from T-REx and then manually extracted 
 patterns from the  sentences. (4) Lastly, we added
-additional paraphrases of the base pattern
+additional paraphrases of the base-pattern
 using the annotators' linguistic expertise. Two additional
 experts went over all the patterns and corrected them, while
 engaging in a discussion until reaching  agreement,
@@ -70,7 +38,7 @@ discarding patterns they could not agree on.
 % \ye{can decide when we have the full story}
 %The entailment edges were also annotated by the same two authors that created the patterns.
 
-\input{tables/rel_graph_stats}
+
 
 
 % \paragraph{Consistency Types}
@@ -89,21 +57,21 @@ discarding patterns they could not agree on.
 To assess the quality of \resource{}, we run a
 human annotation study.
 For each relation, we sample up to
-five paraphrases, comparing each of the new patterns to the \textit{base-pattern} that came with LAMA, which reflects the relation.
-That is, given that relation $r_i$ contain the following patterns: $p_1, p_2, p_3, p_4$, and $p_1$ being the \textit{base-pattern}, we compare the following pairs $(p_1, p_2), (p_1, p_3), (p_1,p_4)$.
+five paraphrases, comparing each of the new patterns to the base-pattern that came with LAMA, which reflects the relation.
+That is, given that relation $r_i$ contains the following patterns: $p_1, p_2, p_3, p_4$, and $p_1$ being the \textit{base-pattern}, we compare the following pairs $(p_1, p_2), (p_1, p_3), (p_1,p_4)$.
 
 % By definition, two patterns that are paraphrases of the base pattern are also paraphrases of each other.
 
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
 We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
-Overall, each task contains five patterns that are thought
+Each task contains five patterns that are thought
 to be paraphrases, and two that are not.\footnote{The
-  control patterns contain the same subjects and objects, so
+  controls contain the same subjects and objects, so
   that only the pattern (not its argument) can be used to
   solve the task.}
-Overall, we collect annotations for 156 paraphrase candidates and 61 false paraphrases for control.
+Overall, we collect annotations for 156 paraphrase candidates and 61 control.
 
-We asked five NLP graduate students to  annotate the pairs and collected one answer per pair.\footnote{Due to random errors in the annotations, for every question
+We asked five NLP graduate students to  annotate the pairs and collected one answer per pair.\footnote{Due to random annotation mistakes, for every question
 that does not match our original label (either for
 paraphrases or controls), we ask the annotators to relabel
 them (without specifying the reason), to allow them to fix
@@ -117,6 +85,8 @@ to further improve the resource quality.
 % \am{a bit odd to send the reader all the way to table 4, at this stage}
 % \input{tables/rel_graph_examples}
 
-One of the disagreements with our annotation arised from the following paraphrases: ``\textit{Royal Dutch Football Association} is a member of \textit{FIFA}.'' and ``\textit{Royal Dutch Football Association} is affiliated with the \textit{FIFA} organization.''
-Although these phrases are not paraphrases in the general case, we believe they are in our case with football association. Such disagreement may arise from the lack of specific domain knowledge, but also from inherent disagreement in this sort of annotation that may arise from inherent disagreements \cite{pavlick2019inherent} or from different construals \cite{trott2020re}, which were recently observed in NLI \cite{elazar2020extraordinary}.
-\nk{I am not convinced that this paragraph is helping the paper. I think it might trigger people to doubt the resource}
+% One of the disagreements with our annotation arised from the following paraphrases: ``\textit{Royal Dutch Football Association} is a member of \textit{FIFA}.'' and ``\textit{Royal Dutch Football Association} is affiliated with the \textit{FIFA} organization.''
+% Although these phrases are not paraphrases in the general case, we believe they are in our case with football association, and the other KB tuples from the KB. Such disagreement may arise from the lack of specific domain knowledge, but also from inherent disagreement in this sort of annotation that may arise from inherent disagreements \cite{pavlick2019inherent} or from different construals \cite{trott2020re}, which were recently observed in NLI \cite{elazar2020extraordinary}.
+% \nk{I am not convinced that this paragraph is helping the paper. I think it might trigger people to doubt the resource}\yg{I agree. Either remove or prefix it by something that says this is an analysis of disagreements, and that there are only few of them.}
+
+\input{tables/rel_graph_stats}

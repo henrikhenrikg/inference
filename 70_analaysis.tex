@@ -9,19 +9,20 @@
 
 \subsection{Qualitative Analysis}
 In order to better understand the factors affecting consistent predictions, we inspect the predictions of BERT-large on different patterns, which are summarized in Table \ref{tab:predictions}.
-We highlight several cases.
+We highlight several cases:
 The predictions in the first row are inconsistent, and
 correct for the first pattern, but not for the other two. 
-The predictions in the second row also show a single pattern that predicted the right object, however, the two other patterns, which are lexically similar, predicted the same, wrong answer - Renault.
+The predictions in the second row also show a single pattern that predicted the right object, however, the two other patterns, which are lexically similar, predicted the same, wrong answer - \textit{Renault}.
 % However, the third pattern prediction is related in the sense that Ireland is close to London. \ye{is the Ireland-London argument convincing?}
-% The last row of the upper part detail three different incorrect predictions. 
-% Note that the patterns of the penultimate row predicted two factually correct answers out of three (Greece, Kosovo), but simply do not correspond to the gold object in T-REx (Albania), since this is an M-N relation. 
-The last row of the upper part demonstrates three different predictions, all factually incorrect. 
+Next, the patterns of the penultimate row predicted two factually correct answers out of three (Greece, Kosovo), but simply do not correspond to the gold object in T-REx (Albania), since this is an M-N relation. Note that this relation is not part of the consistency evaluation, but of the determinism evaluation.
+The last row of the upper part detail three different incorrect predictions. 
+% The last row of the upper part demonstrates three different predictions, all factually incorrect. 
 % Note that even when more than a single answer is correct, we still argue that the model should make consistent predictions.
 Finally, the predictions in the bottom part demonstrate
 consistent predictions:
 The last row  is consistent and factual, the last but one
-row is consistent, but factually incorrect (surprisingly due to the fact the object is a substring of the subject).
+row is consistent, but factually incorrect (which is surprising as the correct answer is substring of the subject).
+% fact the object is a substring of the subject).
 
 
 
@@ -29,17 +30,15 @@ row is consistent, but factually incorrect (surprisingly due to the fact the obj
 
 \begin{figure}[t!]
 \centering
-
-% \subfloat{\includegraphics[width=1.\columnwidth]{figures/P407_emb.pdf}}\\
-%   \hfill
-\subfloat{\includegraphics[width=1.\columnwidth]{figures/capital-bert-large}}
-% \\
+\vspace{-0.1in}
+\includegraphics[width=.8\columnwidth]{figures/capital-bert-large}
 
 
-\caption{t-SNE plots for encoded patterns from the
-  \textit{capital} relation. Points of the same color
-  represent the same subject, points of the same shape
-  represent the same pattern. We expect that a knowledge-focused representation  clusters based on identical-subjects (color) rather than identical-patterns (shape).}
+\caption{t-SNE of the encoded patterns from the
+  \textit{capital} relation. The colors
+  represent the different subjects, while the shapes
+  represent patterns. We expect that a knowledge-focused representation clusters based on identical-subjects (color) rather than identical-patterns (shape).}
+  \vspace{-0.2in}
 \label{fig:tsne-emb}
 
 \end{figure}
@@ -47,27 +46,23 @@ row is consistent, but factually incorrect (surprisingly due to the fact the obj
 \subsection{Representation Analysis}
 
 
-To provide insights on the models' representations, we inspect these after encoding the cloze-style patterns.
+To provide insights on the models' representations, we inspect these after encoding the patterns.
 
 Motivated by previous work that found that words with the same syntactic structure cluster together \cite{chi-etal-2020-finding,ravfogel-etal-2020-unsupervised} we perform a similar experiment to test if this behavior replicates with respect to knowledge:
 We encode the patterns, after filling the placeholders with subjects and masked tokens and inspect the last layer representations in the masked token position.
 When plotting the results using t-SNE \cite{tsne} we mainly
 observe clustering based on the patterns, which suggests
-that
-%the knowledge, therefore the
-encoding of knowledge of the entity is not the main component of the representations.
+that encoding of knowledge of the entity is not the main component of the representations.
 Figure \ref{fig:tsne-emb} demonstrates
-%such graph
-this
-for BERT-large encodings of the \textit{capital} relation.\footnote{While some patterns are clustered based on the subjects in the top-left part, most of them are clustered based on pattern.}
-\enote{hs}{following sentences: i didn't understand how the
-  clustering is done}
-We also cluster these representations using two different number of centroids:\footnote {Using the KMeans algorithm} (1) the number of patterns in each relation and (2) the number of entities in each relation. We then measure the purity of these clusters using V-measure. We observe that the clusters are mostly grouped by the patterns, rather than the objects.
+this for BERT-large encodings of the \textit{capital} relation, which is highly consistent.\footnote{While some patterns are clustered based on the subjects (upper-left part), most of them are clustered based on patterns.}
+To provide a more quantitative assessment to the above phenomenon, 
+we also cluster these representations, and set the number of centroids based on:\footnote{Using the KMeans algorithm.} (1) the number of patterns in each relation, which aims to capture pattern-based clusters and (2) the number of entities in each relation, which aims to capture entity-based clusters. This would allow for a perfect clustering, in the case of perfect alignment between the representation and the inspected property.
+We measure the purity of these clusters using V-measure, and observe that the clusters are mostly grouped by the patterns, rather than the objects.
 % Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. 
 Finally, we compute the spearman correlation between the consistency scores and the v-measure of the representations.
-However, the correlation between these variables is low (close to zero, and not significant)\footnote{Except for BERT-large whole-word-masking, where the correlation is 39.5 ($p-val<0.05$).}, therefore not explaining the models' behavior.
-This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e. Their main component does not relate to knowledge, and (2) the entire representation does not explain the behavior of the model. This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
-We hypothesize that this disparity between the representation and the behavior of the model may be explained by a situation where distances between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of each sentence.
+However, the correlation between these variables is close to zero,\footnote{Except for BERT-large whole-word-masking, where the correlation is 39.5 ($pval<0.05$).} therefore not explaining the models' behavior.
+This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e. Their main component does not relate to knowledge, and (2) the representation by its entirety does not explain the behavior of the model, and thus only a subset of the representation does. This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
+We hypothesize that this disparity between the representation and the behavior of the model may be explained by a situation where distance between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of a sentence.
 % We believe that the explanation of these findings is that the relevant information for the word prediction, lies in a subspace of the original representation, and thus much of the encoded information is in practice not relevant for the prediction. \sr{I don't understand this explanation. I'd write something like ``We hypothesize that this disparity between representation and behavior may be explained by a situation where distances between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of each sentence"}.
 
 
