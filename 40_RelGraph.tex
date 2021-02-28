@@ -1,10 +1,17 @@
 \section{The \resource{} Resource}
 \label{sec:rel-graph}
 
-We now describe \resource{}, a concrete resource according to the framework described in Section \ref{sec:framework}.
+We now describe \resource{}, a
+%concrete
+% in what way is the resource concrete?
+resource
+designed for our framework (cf.\ Section \ref{sec:framework}).
+%according to the framework described in Section \ref{sec:framework}.
 \resource{} is curated by experts, with high level of agreement.
-It contains patterns for thirty-eight relations from the T-REx \cite{trex} --- a large dataset containing KB triples aligned with Wikipedia abstracts --- with an average of 8.63 patterns per relation.
-Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
+It contains patterns for thirty-eight relations from  T-REx \cite{trex} --- a large dataset containing KB triples aligned with Wikipedia abstracts --- with an average of 8.63 patterns per relation.
+Table \ref{tab:rel-graph-stats} gives statistics.
+
+%Some statistics of the resource are presented in Table \ref{tab:rel-graph-stats}.
 
 
 \paragraph{Construction Method}
@@ -57,19 +64,26 @@ discarding patterns they could not agree on.
 To assess the quality of \resource{}, we run a
 human annotation study.
 For each relation, we sample up to
-five paraphrases, comparing each of the new patterns to the base-pattern that came with LAMA, which reflects the relation.
-That is, given that relation $r_i$ contains the following patterns: $p_1, p_2, p_3, p_4$, and $p_1$ being the \textit{base-pattern}, we compare the following pairs $(p_1, p_2), (p_1, p_3), (p_1,p_4)$.
+five paraphrases, comparing each of the new patterns to the
+base-pattern from LAMA.
+% we're assuming LAMA is correct -- i don't think we need
+% additional explanataions
+%, which reflects the relation.
+That is, if relation $r_i$ contains the following patterns:
+$p_1, p_2, p_3, p_4$, and $p_1$ is the
+base-pattern, then we compare the following pairs $(p_1, p_2), (p_1, p_3), (p_1,p_4)$.
 
 % By definition, two patterns that are paraphrases of the base pattern are also paraphrases of each other.
 
 We populate the patterns with random subjects and objects from T-REx \cite{trex} and ask annotators if these sentences are paraphrases.
-We also sample patterns from different relations to provide examples that are not paraphrases of each other, for control.
+We also sample patterns from different relations to provide
+examples that are not paraphrases of each other, as a control.
 Each task contains five patterns that are thought
 to be paraphrases, and two that are not.\footnote{The
   controls contain the same subjects and objects, so
   that only the pattern (not its argument) can be used to
   solve the task.}
-Overall, we collect annotations for 156 paraphrase candidates and 61 control.
+Overall, we collect annotations for 156 paraphrase candidates and 61 controls.
 
 We asked five NLP graduate students to  annotate the pairs and collected one answer per pair.\footnote{Due to random annotation mistakes, for every question
 that does not match our original label (either for
@@ -77,10 +91,12 @@ paraphrases or controls), we ask the annotators to relabel
 them (without specifying the reason), to allow them to fix
 random mistakes.}
 % \footnote{Moreover, due to the sampling of patterns from different relations, seldom the patterns may be paraphrases of one another, which we do not count as mistakes.}
-The agreement score for the paraphrases and the control are: 95.5\% and 98.3\%, which are high and reassures \resource's quality.
-We further went through the disagreements  %of the paraphrases 
-and fixed any additional problem %that we agree with, 
-to further improve the resource quality.
+The agreement scores for the paraphrases and the controls
+are 95.5\% and 98.3\%, which is high and
+indicates \resource's high quality.
+We also inspected  the disagreements  %of the paraphrases 
+and fixed many additional problems %that we agree with, 
+to further improve  quality.
 % Examples of paraphrases are displayed in Table \ref{tab:predictions}. 
 % \am{a bit odd to send the reader all the way to table 4, at this stage}
 % \input{tables/rel_graph_examples}
