@@ -17,7 +17,7 @@
 %% Most compact command to produce a submission version with hyperref enabled
 %%    \usepackage[]{tacl2018v2}
 %% Most compact command to produce a "camera-ready" version
-%%    \usepackage[acceptedWithA]{tacl2018v2}
+\usepackage[acceptedWithA]{tacl2018v2}
 %% Most compact command to produce a double-spaced copy-editor's version
 %%    \usepackage[acceptedWithA,copyedit]{tacl2018v2}
 %
@@ -25,7 +25,7 @@
 %% "LaTeX files") in the TACL instructions), add ",nohyperref" in the square
 %% brackets. (The comma is a delimiter in case there are multiple options specified.)
 
-\usepackage[]{tacl2018v2}
+% \usepackage[]{tacl2018v2}
 
 
 
@@ -85,6 +85,9 @@ TACL-submission anonymization requirements)}
 \usepackage{amssymb} % check mark
 \usepackage{multicol}
 \usepackage{dsfont} % math
+\usepackage[shortlabels]{enumitem} % letters enumeration
+
+
 
 %
 \iftaclpubformat % this "if" is set by the choice of options
@@ -135,20 +138,39 @@ TACL-submission anonymization requirements)}
 \newcommand{\subj}{\textit{X}}
 \newcommand{\obj}{\textit{Y}}
 
+\newcommand{\yenew}[1]{\textcolor{purple}{#1}}
+
 \title{Measuring and Improving Consistency in Pretrained Language Models}
 
 
 % Author information does not appear in the pdf unless the "acceptedWithA" option is given
 % See tacl2018v2.sty for other ways to format author information
-\author{
- Template Author\Thanks{The {\em actual} contributors to this instruction
- document and corresponding template file are given in Section
- \ref{sec:contributors}.} \\
- Template Affiliation/Address Line 1 \\
- Template Affiliation/Address Line 2 \\
- Template Affiliation/Address Line 2 \\
-  {\sf template.email@sampledomain.com} \\
-}
+% \author{
+%  Template Author\Thanks{The {\em actual} contributors to this instruction
+%  document and corresponding template file are given in Section
+%  \ref{sec:contributors}.} \\
+%  Template Affiliation/Address Line 1 \\
+%  Template Affiliation/Address Line 2 \\
+%  Template Affiliation/Address Line 2 \\
+%   {\sf template.email@sampledomain.com} \\
+% }
+
+ \author{Yanai Elazar\textsuperscript{1,2} \,
+ Nora Kassner\textsuperscript{3} \,
+ Shauli Ravfogel\textsuperscript{1,2} \, 
+ Abhilasha Ravichander\textsuperscript{4} \, \\
+ {\bf Eduard Hovy\textsuperscript{4}\, 
+ \bf Hinrich Sch\"utze\textsuperscript{3}\, 
+ Yoav Goldberg\textsuperscript{1,2}}\\
+\textsuperscript{1}Computer Science Department, Bar Ilan University \\
+\textsuperscript{2}Allen Institute for Artificial Intelligence \\
+\textsuperscript{3}Center for Information and Language Processing (CIS), LMU Munich\\
+\textsuperscript{4}Language Technologies Institute, Carnegie Mellon University \\
+  {\tt  \{yanaiela,shauli.ravfogel,yoav.goldberg\}@gmail.com}\\
+  {\tt kassner@cis.lmu.de} 
+  {\tt \{aravicha,hovy\}@cs.cmu.edu} 
+  }
+ 
 
 \date{}
 
@@ -194,9 +216,21 @@ $>>>$\hspace{1cm}}}}}
 \input{100_conclusions}
 
 
+\section*{Acknowledgements}
+We would like to thank Tomer Wolfson, Ido Dagan, Amit Moryossef for their helpful comments and discussions, and Alon Jacovi, Ori Shapira, Arie Cattan, Elron Bandel, Masoud Jalili Sabet,  Marina Speranskaya, Antonis Maronikolakis, Aakanksha Naik, Aditya Potukuchi for the help with the annotations.
+We also thank the anonymous reviewers and the action editor, George Foster, for their valuable suggestions.
+
+
+Yanai Elazar is grateful to be supported by the PBC fellowship for outstanding PhD candidates in Data Science and the Google PhD fellowship.
+This project has received funding from the Europoean Research Council (ERC) under the Europoean Union's Horizon 2020 research and innovation programme, grant agreement No. 802774 (iEXTRACT).
+This work has been funded by the European Research Council (\#740516) and by the German Federal Ministry of Education
+and Research (BMBF) under Grant No. 01IS18036A. The authors of this
+work take full responsibility for its content. This research was also supported in part by grants from the National Science Foundation Secure and Trustworthy Computing program (CNS-1330596, CNS15-13957, CNS-1801316, CNS-1914486) and a DARPA Brandeis grant (FA8750-15-2-0277). The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements, either expressed or implied, of the NSF, DARPA, or the US Government.
 
 \bibliography{custom}
 \bibliographystyle{acl_natbib}
+
+\appendix
 
 \input{999_appendix}
 

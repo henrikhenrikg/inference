@@ -57,26 +57,7 @@
 
 
 
-\begin{tikzpicture}[
-  emb/.style={rectangle,draw,fill=white,minimum width=2cm,minimum height=0.6cm,rounded corners=.8ex},
-  normal/.style={rectangle,draw,fill=white,minimum width=4cm,minimum height=0.8cm,rounded corners=.8ex},
-  path_embedding/.style={rectangle,draw,fill=blue!20,minimum width=4cm,    minimum height=0.7cm},
-  nc_embedding/.style={rectangle,draw,fill=orange!50,minimum width=2.5cm,    minimum height=0.7cm},
-  word_embedding/.style={rectangle,draw,fill=my_green!40,minimum width=2.5cm,    minimum height=0.7cm},
-  every neuron_empty/.style={circle,draw,minimum size=0.2cm},
-  every neuron/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
-  every neuron1/.style={circle,draw,fill=orange!50,minimum size=0.2cm},
-  every neuron2/.style={circle,draw,fill=blue!50,minimum size=0.2cm},
-  every neuron3/.style={circle,draw,fill=green!50,minimum size=0.2cm},
-  every neuron4/.style={circle,draw,fill=green!50,minimum size=0.2cm},
-  every neurontar/.style={circle,draw,fill=brown!50,minimum size=0.5cm},
-  every text-box/.style={rectangle,minimum size=0.6cm},
-  every rect/.style={rectangle,draw,fill=gray!50,minimum size=0.6cm},
-  every vecrec/.style={rectangle,draw,fill=none,minimum width=1.5cm, minimum height=0.8cm},
-  every oper/.style={rectangle,draw,fill=red!50,minimum size=0.5cm},
-  every oper2/.style={rectangle,draw,fill=pink!50,minimum size=0.5cm},
-  neuron missing/.style={draw=none,fill=none,scale=2,execute at begin node=\color{black}$\cdots$}
-  ]
+\begin{tikzpicture}
   
 
 
@@ -89,7 +70,7 @@
 %\draw [->] (text-15.south west)++(0,-1) -- (text-23.south east);
 
 \node[inner sep=0pt] (detective) at (0,-1.1)
-    {\includegraphics[width=.1\textwidth]{detective}};
+    {\includegraphics[width=.05\textwidth]{detective}};
 
 
 \node at (0, -2) {\small $r_i=$\textit{originally-aired-on}};

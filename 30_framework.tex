@@ -5,7 +5,7 @@
 In this section, we formally define consistency and describe our framework for probing consistency of PLMs.
 
 % In this section, we formally define consistency and describe our probing framework of PLMs consistency.
-% \yg{sec 3 should be either all in page 2, or all in page 3.}
+
 
 \subsection{Consistency}
 We define a model as \emph{consistent} if, given  two
@@ -20,31 +20,15 @@ predictions\footnote{We refer to \textit{non-contradictory
   considered to be contradictory, but predicting a city and
   its country, is \textbf{not}.}
 %contradicting.}
-on N-1 relations over a large set of entities.\footnote{A \textit{quasi-paraphrase} -- introduced by \citet{what_is_paraphrase} -- is a more fuzzy version of a paraphrase. The concept does not rely
-  on the strict, logical definition of paraphrase and
-  allows to operationalize concrete uses of
-  paraphrases. This definition is in the spirit of the RTE
-  definition \cite{dagan-rte}, which similarly supports a
-  more flexible use of the notion of entailment.}
- For instance, a model that predicts \textit{NBC} and \textit{ABC} on the two aforementioned patterns,\footnote{We define a \textit{pattern} as a cloze-phrase that expresses a relation between a subject and an object.} is not consistent, since these two facts are contradictory.
-\enote{hs}{it's really lame to define a central term in a
-  footnote -- also is the definition correct? one of subject
-  or object (or only object?) has to be MASK?}
-% \enote{hs}{I don't understand what this sentence says
-% -- in  addition to what was previously already said:
-% In the context of PLM knowledge consistency, if two cloze-phrases 
-% % \yg{we didn't define cloze-phrases yet. do they include a relation tuple?} 
-% of some relation (e.g., \textit{originally-aired-on}) are quasi-paraphrases, masked language models should predict the same entity for the masked item. 
-% % \sr{I changed the wording here. Is it still what you meant? a natural question now is ``why objects".}
-% % \yg{can it be "masked item"? or is it really a syntactic
-% % object?}
-% }
+on N-1 relations over a large set of entities.
+A \textit{quasi-paraphrase} -- a concept introduced by \citet{what_is_paraphrase} -- is a more fuzzy version of a paraphrase. The concept does not rely on the strict, logical definition of paraphrase and allows to operationalize concrete uses of paraphrases. This definition is in the spirit of the RTE definition \cite{dagan-rte}, which similarly supports a more flexible use of the notion of entailment.
+For instance, a model that predicts \textit{NBC} and \textit{ABC} on the two aforementioned patterns, is not consistent, since these two facts are contradictory. We define a \textit{cloze-pattern} as a cloze-phrase that expresses a relation between a subject and an object.
 Note that consistency does not require the answers to be factually correct. While correctness is also an important property for KBs, we view it as a separate objective and measure it independently.
 We use the terms \textit{paraphrase} and \textit{quasi-paraphrase} interchangeably.
  
 
 
-Note that many-to-many (N-M) relations (e.g. \textit{shares-border-with}) can be consistent 
+Many-to-many (N-M) relations (e.g. \textit{shares-border-with}) can be consistent 
 even with different answers (given they are correct). For
 instance, two patterns that express the
 \textit{shares-border-with} relation and predict
@@ -58,10 +42,10 @@ In this work, we focus on consistency, but also measure determinism of the model
 \subsection{The Framework}
 \label{sec:framework}
 
-\begin{figure}[t!]
+\begin{figure*}[t!]
 \centering
 
-\includegraphics[width=1.\columnwidth]{figures/framework}
+\includegraphics[width=1.\textwidth]{figures/framework}
 
 \caption{Overview of our framework for assessing model
   consistency. $D_i$ (``Data Pairs $(D)$'' on the left) is a
@@ -75,18 +59,18 @@ In this work, we focus on consistency, but also measure determinism of the model
   and expect a model to predict the same object across all pattern pairs.}
 \label{fig:framework}
 % \vspace{-6mm}
-\end{figure}
+\end{figure*}
 
 
-\enote{hs}{``quasi-paraphrase cloze-pattern'': it would be
-  better to define clear terminology in the beginning and
-  then to use it consistently (!). it's confusing to the
-  reader to switch back and forth between terms for the same concept}
+% \enote{hs}{``quasi-paraphrase cloze-pattern'': it would be
+%   better to define clear terminology in the beginning and
+%   then to use it consistently (!). it's confusing to the
+%   reader to switch back and forth between terms for the same concept}
 
 
 An illustration of the framework is presented in Figure \ref{fig:framework}.
 Let $D_i$ be a set of subject-object KB tuples (e.g., <\textit{Homeland}, \textit{Showtime}>) from some relation $r_i$ (e.g., \textit{originally-aired-on}), accompanied with a set of \textit{quasi-paraphrases} cloze-patterns $P_i$ (e.g., \textit{X} originally aired on \textit{Y}).
-Our goal is to test whether the model consistently predicts the same object (e.g., \textit{Showtime}) for a particular subject (e.g., \textit{Homeland}). To this end, we substitute \textit{X} with a subject from $D_i$ and \textit{Y} with \textit{[MASK]} in all of the patterns $P_i$ of that relation (e.g., \textit{Homeland} originally aired on \textit{[MASK]} and \textit{Homeland} premiered on \textit{[MASK]}).
+Our goal is to test whether the model consistently predicts the same object (e.g., \textit{Showtime}) for a particular subject (e.g., \textit{Homeland}).\footnote{Although it is possible to also predict the subject from the object, in the cases of N-1 relations more than a single answer would be possible, making it impossible to test for consistency, but determinism.} To this end, we substitute \textit{X} with a subject from $D_i$ and \textit{Y} with \textit{[MASK]} in all of the patterns $P_i$ of that relation (e.g., \textit{Homeland} originally aired on \textit{[MASK]} and \textit{Homeland} premiered on \textit{[MASK]}).
 A consistent model must predict the same entity. 
 
 
@@ -106,19 +90,8 @@ A consistent model must predict the same entity.
 
 \paragraph{Restricted Candidate Sets}
 
-Since PLMs were not trained for
-serving as KBs,
-%as such,
-they often predict words
-that are not KB entities;
-e.g., a PLM may predict, for the pattern ``\textit{Showtime} originally aired on \textit{[MASK]}'', the noun
-`tv' --  which is also a likely substitution for the language
-modeling objective, but not a valid KB fact completion.
-Therefore,
-following \citep{Xiong2020Pretrained, kassner2021multilingual},
-we
-restrict the PLMs' output vocabulary to the set of possible gold objects for each
-relation.
+Since PLMs were not trained for serving as KBs, they often predict words that are not KB entities; e.g., a PLM may predict, for the pattern ``\textit{Showtime} originally aired on \textit{[MASK]}'', the noun `tv' --  which is also a likely substitution for the language modeling objective, but not a valid KB fact completion.
+Therefore, following \citep{Xiong2020Pretrained, kassner2021multilingual}, we restrict the PLMs' output vocabulary to the set of possible gold objects for each relation from the underlining KB. For example, in the \textit{born-in} relation, instead of inspecting the entire vocabulary of a model, we only keep objects from the KB, such as \textit{Paris}, \textit{London}, \textit{Tokyo}, etc.
 
 % I don't think we have to give implementation details at
 % this point in the paper?

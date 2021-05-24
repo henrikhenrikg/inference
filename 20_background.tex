@@ -31,12 +31,8 @@ commonsense \cite{forbes2019neural,
 measures of accuracy.
 However, accuracy is just one measure of PLM performance \cite{linzen2020can}. It is
 equally important that PLMs do not make contradictory
-predictions (cf.\ Figure \ref{fig:overview}), a type of
-error that humans rarely make.
-There has been
-little research attention devoted to this
-question, i.e., to analyzing if
-models behave \emph{consistently}.
+predictions (cf.\ Figure \ref{fig:overview}), a type of error that humans rarely make. 
+There has been relatively little research attention devoted to this question, i.e., to analyze if models behave \emph{consistently}.
 One example concerns negation:
 \citet{Ettinger_2020} and \citet{kassner-schutze-2020-negated}
 show
@@ -69,7 +65,7 @@ inconsistent and detects inconsistent statements
 \citet{ribeiro-etal-2019-red} in two tasks: visual question answering \cite{vqa} and reading comprehension \cite{squad}. They automatically generate questions to test the consistency of QA models.
 Their findings suggest that most models are not consistent in their predictions. In addition, they use data augmentation to create more robust models.
 \citet{alberti2019synthetic} generate new questions
-conditioned on  context and answer from a labeled dataset
+conditioned on context and answer from a labeled dataset
 and by filtering answers that do not provide a consistent
 result with the original answer. They show that pretraining on these synthetic data improves QA results.
 \citet{consistent-qa}  use data augmentation that complements questions with symmetricity and transitivity, as well as a regularizing loss that penalizes inconsistent predictions.

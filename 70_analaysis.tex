@@ -2,39 +2,26 @@
 \label{sec:analysis}
 
 
-
-
-
 \input{tables/predictions}
 
-\enote{hs}{i recommend numbefing the rows of table 6 -- then
-  refer to the rows instead  of awkward and confusing use of
-  ``lower/upper'', ``penultimate''}
 
 \subsection{Qualitative Analysis}
 To better understand the factors affecting consistent
 predictions, we inspect the predictions of BERT-large on the
 patterns shown  in Table \ref{tab:predictions}.
 We highlight several cases:
-The predictions in the first row are inconsistent, and
-correct for the first pattern, but not for the other two. 
-The predictions in the second row also show a single pattern that predicted the right object, however, the two other patterns, which are lexically similar, predicted the same, wrong answer -- \textit{Renault}.
+The predictions in Example \#1 are inconsistent, and correct for the first pattern (\textit{Amsterdam}), but not for the other two (\textit{Madagascar} and \textit{Luxembourg}). 
+The predictions in Example \#2 also show a single pattern that predicted the right object; however, the two other patterns, which are lexically similar, predicted the same, wrong answer -- \textit{Renault}.
 % However, the third pattern prediction is related in the sense that Ireland is close to London. \ye{is the Ireland-London argument convincing?}
-Next, the patterns of the penultimate row of the upper part
-predicted two factually correct answers out of three
-(Greece, Kosovo), but simply do not correspond to the gold
-object in T-REx (Albania), since this is an M-N
-relation. Note that this relation is not part of the
-consistency evaluation, but of the determinism evaluation.
-The three different predictions in
-the last row of the upper part are all incorrect.
+Next, the patterns of Example \#3
+produced two factually correct answers out of three (\textit{Greece}, \textit{Kosovo}), but simply do not correspond to the gold
+object in T-REx (\textit{Albania}), since this is an M-N relation. Note that this relation is not part of the consistency evaluation, but the determinism evaluation.
+The three different predictions in example \#4 are all incorrect.
 % The last row of the upper part demonstrates three different predictions, all factually incorrect. 
 % Note that even when more than a single answer is correct, we still argue that the model should make consistent predictions.
-Finally, the predictions in the bottom part demonstrate
-consistent predictions:
-The last row  is consistent and factual, the last but one
-row is consistent, but factually incorrect (which is
-surprising as the correct answer is a substring of the subject).
+Finally, the two last predictions demonstrate consistent predictions:
+Example \#5 is consistent but factually incorrect (even though the correct answer is a substring of the subject), and finally, Example \#6
+is consistent and factual.
 % fact the object is a substring of the subject).
 
 
@@ -43,8 +30,8 @@ surprising as the correct answer is a substring of the subject).
 
 \begin{figure}[t!]
 \centering
-\vspace{-0.1in}
-\includegraphics[width=.8\columnwidth]{figures/capital-bert-large}
+% \vspace{-0.1in}
+\includegraphics[width=1\columnwidth]{figures/capital-bert-large}
 
 
 \caption{t-SNE of the encoded patterns from the
@@ -53,7 +40,7 @@ surprising as the correct answer is a substring of the subject).
   represent patterns. A knowledge-focused representation
   should cluster based on identical subjects (color), but
   instead the clustering is according to identical patterns (shape).}
-  \vspace{-0.2in}
+%   \vspace{-0.2in}
 \label{fig:tsne-emb}
 
 \end{figure}
@@ -71,23 +58,22 @@ that encoding of knowledge of the entity is not the main component of the repres
 Figure \ref{fig:tsne-emb} demonstrates
 this for BERT-large encodings of the \textit{capital} relation, which is highly consistent.\footnote{While some patterns are clustered based on the subjects (upper-left part), most of them are clustered based on patterns.}
 To provide a more quantitative assessment of this phenomenon, 
-we also cluster the representations, and set the number of centroids based on:\footnote{Using the KMeans algorithm.} (1) the number of patterns in each relation, which aims to capture pattern-based clusters and (2) the number of entities in each relation, which aims to capture entity-based clusters. This would allow for a perfect clustering, in the case of perfect alignment between the representation and the inspected property.
-We measure the purity of these clusters using V-measure, and observe that the clusters are mostly grouped by the patterns, rather than the objects.
+we also cluster the representations and set the number of centroids based on:\footnote{Using the KMeans algorithm.} (1) the number of patterns in each relation, which aims to capture pattern-based clusters, and (2) the number of subjects in each relation, which aims to capture entity-based clusters. This would allow for a perfect clustering, in the case of perfect alignment between the representation and the inspected property.
+We measure the purity of these clusters using V-measure and observe that the clusters are mostly grouped by the patterns, rather than the subjects.
 % Finally, we compute the correlation between the distance of two representations, and whether their predictions are consistent. 
 Finally, we compute the spearman correlation between the consistency scores and the V-measure of the representations.
 However, the correlation between these variables is close to zero,\footnote{Except for BERT-large whole-word-masking, where the correlation is 39.5 ($p<0.05$).} therefore not explaining the models' behavior.
-This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e., their main component does not relate to knowledge, and (2) the representation by its entirety does not explain the behavior of the model, and thus only a subset of the representation does. This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
+We repeated these experiments while inspecting the objects instead of the subjects, and found similar trends.
+This finding is interesting since it means that (1) these representations are not knowledge-focused, i.e., their main component does not relate to knowledge, and (2) the representation by its entirety does not explain the behavior of the model, and thus only a subset of the representation does. %\nk{What do you mean by saying: only a subset of the representation does?} 
+This finding is consistent with previous work that observed similar trends for linguistic tasks \cite{amnesic_probing}.
 We hypothesize that this disparity between the
-representation and the behavior of the model may be
-explained by a situation where distance between
-representations largely does not reflect the distance
-between predictions, but rather other, behaviorally irrelevant factors of a sentence.
+representation and the behavior of the model may be explained by a situation where the distance between representations largely does not reflect the distance between predictions, but rather other, behaviorally irrelevant factors of a sentence.
 % We believe that the explanation of these findings is that the relevant information for the word prediction, lies in a subspace of the original representation, and thus much of the encoded information is in practice not relevant for the prediction. \sr{I don't understand this explanation. I'd write something like ``We hypothesize that this disparity between representation and behavior may be explained by a situation where distances between representations largely do not reflect the distance between predictions, but rather reflect other, behaviorally-irrelevant factors of each sentence"}.
 
 
 % We encode the patterns, populated with 50 random subjects along with the masked token, and inspect the final layer in the masked token index for all the paraphrases of multiple relations.
 % Then, we use t-SNE \cite{tsne} and present the results in Figure \ref{fig:tsne-emb} in the appendix.
-% Each point represents a specific tuple, and are colored by the subjects, and the shape stands for the pattern.
+% Each point represents a specific tuple and is colored by the subjects, and the shape stands for the pattern.
 % A good representation would cluster the vectors together based on the subject, as then the predictions would more likely to be consistent. However, clusters based on patterns would suggest a worse encoding, since the subjects, which are of great importance in these paraphrases, are less taken into account in the representation.
 
 % We display the t-SNE figures for two relations, \textit{Language  of work or name} and \textit{Capital} in Figure \ref{fig:tsne-emb}.
@@ -97,7 +83,7 @@ between predictions, but rather other, behaviorally irrelevant factors of a sent
 % The v-measure results for these patterns are presented in Table \ref{tab:vmeasure-small}.
 % As expected, the pattern-based clustering is better for the \textit{language of work or name} relation is higher than the subject-based, and vice versa for the \textit{capital} relation.
 % The full clustering measures for all relations are reported in the Appendix.
-% \ar{Can we report correlation with performance for all relations here? Or say that in general we observe this trend?}
+
 % \input{tables/vmeasure_small}
 
 

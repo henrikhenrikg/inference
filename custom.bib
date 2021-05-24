@@ -168,10 +168,11 @@
     abstract = "Despite the success of language models using neural networks, it remains unclear to what extent neural models have the generalization ability to perform inferences. In this paper, we introduce a method for evaluating whether neural models can learn systematicity of monotonicity inference in natural language, namely, the regularity for performing arbitrary inferences with generalization on composition. We consider four aspects of monotonicity inferences and test whether the models can systematically interpret lexical and logical phenomena on different training/test splits. A series of experiments show that three neural models systematically draw inferences on unseen combinations of lexical and logical phenomena when the syntactic structures of the sentences are similar between the training and test sets. However, the performance of the models significantly decreases when the structures are slightly changed in the test set while retaining all vocabularies and constituents already appearing in the training set. This indicates that the generalization ability of neural models is limited to cases where the syntactic structures are nearly the same as those in the training set.",
 }
 
-@article{forbes2019neural,
+
+@inproceedings{forbes2019neural,
   title={Do Neural Language Representations Learn Physical Commonsense?},
   author={Forbes, Maxwell and Holtzman, Ari and Choi, Yejin},
-  journal={arXiv preprint arXiv:1908.02899},
+  booktitle={CogSci},
   year={2019}
 }
 
@@ -224,8 +225,11 @@
 @article{rogers2020primer,
   title={A primer in bertology: What we know about how bert works},
   author={Rogers, Anna and Kovaleva, Olga and Rumshisky, Anna},
-  journal={arXiv preprint arXiv:2002.12327},
-  year={2020}
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={8},
+  pages={842--866},
+  year={2020},
+  publisher={MIT Press}
 }
 
 @inproceedings{ravichander-etal-2020-systematicity,
@@ -710,11 +714,18 @@ bibsource = {dblp computer science bibliography, https://dblp.org}
   year={2019}
 }
 
-@misc{amnesic_probing,
-Author = {Yanai Elazar and Shauli Ravfogel and Alon Jacovi and Yoav Goldberg},
-Title = {Amnesic Probing: Behavioral Explanation with Amnesic Counterfactuals},
-Year = {2020},
-Eprint = {arXiv:2006.00995},
+@article{amnesic_probing,
+    author = {Elazar, Yanai and Ravfogel, Shauli and Jacovi, Alon and Goldberg, Yoav},
+    title = "{Amnesic Probing: Behavioral Explanation with Amnesic Counterfactuals}",
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume = {9},
+    pages = {160-175},
+    year = {2021},
+    month = {03},
+    issn = {2307-387X},
+    doi = {10.1162/tacl_a_00359},
+    url = {https://doi.org/10.1162/tacl\_a\_00359},
+    eprint = {https://direct.mit.edu/tacl/article-pdf/doi/10.1162/tacl\_a\_00359/1894330/tacl\_a\_00359.pdf},
 }
 
 @inproceedings{hewitt2019structural,
@@ -1044,4 +1055,64 @@ booktitle	= {International Conference on Learning Representations}
   author={Camburu, Oana-Maria and Rockt{\"a}schel, Tim and Lukasiewicz, Thomas and Blunsom, Phil},
   booktitle={NeurIPS},
   year={2018}
+}
+
+@inproceedings{davison2019commonsense,
+  title={Commonsense knowledge mining from pretrained models},
+  author={Davison, Joe and Feldman, Joshua and Rush, Alexander M},
+  booktitle={Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},
+  pages={1173--1178},
+  year={2019}
+}
+
+@inproceedings{autoprompt,
+    title = "{A}uto{P}rompt: {E}liciting {K}nowledge from {L}anguage {M}odels with {A}utomatically {G}enerated {P}rompts",
+    author = "Shin, Taylor  and
+      Razeghi, Yasaman  and
+      Logan IV, Robert L.  and
+      Wallace, Eric  and
+      Singh, Sameer",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-main.346",
+    doi = "10.18653/v1/2020.emnlp-main.346",
+    pages = "4222--4235",
+}
+
+@inproceedings{peters2019knowledge,
+  title={Knowledge Enhanced Contextual Word Representations},
+  author={Peters, Matthew E and Neumann, Mark and Logan, Robert and Schwartz, Roy and Joshi, Vidur and Singh, Sameer and Smith, Noah A},
+  booktitle={Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},
+  pages={43--54},
+  year={2019}
+}
+
+@inproceedings{shwartz2020neural,
+  title={Do Neural Language Models Overcome Reporting Bias?},
+  author={Shwartz, Vered and Choi, Yejin},
+  booktitle={Proceedings of the 28th International Conference on Computational Linguistics},
+  pages={6863--6870},
+  year={2020}
+}
+
+@article{gpt2,
+  title={Language models are unsupervised multitask learners},
+  author={Radford, Alec and Wu, Jeffrey and Child, Rewon and Luan, David and Amodei, Dario and Sutskever, Ilya},
+  journal={OpenAI blog},
+  volume={1},
+  number={8},
+  pages={9},
+  year={2019}
+}
+
+@article{t5,
+  title={Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
+  author={Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and Narang, Sharan and Matena, Michael and Zhou, Yanqi and Li, Wei and Liu, Peter J},
+  journal={Journal of Machine Learning Research},
+  volume={21},
+  pages={1--67},
+  year={2020}
 }

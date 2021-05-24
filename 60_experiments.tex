@@ -12,7 +12,7 @@
 % \subsection{Consistency and Knowledge}
 
 % \yg{wdym by ``to asses the knowledge and ability of the different patterns to extract knowledge''? in particular, what is the first `knowledge'?}
-% To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help understanding the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
+% To better understand the results, and assess the knowledge and ability of the different patterns to extract the correct knowledge of \resource{}, we report additional metrics that help to understand the results. \sr{need a better motivation. e.g. ``In this section, we provide a finer-grained analysis, measuring consistency scores in various settings". But honestly, this looks a bit like a checklist of different, unrelated experiments, and may be better pushed into an appendix.}
 
 We begin by assessing our patterns as
 well as the degree to which they extract the correct
@@ -31,7 +31,7 @@ We observe that some tuples are not predicted correctly by any of our patterns: 
 With an average number of 8.63 patterns per relation, there are multiple ways to extract the knowledge, we thus interpret these results as evidence that a large part of T-REx knowledge is not stored in these models.
 % \nk{should we say we consider these facts to be \emph{Unknown} in reference to \emph{Unk-Const}.}
 % \nk{This seems to suggest that it is the fault of the pattern that knowledge is not extracted from the model but an unsuccessful prediction across all models of the same tuple rather says that this knowledge is not stored} 
-% The average number of factual knowledge that are correctly extracted varies between 45.3\% to 63.0\%, depending on the model. Notably, the BERT based models are consistently better than the rest in extracting the knowledge. 
+% The average number of factual knowledge that is correctly extracted varies between 45.3\% to 63.0\%, depending on the model. Notably, the BERT-based models are consistently better than the rest in extracting the knowledge. 
 
 
 % \yg{give this part a paragraph title?}
@@ -48,7 +48,7 @@ For instance, for BERT-large, \textit{Know-Const}  is 65.2\% and \textit{Unk-Con
 % The analysis of knowledge consistency permits the distinction between when the knowledge is robustly stored inside the parameters of a PLM (based on information extracted from training corpora) as compared to when its predictions rely on spurious correlations.
 
 % suggestion:
-% This analysis also enables us to separate between facts which are robustly encoded in the model, compared to mere `guesses', which may arise from some heuristic or spurious correlations with certain patterns \cite{poerner2020bert}.
+% This analysis also enables us to separate between facts that are robustly encoded in the model, compared to mere `guesses', which may arise from some heuristic or spurious correlations with certain patterns \cite{poerner2020bert}.
 
 % point on a connection between acquiring the correct knowledge, and the ability to extract it robustly. 
 % We refer to these metrics as \textsc{Know} and \textsc{Unk}, respectively, that stands for Knowledgeable and Unknowledgeable consistency.
@@ -89,7 +89,7 @@ We note that the results are highly variant between models
 Finally, we report
 \emph{Consistent-Acc}:
 the results are much lower than for \textit{Accuracy}, as expected,
-but follow similar trends: RoBERTa-base perform worse (16.4\%) and BERT-large  best  (29.5\%).
+but follow similar trends: RoBERTa-base performs worse (16.4\%) and BERT-large best  (29.5\%).
 
 Interestingly, we find strong correlations between Accuracy
 and Consistency, ranging from 67.3\% for RoBERTa-base to
@@ -101,32 +101,23 @@ and Consistency, ranging from 67.3\% for RoBERTa-base to
 
 A striking result of the model comparison is
 the clear superiority of
-BERT, both in knowledge accuracy and knowledge
-consistency. This result, which we hypothesise to be due to
-the training data, may have a broader impact on models to
-come: Training bigger models with more data is not always
-beneficial. Since Wikipedia is likely the largest unified source
-of factual knowledge that exists in unstructured data,
-giving it prominence in pretraining  makes it more
-likely that the model will incorporate Wikipedia's factual knowledge
-well.
-This may indicate that the consistency of models such as GPT-3 \cite{gpt3}
-or other future models -- i.e., models that
-have a much larger size and
-are trained on very large corpora of
-which Wikipedia is just a small part -- may suffer.
+BERT, both in knowledge accuracy (which was also observed by \citet{autoprompt}) and knowledge
+consistency. \yenew{We hypothesize this result is caused by the different sources of training data: although Wikipedia is part of the training data for all models we consider for BERT it is the main data source, but for RoBERTa and ALBERT it is only a small portion. Thus, when using additional data, some of the facts may be forgotten, or contradicted in the other corpora, leading to diminish in knowledge, and consistency behavior.} 
+Thus, since Wikipedia is likely the largest unified source of factual knowledge that exists in unstructured data, giving it prominence in pretraining  makes it more likely that the model will incorporate Wikipedia's factual knowledge well.
+These results may have a broader impact on models to
+come: Training bigger models with more data (such as GPT-3 \cite{gpt3}) is not always beneficial. 
+% This may indicate that the consistency of models such as GPT-3 \cite{gpt3}
+% or other future models -- i.e., models that
+% have a much larger size and
+% are trained on very large corpora of
+% which Wikipedia is just a small part -- may suffer.
 
 % \am{this is unsubstantiated, you can add "we hypothesize" to make this claim}% and retain more factual knowledge.
 
 
 \paragraph{Determinism}
 We also measure determinism for N-M relations, i.e., we use
-the same measure as \textit{Consistency}, but since
-``contradictory'' predictions may be factually correct,
-these do not necessarily convey consistency violations, but
-indicate non-determinism. For brevity, we do not present all
-results, but the trend is similar to the consistency result
-(although not comparable, as the relations are different): 52.9\% and 44.6\% for BERT-large and RoBERTa-base, respectively.
+the same measure as \textit{Consistency}, but since difference predictions may be factually correct, these do not necessarily convey consistency violations, but indicate non-determinism. For brevity, we do not present all results, but the trend is similar to the consistency result (although not comparable, as the relations are different): 52.9\% and 44.6\% for BERT-large and RoBERTa-base, respectively.
 
 
 
@@ -136,9 +127,7 @@ results, but the trend is similar to the consistency result
 
 % \subsection{Consistency}
 
-% The results for the different models are summarized in Table \ref{tab:consistency_main}.
-% % First, we report the average consistency results for all graphs, as describe in Section \ref{sec:eval}.
-% The last column (``Consistency'') shows the average results across all relations \yg{consider oredering the table columns in the order of their discussion}\am{I actually like it in the end, its easier to find in a glance}
+
 
 
 
@@ -154,16 +143,11 @@ These are RoBERTa-based models, trained on a sample of Wikipedia and the book co
 Overall, \textit{Accuracy} and
 \textit{Consistent-Acc} improve
 with more training data.
-However, there is an interesting outlier to this trend.
-First, the model that was trained on one million tokens is
-more consistent than the models trained on ten and
-one-hundred million tokens. A potentially crucial difference
-is that this model
-has many fewer parameters than the rest (to avoid overfitting). It is nonetheless interesting that a model that is trained on significantly less data can achieve better consistency. On the other hand, the knowledge scores are lower, arguably due to the model being exposed to less factual knowledge during pretraining.
+However, there is an interesting outlier to this trend:
+The model that was trained on one million tokens is more consistent than the models trained on ten and one-hundred million tokens. A potentially crucial difference is that this model has many fewer parameters than the rest (to avoid overfitting). It is nonetheless interesting that a model that is trained on significantly less data can achieve better consistency. On the other hand, it's accuracy scores are lower, arguably due to the model being exposed to less factual knowledge during pretraining.
+
 
 \subsection{Do PLMs Generalize Over Syntactic Configurations?} 
-
-
 
 Many papers have found neural models (especially PLMs) to naturally
 encode syntax
@@ -175,15 +159,10 @@ Does this mean that PLMs have successfully abstracted
 knowledge and can comprehend and produce it regardless of
 syntactic variation?
 We consider two scenarios. (1) Two patterns differ only in
-syntax. (2) Both  syntax and  lexical choice are the same.
-As a proxy, we define syntactic equivalence as the dependency
-paths between subject and object being identical.
+syntax. (2) Both syntax and lexical choice are the same.
+As a proxy, we define syntactic equivalence when the dependency path between the subject and object are identical.
 We parse all patterns from \resource{} using a dependency parser \cite{spacy}\footnote{\url{https://spacy.io/}} and retain the path between the entities.
-Success on (1) indicates
-that the model's knowledge processing is robust to syntactic
-variation.
-Success on (2) indicates
-that the model's knowledge processing is robust to
+Success on (1) indicates that the model's knowledge processing is robust to syntactic variation. Success on (2) indicates that the model's knowledge processing is robust to
 variation in word order and tense.
 
 \input{tables/syntax_results}
@@ -199,10 +178,10 @@ reports results.
 While the results are not comparable to the main results on
 the entire dataset as the pattern subsets are different,
 they are higher than the general results: 67.5\% for BERT-large when only 
-syntax differs, and 78.7\% when syntax is
+the syntax differs and 78.7\% when the syntax is
 identical. This demonstrates that while PLMs have impressive syntactic abilities, 
 they struggle to extract factual knowledge in the face of
-tense, word-order and syntactic variation.
+tense, word-order, and syntactic variation.
 
 % These results are surprising, since the ability to abstract over syntax is perhaps the easier abstraction, and was expected to perform better, given other results on PLMs syntactic abilities. \sr{not sure if we can say it's easier/harder.}
 
@@ -210,7 +189,7 @@ tense, word-order and syntactic variation.
 dataset \cite{snli}, use
 superficial syntactic heuristics rather than more
 generalizable properties of the data.
-Our results indicate that pretrained PLMs have  problems along
+Our results indicate that PLMs have  problems along
 the same lines:
 they are not robust to surface variation.
 

@@ -7,3 +7,42 @@ Finally, we used sklearn \cite{scikit-learn} for other ML-related experiments.
 
 % \input{tables/relations_stats_detailed}
 
+\section{Paraphrases Analysis}
+\label{sec:paraphrase_analysis}
+
+We analysis the type of paraphrases in \resource{}. Thus, we sample 100 paraphrase pairs from the agreement study that were in agreement with our annotation and label the type of paraphrase phenomena.
+We mainly rely on a subset of paraphrase types defined by \citet{what_is_paraphrase}, but also define some new types which were not covered by that work.
+We begin by briefly defining the types of paraphrases found in \resource{} from \citet{what_is_paraphrase}, and then define the new types we observed.
+
+\input{tables/paraphrases_analysis}
+
+\begin{enumerate}
+    \item Synonym substitution: Replacing a word/phrase by a synonymous word/phrase, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Antonym substitution: Replacing a word/phrase by its antonym accompanied by a negation or by negating some other word, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Converse substitution: Replacing a word/phrase with its converse and inverting the relationship between the constituents of a sentence/phrase, in the appropriate context, results in a paraphrase of the original sentence/phrase, presenting the situation from the converse perspective.
+    \item Change of voice: Changing a verb from its active to passive form and vice versa results in a paraphrase of the original sentence/phrase.
+    \item Function word variations: Changing the function words in a sentence/phrase without affecting its semantics, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Actor/Action substitution: Replacing the name of an action by a word/phrase denoting the person doing the action (actor) and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Verb/“Semantic-role noun” substitution: Replacing a verb by a noun corresponding to the agent of the action or the patient of the action or the instrument used for the action or the medium used for the action, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Part/Whole substitution: Replacing a part by its corresponding whole and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Verb/Noun conversion: Replacing a verb by its corresponding nominalized noun form and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Verb/Adjective conversion: Replacing a verb by the corresponding adjective form and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Verb/Adverb conversion: Replacing a verb by its corresponding adverb form and vice versa, in the appropriate context, results in a paraphrase of the original sentence/ phrase.
+    \item Noun/Adjective conversion: Replacing a verb by its corresponding adjective form and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Verb-preposition/Noun substitution: Replacing a verb and a preposition denoting location by a noun denoting the location and vice versa, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Change of tense: Changing the tense of a verb, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Change of aspect: Changing the aspect of a verb, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item Change of modality: Addition/deletion of a modal or substitution of one modal by another, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+    \item External knowledge: Replacing a word/phrase by another word/phrase based on extra-linguistic (world) knowledge, in the appropriate context, results in a paraphrase of the original sentence/phrase.
+\end{enumerate}
+
+We also define several other types of paraphrases, which were not covered by \citet{what_is_paraphrase}, potentially as such cases did not appear in the corpora they have inspected.
+
+\begin{enumerate}[a.]
+\item one
+\item two
+\end{enumerate}
+
+
+We report the percentage of each type, along with examples of paraphrases in Table \ref{tab:paraphrases_analysis}.
+
