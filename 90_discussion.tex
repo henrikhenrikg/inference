@@ -31,7 +31,7 @@ Although some heuristics can be used for allowing a PLM to do so, e.g., using a 
 Newer approaches that propose to use PLMs as a starting point to more complex systems have promising results and address these problems \cite{thorne2020neural}.
 
 \yenew{
-Another approach, by \citet{autoprompt} suggests to use \textsc{AutoPrompt} to automatically generate prompts, or patterns, instead of creating them manually. This approach is superior to manual patterns \cite{lama}, or aggregation of patterns that were collected automatically \cite{alpaqa}. 
+In another approach,  \citet{autoprompt} suggest using \textsc{AutoPrompt} to automatically generate prompts, or patterns, instead of creating them manually. This approach is superior to manual patterns \cite{lama}, or aggregation of patterns that were collected automatically \cite{alpaqa}. 
 }
 
 \paragraph{Brittleness of Neural Models}
@@ -64,13 +64,22 @@ likely to perform better with respect to brittleness.
 
 \paragraph{Can We Expect from LMs to be Consistent?}
 
-\yenew{The typical training procedure of a LM does not necessarily encourage consistency. The standard training solely tries to minimize the log-likelihood of an unseen token, and this objective is not always aligned with consistency to knowledge. Consider for example the case of wikipedia texts, as opposed to reddit; the texts and styles in the first, may be very different, and even describe contradictory facts. A model can exploit the styles of each text, to best fit the probabilities given to an unseen word, even if they contradict each other.}
+\yenew{The typical training procedure of an LM does not
+  necessarily encourage consistency. The standard training
+  solely tries to minimize the log-likelihood of an unseen
+  token, and this objective is not always aligned with
+  consistency of knowledge. Consider for example the case of
+  wikipedia texts, as opposed to reddit; their texts and
+  styles  may be very different and they may even describe
+  contradictory facts. A model can exploit the styles of
+  each text to best fit the probabilities given to an unseen
+  word, even if the resulting generations contradict each other.}
 
-\yenew{Since the pretraining-finetuning procedure is the dominating one in our field currently, a great amount of the language capabilities that were learned during the pre-training also propagates to the fine-tuned models. As such, we believe it is important to measure and improve consistency already in the pretrained models.}
+\yenew{Since the pretraining-finetuning procedure is the dominating one in our field currently, a great amount of the language capabilities that were learned during pre-training also propagates to the fine-tuned models. As such, we believe it is important to measure and improve consistency already in the pretrained models.}
 
 \paragraph{Reasons Behind the (In)Consistency}
 
-\yenew{Since LMs are not expected to be consistent, what are the reasons behind their prediction, when being consistent, or inconsistent?}
+\yenew{Since LMs are not expected to be consistent, what are the reasons behind their predictions, when being consistent, or inconsistent?}
 
 \yenew{In this work, we presented the predictions of multiple queries, and the representation space of one of the inspected models. However, this does not point to the origins of such behavior.
 In future work, we aim to inspect this question more closely.}

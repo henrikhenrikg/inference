@@ -102,7 +102,14 @@ and Consistency, ranging from 67.3\% for RoBERTa-base to
 A striking result of the model comparison is
 the clear superiority of
 BERT, both in knowledge accuracy (which was also observed by \citet{autoprompt}) and knowledge
-consistency. \yenew{We hypothesize this result is caused by the different sources of training data: although Wikipedia is part of the training data for all models we consider for BERT it is the main data source, but for RoBERTa and ALBERT it is only a small portion. Thus, when using additional data, some of the facts may be forgotten, or contradicted in the other corpora, leading to diminish in knowledge, and consistency behavior.} 
+consistency. \yenew{We hypothesize this result is caused by
+  the different sources of training data: although Wikipedia
+  is part of the training data for all models we consider,
+  for BERT it is the main data source, but for RoBERTa and
+  ALBERT it is only a small portion. Thus, when using
+  additional data, some of the facts may be forgotten, or
+  contradicted in the other corpora; this can diminish
+  knowledge and compromise consistency behavior.} 
 Thus, since Wikipedia is likely the largest unified source of factual knowledge that exists in unstructured data, giving it prominence in pretraining  makes it more likely that the model will incorporate Wikipedia's factual knowledge well.
 These results may have a broader impact on models to
 come: Training bigger models with more data (such as GPT-3 \cite{gpt3}) is not always beneficial. 
