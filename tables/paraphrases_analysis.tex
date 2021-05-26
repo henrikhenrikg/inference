@@ -1,23 +1,44 @@
-\begin{table*}[t]
+\begin{table*}[t!]
 % \small
     \centering
 \resizebox{1\textwidth}{!}{%
 \begin{tabular}{lllllllll}
 \toprule
-Paraphrase Type & Pattern \#1 & Pattern \#2 & Relation & \% \\
+Paraphrase Type & Pattern \#1 & Pattern \#2 & Relation & N. \\
 \midrule
 
-Synonym substitution & [X] died in [Y]. & [X] expired at [Y]. & place of death & \\
+Synonym substitution & [X] died in [Y]. & [X] expired at [Y]. & place of death & 41 \\
 
-Change of voice & [X] is owned by [Y]. & [Y] owns [X]. & owned by & \\
+Function words variations & [X] is [Y] citizen. & [X], who is a citizen of [Y]. & country of citizenship & 16 \\
 
-Noun/Adjective conversion & The official language of [X] is [Y]. & The official language of [X] is the [Y] language. & official language & \\
+Converse substitution & [X] maintains diplomatic relations with [Y]. & [Y] maintains diplomatic relations with [X]. & diplomatic relation & 10 \\
 
-Change of Tense & [X] is developed by [Y]. & [X] was developed by [Y]. & developer & \\ 
+Change of tense & [X] is developed by [Y]. & [X] was developed by [Y]. & developer & 10 \\ 
 
-Function words variations & [X] is [Y] citizen. & [X], who is a citizen of [Y]. & country of citizenship & \\
+Change of voice & [X] is owned by [Y]. & [Y] owns [X]. & owned by & 7 \\
 
-Converse substitution & Brazil maintains diplomatic relations with Canada. & Canada maintains diplomatic relations with Brazil. & diplomatic relation & \\
+Verb/Noun conversion & The headquarter of [X] is in [Y]. & [X] is headquartered in [Y]. & headquarters location & 7 \\
+
+External knowledge & [X] is represented by music label [Y]. & [X], that is represented by [Y]. & record label & 3 \\
+
+Noun/Adjective conversion & The official language of [X] is [Y]. & The official language of [X] is the [Y] language. & official language & 2 \\
+
+Change of aspect & [X] plays in [Y] position. & playing as an [X], [Y] & position played on team & 1 \\
+
+\midrule
+
+Irrelevant addition & [X] shares border with [Y]. & [X] shares a common border with [Y]. & shares border with & 11 \\
+
+Topicalization transformation & [X] plays in [Y] position. & playing as a [Y], [X] & position played on team & 8 \\
+
+Apposition transformation & [X] is the capital of [Y]. & [Y]'s capital, [X]. & capital of & 4 \\ 
+
+Other syntactic movements & [X] and [Y] are twin cities. & [X] is a twin city of [Y]. & twinned administrative body & 10 \\
+
+
+
+
+
 
 
 
@@ -26,8 +47,8 @@ Converse substitution & Brazil maintains diplomatic relations with Canada. & Can
 
 
 }
-    \caption{Examples for the type of paraphrases types used in \resource{}. We report examples from each paraphrase type, along with the type of relation, and the percentage of the substitution type from a random subset of 100 pairs.}
-    \label{tab:paraphrases_analysis}
+\caption{Different types of paraphrases in \resource{}. We report examples from each paraphrase type, along with the type of relation, and the number of examples from the specific transformation from a random subset of 100 pairs. Each pair can be classified into more than a single transformation (we report one for brevity), thus the sum of transformation is more than 100.}
+\label{tab:paraphrases_analysis}
     
     % \vspace{-0.1in}
 \end{table*}
